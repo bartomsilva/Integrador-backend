@@ -18,7 +18,6 @@ O Integrador é uma API que trata de uma rede social, ela tem as funcionalidades
 	
 ## Layout: 
 #### a) Estrutura das pastas
-<img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/eac02979-d853-46b0-b1c0-733986533028" height="40%"/>
 
 #### b) Endpoints implementados
 - [X]  Singup
