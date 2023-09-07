@@ -1,0 +1,17 @@
+import z from "zod"
+
+export interface CreateCommentInputDTO {
+  content: string
+  token: string 
+}
+
+export const CreateCommentSchema = z.object({
+  content: z.string(
+    {
+      required_error: "'content' é obrigatória",
+      invalid_type_error: "'content' deve ser uma string" 
+    }
+  ).min(1, "'content' inválido deve ter ao menos um caracter"),
+
+  token: z.string() // adicionamos token também no schema
+}).transform(data => data as CreateCommentInputDTO)

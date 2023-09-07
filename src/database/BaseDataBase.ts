@@ -1,6 +1,6 @@
 import { knex } from "knex"
 import dotenv from "dotenv"
-import { PostDB } from "../models/posts/Post"
+import { ActionDB } from "../models/posts/Post"
 dotenv.config()
 export abstract class BaseDataBase {
 
@@ -31,15 +31,20 @@ export abstract class BaseDataBase {
         return await BaseDataBase.connection(this.TABLE_NAME).where("name", "like", `%${name}%`)
     }
 
-    // FIND ALL I
+    // FIND ALL 
     public async findAll(): Promise<any> {
         return await BaseDataBase.connection(this.TABLE_NAME)
     }
-   
-    //============= FIND POST / POSTS
-    public async findPost (id: string): Promise<PostDB[]>  {
-    const result: PostDB[] = await BaseDataBase.connection("posts").where({id})
-    return result
-}
+
+    //============= FIND POST
+    public async findPost(id: string): Promise<ActionDB[]> {
+        const result: ActionDB[] = await BaseDataBase.connection("posts").where({ id })
+        return result
+    }
+    //============= FIND COMMENT
+    public async findComment(id: string): Promise<ActionDB[]> {
+        const result: ActionDB[] = await BaseDataBase.connection("comments").where({ id })
+        return result
+    }
 
 }

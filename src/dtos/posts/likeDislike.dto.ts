@@ -1,8 +1,10 @@
 import z from "zod"
+import { POST_ACTION } from "../../models/posts/Post"
 
 export interface LikeDislikeInputDTO {
   id: string
   like: boolean
+  action: POST_ACTION
   token: string 
 }
 
@@ -19,6 +21,11 @@ export const LikeDislikeSchema = z.object({
       required_error: "'like' é obrigatório",
       invalid_type_error: "'like' deve ser um boolean" 
     }),   
+
+  action: z.enum([POST_ACTION.COMMENT, POST_ACTION.POST],{
+    required_error: "'action' é obrigatório",
+    invalid_type_error: "'aciton' deve ser "+POST_ACTION // precisa confirmar isso <<-
+  }),
 
   token: z.string() 
 }).transform(data => data as LikeDislikeInputDTO)

@@ -17,7 +17,6 @@ export class PostController {
   public createPost = async (req: Request, res: Response) => {
 
     try {
-
       const input = CreatePostSchema.parse({
         content: req.body.content,
         token: req.headers.authorization
@@ -84,7 +83,6 @@ export class PostController {
     } catch (error) {
       handlerError(res, error)
     }
-
   }
 
   //================  LIKE DISLIKE
@@ -94,6 +92,7 @@ export class PostController {
       const input = LikeDislikeSchema.parse({
         id: req.params.id,
         like: req.body.like,
+        action: req.body.action,
         token: req.headers.authorization as string
       })
 
