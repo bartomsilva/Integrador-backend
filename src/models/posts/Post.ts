@@ -17,7 +17,6 @@ export interface PostUpdateDB {
   updated_at: string 
 }
 
-
 // POSTS  USERS
 export interface PostResultDB {
   id: string,  
