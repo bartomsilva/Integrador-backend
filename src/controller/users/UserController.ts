@@ -5,6 +5,7 @@ import { handlerError } from "../../error/handlerError"
 import { CreateUserSchema } from "../../dtos/users/singUp.dto"
 import { LoginSchema } from "../../dtos/users/login.dto"
 import { CreateAdminSchema } from "../../dtos/users/createAdmin.dto"
+import { HTTP_CODE } from "../../util/util"
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
 
@@ -19,7 +20,7 @@ export class UserController {
 
       const output = await this.userBusiness.getUsers(input)
 
-      res.status(200).send(output)
+      res.status(HTTP_CODE.OK).send(output)
 
     } catch (error) {
       handlerError(res, error)
@@ -38,7 +39,7 @@ export class UserController {
 
       const output = await this.userBusiness.createUser(input);
 
-      res.status(201).send(output)
+      res.status(HTTP_CODE.CREATED).send(output)
 
     } catch (error) {
       handlerError(res, error)
@@ -56,7 +57,7 @@ export class UserController {
 
       const output = await this.userBusiness.login(input)
 
-      res.status(200).send(output)
+      res.status(HTTP_CODE.OK).send(output)
 
     } catch (error) {
       handlerError(res, error)
@@ -74,7 +75,7 @@ export class UserController {
 
       await this.userBusiness.createAdmin(input);
 
-      res.sendStatus(200)
+      res.sendStatus(HTTP_CODE.OK)
 
     } catch (error) {
       handlerError(res, error)

@@ -1,7 +1,8 @@
+import { HTTP_CODE } from "../util/util";
 import { BaseError } from "./BaseError";
 
 export class ConflictError extends BaseError {
   constructor(message: string = "Recurso já cadastrado") {
-    super(409, message)
+    super(HTTP_CODE.CONFLICT, message)
   }
 }

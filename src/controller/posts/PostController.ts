@@ -7,6 +7,7 @@ import { UpdatePostSchema } from "../../dtos/posts/updatePost.dto"
 import { DeletePostSchema } from "../../dtos/posts/deletePost.dto"
 import { GetPostShema } from "../../dtos/posts/getPost.dto"
 import { LikeDislikeSchema } from "../../dtos/posts/likeDislike.dto"
+import { HTTP_CODE } from "../../util/util"
 
 export class PostController {
   constructor(private postBusiness: PostBusiness,
@@ -24,7 +25,7 @@ export class PostController {
 
       await this.postBusiness.createPost(input)
 
-      res.sendStatus(201)
+      res.sendStatus(HTTP_CODE.CREATED)
 
     } catch (error) {
       handlerError(res, error)
@@ -44,7 +45,7 @@ export class PostController {
 
       await this.postBusiness.editPost(id, input)
 
-      res.sendStatus(200)
+      res.sendStatus(HTTP_CODE.OK)
 
     } catch (error) {
       handlerError(res, error)
@@ -62,7 +63,7 @@ export class PostController {
 
       await this.postBusiness.deletePost(input)
 
-      res.sendStatus(200)
+      res.sendStatus(HTTP_CODE.OK)
 
     } catch (error) {
       handlerError(res, error)
@@ -78,7 +79,7 @@ export class PostController {
       })
 
       const output = await this.postBusiness.getPost(input)
-      res.status(200).send(output)
+      res.status(HTTP_CODE.OK).send(output)
 
     } catch (error) {
       handlerError(res, error)
@@ -98,7 +99,7 @@ export class PostController {
 
       await this.likeDislikeBusiness.likeDislike(input)
 
-      res.sendStatus(200)
+      res.sendStatus(HTTP_CODE.OK)
 
     } catch (error) {
       handlerError(res, error)
