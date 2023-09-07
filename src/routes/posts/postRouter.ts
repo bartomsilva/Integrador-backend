@@ -30,3 +30,8 @@ postRouter.put("/:id",postController.editPost)
 postRouter.delete("/:id",postController.deletePost)
 //================== LIKE, DISLIKE 
 postRouter.put("/:id/like", postController.likeDislike)
+
+//================== COMMENTS
+// postRouter.post("/:id/comment", postController.createComment)
+// postRouter.put("/:id/comment", postController.editComment)
+// postRouter.delete("/:id/comment", postController.deleteComment)
