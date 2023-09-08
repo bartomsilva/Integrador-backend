@@ -49,7 +49,9 @@ export class CommentBusiness {
       updated_at: new Date().toISOString()
     }
     // enviando para ser salvo no banco de dados
-    //await this.postDataBase.insertPost(newPost)
+    console.log("bussines enviando",newComment)
+    await this.commentDataBase.insertComment(newComment)
+    //TODO incrementar o número de comments do POST
   }
 
   //============= EDIT COMMENT
@@ -107,6 +109,7 @@ export class CommentBusiness {
       throw new UnAuthorizedError("Recurso negado")
     }
     await this.commentDataBase.deleteComment(id)
+    //TODO diminuir o número de comentarios do POST
   }
 
   //============ GET COMMENTS

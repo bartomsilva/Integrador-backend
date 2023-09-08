@@ -7,7 +7,8 @@ export class CommentDataBase extends BaseDataBase {
 
   //=============== INSERT COMMENT
   public insertComment = async (newComment: CommentDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME).insert(newComment)
+    console.log("estou na commentDatabase", newComment)
+    await BaseDataBase.connection("comments").insert(newComment)
   }
 
   //=============== UPDATE COMMENT 
