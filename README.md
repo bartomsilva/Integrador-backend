@@ -43,6 +43,8 @@ importante: endpoints dos posts protegidos, precisa enviar um token válido para
 - /users
 #### Requisições de Posts
 - /posts
+#### Requisições de Comentários
+- /comments
 
 <hr/>
 <span id="example"></span>
