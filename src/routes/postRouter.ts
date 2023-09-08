@@ -1,11 +1,11 @@
 import express from "express"
-import { IdGenerator } from "../../services/IdGenarator"
-import { TokenManager } from "../../services/TokenManager"
-import { PostController } from "../../controller/posts/PostController"
-import { PostBusiness } from "../../business/posts/PostBusiness"
-import { PostDataBase } from "../../database/posts/PostDataBase"
-import { LikeDislikeBusiness } from "../../business/posts/LikeDislikeBusiness"
-import { LikesDislikesDatabase } from "../../database/posts/LikeDislikeDatabase"
+import { IdGenerator } from "../services/IdGenarator"
+import { TokenManager } from "../services/TokenManager"
+import { PostController } from "../controller/PostController"
+import { PostBusiness } from "../business/PostBusiness"
+import { PostDataBase } from "../database/PostDataBase"
+import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
+import { LikesDislikesDatabase } from "../database/LikeDislikeDatabase"
 
 export const postRouter = express.Router()
 
@@ -32,8 +32,4 @@ postRouter.delete("/:id",postController.deletePost)
 postRouter.put("/:id/like", postController.likeDislike)
 
 
-//================== COMMENTS
-// postRouter.post("/:id/comment", postController.createComment)
-// postRouter.put("/:id/comment", postController.editComment)
-// postRouter.delete("/:id/comment", postController.deleteComment)
 

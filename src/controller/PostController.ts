@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
-import { PostBusiness } from "../../business/posts/PostBusiness"
-import { LikeDislikeBusiness } from "../../business/posts/LikeDislikeBusiness"
-import { CreatePostSchema } from "../../dtos/posts/createPost.dto"
-import { handlerError } from "../../error/handlerError"
-import { UpdatePostSchema } from "../../dtos/posts/updatePost.dto"
-import { DeletePostSchema } from "../../dtos/posts/deletePost.dto"
-import { GetPostShema } from "../../dtos/posts/getPost.dto"
-import { LikeDislikeSchema } from "../../dtos/posts/likeDislike.dto"
-import { HTTP_CODE } from "../../util/util"
+import { PostBusiness } from "../business/PostBusiness"
+import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
+import { CreatePostSchema } from "../dtos/posts/createPost.dto"
+import { handlerError } from "../error/handlerError"
+import { UpdatePostSchema } from "../dtos/posts/updatePost.dto"
+import { DeletePostSchema } from "../dtos/posts/deletePost.dto"
+import { GetPostShema } from "../dtos/posts/getPost.dto"
+import { LikeDislikeSchema } from "../dtos/posts/likeDislike.dto"
+import { HTTP_CODE } from "../util/util"
 
 export class PostController {
   constructor(private postBusiness: PostBusiness,
@@ -78,6 +78,7 @@ export class PostController {
       })
 
       const output = await this.postBusiness.getPost(input)
+      console.log(output)
       res.status(HTTP_CODE.OK).send(output)
 
     } catch (error) {

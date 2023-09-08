@@ -1,6 +1,7 @@
 import { knex } from "knex"
 import dotenv from "dotenv"
-import { ActionDB } from "../models/posts/Post"
+import { PostDB } from "../models/Post"
+import { CommentDB } from "../models/Comments"
 dotenv.config()
 export abstract class BaseDataBase {
 
@@ -37,13 +38,13 @@ export abstract class BaseDataBase {
     }
 
     //============= FIND POST
-    public async findPost(id: string): Promise<ActionDB[]> {
-        const result: ActionDB[] = await BaseDataBase.connection("posts").where({ id })
+    public async findPost(id: string): Promise<PostDB[]> {
+        const result: PostDB[] = await BaseDataBase.connection("posts").where({ id })
         return result
     }
     //============= FIND COMMENT
-    public async findComment(id: string): Promise<ActionDB[]> {
-        const result: ActionDB[] = await BaseDataBase.connection("comments").where({ id })
+    public async findComment(id: string): Promise<CommentDB[]> {
+        const result: CommentDB[] = await BaseDataBase.connection("comments").where({ id })
         return result
     }
 

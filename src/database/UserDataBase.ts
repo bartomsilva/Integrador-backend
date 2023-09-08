@@ -1,5 +1,5 @@
-import { AdminDB, USER_ROLES, UserDB } from "../../models/users/User"
-import { BaseDataBase } from "../BaseDataBase"
+import { AdminDB, USER_ROLES, UserDB } from "../models/User"
+import { BaseDataBase } from "./BaseDataBase"
 
 export class UserDataBase extends BaseDataBase{
 

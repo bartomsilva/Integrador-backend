@@ -1,9 +1,10 @@
-import { LikesDislikesDatabase } from "../../database/posts/LikeDislikeDatabase"
-import { LikeDislikeInputDTO } from "../../dtos/posts/likeDislike.dto"
-import { BadRequestError } from "../../error/BadRequest"
-import { NotFoundError } from "../../error/NotFound"
-import { ActionDB, LikesDislikesDB, POST_ACTION } from "../../models/posts/Post"
-import { TokenManager } from "../../services/TokenManager"
+import { LikesDislikesDatabase } from "../database/LikeDislikeDatabase"
+import { LikeDislikeInputDTO } from "../dtos/posts/likeDislike.dto"
+import { BadRequestError } from "../error/BadRequest"
+import { NotFoundError } from "../error/NotFound"
+import { CommentDB } from "../models/Comments"
+import { PostDB, LikesDislikesDB, POST_ACTION} from "../models/Post"
+import { TokenManager } from "../services/TokenManager"
 
 export class LikeDislikeBusiness {
 
@@ -35,7 +36,7 @@ export class LikeDislikeBusiness {
     }
 
     // procurar o post / comment
-    let postComment: ActionDB
+    let postComment: PostDB | CommentDB
     if ( action == POST_ACTION.POST){
       [postComment] = await this.likesDislikesDataBase.findPost(actionId)
     } else {

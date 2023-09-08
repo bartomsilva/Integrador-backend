@@ -1,11 +1,11 @@
 import { Request, Response } from "express"
-import { UserBusiness } from "../../business/users/UserBusiness"
-import { GetUsersSchema } from "../../dtos/users/getUsers.dto"
-import { handlerError } from "../../error/handlerError"
-import { CreateUserSchema } from "../../dtos/users/singUp.dto"
-import { LoginSchema } from "../../dtos/users/login.dto"
-import { CreateAdminSchema } from "../../dtos/users/createAdmin.dto"
-import { HTTP_CODE } from "../../util/util"
+import { UserBusiness } from "../business/UserBusiness"
+import { GetUsersSchema } from "../dtos/users/getUsers.dto"
+import { handlerError } from "../error/handlerError"
+import { CreateUserSchema } from "../dtos/users/singUp.dto"
+import { LoginSchema } from "../dtos/users/login.dto"
+import { CreateAdminSchema } from "../dtos/users/createAdmin.dto"
+import { HTTP_CODE } from "../util/util"
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
 

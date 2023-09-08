@@ -1,5 +1,5 @@
 import z from "zod"
-import { POST_ACTION } from "../../models/posts/Post"
+import { POST_ACTION } from "../../models/Post"
 
 export interface LikeDislikeInputDTO {
   id: string

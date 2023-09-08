@@ -1,5 +1,5 @@
-import { PostDB, PostResultDB, PostUpdateDB } from "../../models/posts/Post";
-import { BaseDataBase } from "../BaseDataBase";
+import { PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
+import { BaseDataBase } from "./BaseDataBase";
 
 export class PostDataBase extends BaseDataBase {
 
@@ -28,8 +28,8 @@ export class PostDataBase extends BaseDataBase {
   public getPost = async ():Promise<PostResultDB[]> => {
 
     const output: PostResultDB[] =  await BaseDataBase.connection("posts as p")
-      .select("p.id", "p.content", "p.likes", "p.dislikes", "p.created_at",
-        "p.updated_at", "p.creator_id", "u.name as creator_name")
+      .select("p.id", "p.content", "p.likes", "p.dislikes","p.comments", "p.created_at",
+        "p.updated_at", "p.creator_id", "u.name as creator_name")        
       .innerJoin("users as u", "p.creator_id", "u.id")
       return output
   }

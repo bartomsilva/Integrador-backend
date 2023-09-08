@@ -1,5 +1,5 @@
-import { LikesDislikesDB } from "../../models/posts/Post"
-import { BaseDataBase } from "../BaseDataBase"
+import { LikesDislikesDB } from "../models/Post"
+import { BaseDataBase } from "./BaseDataBase"
 
 export class LikesDislikesDatabase extends BaseDataBase {
 
@@ -17,14 +17,14 @@ export class LikesDislikesDatabase extends BaseDataBase {
     await BaseDataBase.connection(this.TABLE_NAME)
       .update({ like: likeDislike.like })
       .where({ user_id: likeDislike.user_id })
-      .andWhere({ post_id: likeDislike.post_id })
+      .andWhere({ action_id: likeDislike.action_id })
   }
 
   //=====================  DELETE LIKE DISLIKE
   public deleteLikeDislike = async (PostId: string, UserId: string): Promise<void> => {
     await BaseDataBase.connection("likes_dislikes")
       .del()
-      .where({ post_id: PostId })
+      .where({ action_id: PostId })
       .andWhere({ user_id: UserId })
   }
 
@@ -75,9 +75,9 @@ export class LikesDislikesDatabase extends BaseDataBase {
   }
 
   // busca os detalhes de like / dislike
-  public findLikeDislike = async (Post_Id: string, User_Id: string): Promise<LikesDislikesDB> => {
+  public findLikeDislike = async (id: string, User_Id: string): Promise<LikesDislikesDB> => {
     const [resultDB]: LikesDislikesDB[] = await BaseDataBase.connection("likes_dislikes")
-      .where({ post_id: Post_Id })
+      .where({ action_id: id })
       .andWhere({ user_id: User_Id })
     return resultDB
   }

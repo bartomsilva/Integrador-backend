@@ -1,5 +1,5 @@
 // INSERT  DO POST
-export interface ActionDB {
+export interface PostDB {
   id: string,  
   creator_id: string,
   content: string,
@@ -23,6 +23,7 @@ export interface PostResultDB {
   content: string,
   likes: number,
   dislikes: number,  
+  comments: number,
   created_at: string,
   updated_at: string, 
   creator_id: string,
