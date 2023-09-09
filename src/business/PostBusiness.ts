@@ -52,7 +52,7 @@ export class PostBusiness {
   }
 
   //============= EDIT POST
-  public editPost = async (id: string, input: UpdatePostInputDTO): Promise<void> => {
+  public editPost = async (id: string, input: UpdatePostInputDTO): Promise<string> => {
 
     const { content, token } = input
 
@@ -81,6 +81,8 @@ export class PostBusiness {
       throw new UnAuthorizedError("Recurso negado")
     }
     await this.postDataBase.updatePost(updatePost, creatorId)
+    
+    return "ok"
   }
 
 

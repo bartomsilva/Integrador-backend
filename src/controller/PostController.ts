@@ -43,9 +43,9 @@ export class PostController {
         token: req.headers.authorization
       })
 
-      await this.postBusiness.editPost(id, input)
+      const response = await this.postBusiness.editPost(id, input)
 
-      res.sendStatus(HTTP_CODE.OK)
+      res.status(HTTP_CODE.OK).send(response)
 
     } catch (error) {
       handlerError(res, error)
