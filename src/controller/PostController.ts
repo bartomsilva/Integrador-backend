@@ -22,9 +22,10 @@ export class PostController {
         token: req.headers.authorization
       })
 
-      await this.postBusiness.createPost(input)
+      const response = await this.postBusiness.createPost(input)
 
-      res.sendStatus(HTTP_CODE.CREATED)
+      res.status(HTTP_CODE.CREATED).send(response)
+      
 
     } catch (error) {
       handlerError(res, error)

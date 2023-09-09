@@ -18,7 +18,7 @@ export class PostBusiness {
     private tokenManager: TokenManager) { }
 
   //=============== CREATE POST 
-  public createPost = async (input: CreatePostInputDTO): Promise<void> => {
+  public createPost = async (input: CreatePostInputDTO): Promise<PostDB> => {
 
     const { content, token } = input
 
@@ -48,6 +48,7 @@ export class PostBusiness {
     }
     // enviando para ser salvo no banco de dados
     await this.postDataBase.insertPost(newPost)
+    return newPost
   }
 
   //============= EDIT POST
