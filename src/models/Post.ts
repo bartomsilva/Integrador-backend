@@ -38,6 +38,6 @@ export interface LikesDislikesDB {
 }
 
 export enum POST_ACTION {
-  POST = "post",
-  COMMENT = "comment"
+  POST = "posts",
+  COMMENT = "comments"
 }

@@ -78,7 +78,6 @@ export class PostController {
       })
 
       const output = await this.postBusiness.getPost(input)
-      console.log(output)
       res.status(HTTP_CODE.OK).send(output)
 
     } catch (error) {

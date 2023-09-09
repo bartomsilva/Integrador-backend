@@ -50,10 +50,7 @@ CREATE TABLE comments(
 CREATE TABLE likes_dislikes(
     user_id VARCHAR(40),
     action_id VARCHAR(40),    
-    like    INTEGER(1),
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY(action_id) REFERENCES posts(id) ON DELETE CASCADE
-    --FOREIGN KEY(action_id) REFERENCES comments(id) ON DELETE CASCADE
+    like    INTEGER(1)
 );
 
 
