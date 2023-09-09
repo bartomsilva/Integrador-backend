@@ -1,4 +1,5 @@
 import { BaseDataBase } from "../../src/database/BaseDataBase"
+import { CommentDB } from "../../src/models/Comments"
 import { PostDB, PostResultDB, PostUpdateDB } from "../../src/models/Post"
 
 const postMock: PostResultDB[] = [
@@ -43,4 +44,11 @@ export class PostDataBaseMock extends BaseDataBase {
   public getPost = async ():Promise<PostResultDB[]> => {
       return postMock
   }
+  //============= FIND POST
+      public async findPost(id: string): Promise<PostDB[]> {
+        const result: PostDB[] = postMock.filter( post => post.id == id)
+        return result
+    }
+ 
+
 }
