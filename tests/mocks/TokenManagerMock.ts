@@ -1,4 +1,4 @@
-import { TokenPayload, USER_ROLES } from '../../src/models/users/User'
+import { TokenPayload, USER_ROLES } from '../../src/models/User'
 
 export class TokenManagerMock {
   // converte o objeto de dados (payload) para um token string
