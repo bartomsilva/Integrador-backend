@@ -1,11 +1,11 @@
-import { UserBusiness } from "../../src/business/users/UserBusiness"
-import { HashManagerMock } from "../mocks/HashManagerMock"
-import { IdGeneratorMock } from "../mocks/IdGeneratorMock"
-import { TokenManagerMock } from "../mocks/TokenManagerMock"
-import { UserDataBaseMock } from "../mocks/UserDataBaseMock"
-import { SingUpInputDTO, SingUpSchema } from "../../src/dtos/users/singUp.dto"
+import { UserBusiness } from "../../../src/business/UserBusiness"
+import { HashManagerMock } from "../../mocks/HashManagerMock"
+import { IdGeneratorMock } from "../../mocks/IdGeneratorMock"
+import { TokenManagerMock } from "../../mocks/TokenManagerMock"
+import { UserDataBaseMock } from "../../mocks/UserDataBaseMock"
+import { CreateUserInputDTO, CreateUserSchema } from "../../../src/dtos/users/singUp.dto"
 import { ZodError } from "zod"
-import { ConflictError } from "../../src/error/ConflictError"
+import { ConflictError } from "../../../src/error/ConflictError"
 
 describe("Teste da signup", () => {
 
@@ -17,27 +17,27 @@ describe("Teste da signup", () => {
   )
 
   test("deve retornar um token", async () => {
-    const input: SingUpInputDTO = {
+    const input: CreateUserInputDTO = {
 
       name: "Linda Roberts",
       email: "linda@email.com",
       password: "Linda123@"
     }
-    const output = await userBusiness.singUp(input)
+    const output = await userBusiness.createUser(input)
     expect(output).toEqual({ token: "token-mock" })
   })
 
   test("o zod deve diaparar error em name", () => {
     expect.assertions(1)
     try {
-      const input: SingUpInputDTO = {
+      const input: CreateUserInputDTO = {
 
         name: "L",
         email: "linda@email",
         password: "Linda123@"
       }
 
-      SingUpSchema.parse(input)
+      CreateUserSchema.parse(input)
 
     } catch (error) {
       if (error instanceof ZodError) {
@@ -49,14 +49,14 @@ describe("Teste da signup", () => {
   test("o zod deve diaparar error em email", () => {
     expect.assertions(1)
     try {
-      const input: SingUpInputDTO = {
+      const input: CreateUserInputDTO = {
 
         name: "Linda Roberts",
         email: "linda@email",
         password: "Linda123@"
       }
 
-      SingUpSchema.parse(input)
+      CreateUserSchema.parse(input)
 
     } catch (error) {
       if (error instanceof ZodError) {
@@ -68,14 +68,14 @@ describe("Teste da signup", () => {
   test("o zod deve diaparar error em password", () => {
     try {
       expect.assertions(1)
-      const input: SingUpInputDTO = {
+      const input: CreateUserInputDTO = {
 
         name: "Linda Roberts",
         email: "linda@email.com",
         password: "Linda123"
       }
 
-      SingUpSchema.parse(input)
+      CreateUserSchema.parse(input)
 
     } catch (error) {
       if (error instanceof ZodError) {
@@ -88,13 +88,13 @@ describe("Teste da signup", () => {
     // expect.assertions(2)
     try {
 
-      const input = SingUpSchema.parse({
+      const input = CreateUserSchema.parse({
         name: "Fulano",
         email: "fulano@email.com",
         password: "123456Aa@",  // Fulano123@
       })
 
-      const output = await userBusiness.singUp(input)
+      const output = await userBusiness.createUser(input)
 
     } catch (error) {
       if (error instanceof ConflictError) {
@@ -102,7 +102,6 @@ describe("Teste da signup", () => {
         expect(error.message).toBe("'email' já cadastrado")
       }
     }
-
   })
 
 })

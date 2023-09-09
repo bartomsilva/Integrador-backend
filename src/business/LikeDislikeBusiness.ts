@@ -34,9 +34,7 @@ export class LikeDislikeBusiness {
       action_id: actionId,
       like: likeVal
     }
-    console.log("***************")
-    console.log(input)
-    console.log("***************")
+  
     // procurar o post / comment
     let postComment: PostDB | CommentDB
     if ( action == POST_ACTION.POST){

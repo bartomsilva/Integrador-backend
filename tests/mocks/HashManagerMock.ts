@@ -15,7 +15,7 @@ export class HashManagerMock {
       case "Fulano123@":
         return hash === "hash-mock-fulano"
       case "Bart123@":
-        return hash === "hash-mock=bart"
+        return hash === "hash-mock-bart"
       default:
         return false
     }

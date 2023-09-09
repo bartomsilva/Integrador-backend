@@ -1,4 +1,4 @@
-import { USER_ROLES, UserDB } from "../../src/models/users/User"
+import { AdminDB, USER_ROLES, UserDB } from "../../src/models/User"
 import { BaseDataBase } from "../../src/database/BaseDataBase"
 
 const usersMock: UserDB[] = [
@@ -19,6 +19,7 @@ const usersMock: UserDB[] = [
   created_at: new Date().toISOString()
   }
 ]
+
 export class UserDataBaseMock extends BaseDataBase {
 
   TABLE_NAME = "users"
@@ -42,7 +43,13 @@ export class UserDataBaseMock extends BaseDataBase {
     } else {
       resultDB = usersMock
     }
-
     return resultDB
   }
+
+  // troca o Status do usuário para admin ou revoga
+  public createAdmin = async (idUser: string, userNewStatus: AdminDB ):Promise<void> =>{
+   
+  }
+
+
 }
