@@ -1,7 +1,7 @@
 import {PostBusiness} from "../../../src/business/PostBusiness"
-import {PostDataBaseMock} from "../../mocks/PostDataBaseMock"
-import { IdGeneratorMock } from "../../mocks/IdGeneratorMock"
-import { TokenManagerMock } from "../../mocks/TokenManagerMock"
+import {PostDataBaseMock} from "../../mocks/PostDataBase.Mock"
+import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
+import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 
 
 describe("Testando createPost", () => {
@@ -10,7 +10,5 @@ describe("Testando createPost", () => {
     new IdGeneratorMock(),
     new TokenManagerMock()
   )
-
-
 
 })

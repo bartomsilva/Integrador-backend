@@ -1,10 +1,10 @@
 import { UserBusiness } from "../../../src/business/UserBusiness"
 import { GetUsersSchema } from "../../../src/dtos/users/getUsers.dto"
 import { USER_ROLES } from "../../../src/models/User"
-import { HashManagerMock } from "../../mocks/HashManagerMock"
-import { IdGeneratorMock } from "../../mocks/IdGeneratorMock"
-import { TokenManagerMock } from "../../mocks/TokenManagerMock"
-import { UserDataBaseMock } from "../../mocks/UserDataBaseMock"
+import { HashManagerMock } from "../../mocks/HashManager.Mock"
+import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
+import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
+import { UserDataBaseMock } from "../../mocks/UserDataBase.Mock"
 import { BadRequestError } from "../../../src/error/BadRequest"
 
 describe("Testando getUsers", () => {
