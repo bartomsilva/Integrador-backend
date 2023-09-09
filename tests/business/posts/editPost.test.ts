@@ -1,8 +1,9 @@
-import {PostBusiness} from "../../../src/business/PostBusiness"
-import {PostDataBaseMock} from "../../mocks/PostDataBase.Mock"
+import { PostBusiness } from "../../../src/business/PostBusiness"
+import { PostDataBaseMock } from "../../mocks/PostDataBase.Mock"
 import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { BadRequestError } from "../../../src/error/BadRequest"
+import { NotFoundError } from "../../../src/error/NotFound"
 
 
 describe("Testando editPost", () => {
@@ -11,40 +12,47 @@ describe("Testando editPost", () => {
     new IdGeneratorMock(),
     new TokenManagerMock()
   )
-  test("Editando um post, deve retornar ok", async ()=>{
-    expect.assertions(1)
-    try {
-      const input = {
-        token: "id-mock-fulano",
-        content: "vamos pra cima com tudo"
-      }
-      
-      const result = await postBusiness.editPost("oo",input)
 
-      expect(result).toEqual("ok")
-        
-    } catch (error) {
-      console.log(error)      
+  test("Edit post, deve retornar - ok", async () => {
+    expect.assertions(1)
+    const input = {
+      token: "id-mock-bart",
+      content: "vamos pra cima com tudo"
     }
+    const result = await postBusiness.editPost("id-mock-post1", input)
+    expect(result).toEqual("ok")
   })
 
-  test("Criando um post, deve retornar token invalido", async ()=>{
+  test("Edit post, deve retornar token invalido", async () => {
     expect.assertions(1)
     try {
       const input = {
         token: "token-fail",
         content: "vamos pra cima com tudo"
       }
-      
-      const result = await postBusiness.createPost(input)
+      const result = await postBusiness.editPost("id-mock-post1",input)
 
-      expect(result.content).toEqual("vanos pra cima com tudo")
-        
     } catch (error) {
-      if ( error instanceof BadRequestError){
-          expect(error.message).toEqual("token inválido")        
+      if (error instanceof BadRequestError) {
+        expect(error.message).toEqual("token inválido")
       }
     }
   })
-  
+
+  test("Edit post, deve retornar 'id' não encontrado", async () => {
+    expect.assertions(1)
+    try {
+      const input = {
+        token: "id-mock-bart",
+        content: "vamos pra cima com tudo"
+      }
+      const result = await postBusiness.editPost("id-mock-fail",input)
+
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        expect(error.message).toEqual("'id' não encontrado")
+      }
+    }
+  })
+
 }) 
