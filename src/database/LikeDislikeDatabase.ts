@@ -8,8 +8,6 @@ export class LikesDislikesDatabase extends BaseDataBase {
   //======================  INSERT LIKE DISLIKE
   public insertLikeDislike = async (likeDislike: LikesDislikesDB): Promise<void> => {
 
-    console.log("*****************")
-    console.log(likeDislike)
     await BaseDataBase.connection(this.TABLE_NAME).insert(likeDislike)
 
   }

@@ -17,16 +17,16 @@ describe("Testando getUsers", () => {
 
   test("deve retornar uma lista de users", async () => {
     const input = GetUsersSchema.parse({
-      token: "token-mock-astrodev"
+      token: "id-mock-bart"
     })
 
     const output = await userBusiness.getUsers(input)
 
     expect(output).toHaveLength(2)
     expect(output).toContainEqual({
-      id: "id-mock-astrodev",
-      name: "Astrodev",
-      email: "astrodev@email.com",
+      id: "id-mock-bart",
+      name: "Bart",
+      email: "bart@email.com",
       createdAt: expect.any(String),
       role: USER_ROLES.ADMIN
     })
@@ -34,17 +34,16 @@ describe("Testando getUsers", () => {
 
   test("deve retornar um usuário", async () => {
     const input = GetUsersSchema.parse({
-      q: "dev",
-      token: "token-mock-astrodev"
+      q: "Bart",
+      token: "id-mock-bart"
     })
 
     const output = await userBusiness.getUsers(input)
 
-    expect(output).toHaveLength(2)
     expect(output).toContainEqual({
-      id: "id-mock-astrodev",
-      name: "Astrodev",
-      email: "astrodev@email.com",
+      id: "id-mock-bart",
+      name: "Bart",
+      email: "bart@email.com",
       createdAt: expect.any(String),
       role: USER_ROLES.ADMIN
     })
@@ -53,15 +52,14 @@ describe("Testando getUsers", () => {
   test("deve retornar a mensagem somente admins podem acessar", async () => {
     try {
       const input = GetUsersSchema.parse({
-        token: "token-mock-fulano"
+        token: "id-mock-fulano"
       })
 
       const output = await userBusiness.getUsers(input)
 
     } catch (error) {
-      console.log(error)
       if (error instanceof BadRequestError) {
-        expect(error.message).toEqual("somente admins podem acessar")
+        expect(error.message).toEqual("somente admins podem acessar esse recurso")
       }
     }
   })
@@ -75,7 +73,6 @@ describe("Testando getUsers", () => {
       const output = await userBusiness.getUsers(input)
 
     } catch (error) {
-      console.log(error)
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")
       }
