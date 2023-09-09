@@ -7,8 +7,7 @@ export class CommentDataBase extends BaseDataBase {
 
   //=============== INSERT COMMENT
   public insertComment = async (newComment: CommentDB): Promise<void> => {
-    console.log("estou na commentDatabase", newComment)
-    await BaseDataBase.connection("comments").insert(newComment)
+    await BaseDataBase.connection(this.TABLE_NAME).insert(newComment)
   }
 
   //=============== UPDATE COMMENT 
@@ -34,5 +33,18 @@ export class CommentDataBase extends BaseDataBase {
       .innerJoin("users as u", "p.creator_id", "u.id")
       .where({post_id: postId})
       return output
+  }
+
+  // rotitna de que incrementa o número de comentarios dos posts
+  public incrementComments = async (postId: string):Promise<void> =>{
+    await BaseDataBase.connection("posts")
+    .where({ id: postId })
+    .increment("comments")
+  }
+  // rotitna de que decrementa o número de comentarios dos posts
+  public decrementComments = async (postId: string):Promise<void> =>{
+    await BaseDataBase.connection("posts")
+    .where({ id: postId })
+    .decrement("comments")
   }
 }

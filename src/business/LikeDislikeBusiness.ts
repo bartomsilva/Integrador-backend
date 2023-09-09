@@ -34,7 +34,9 @@ export class LikeDislikeBusiness {
       action_id: actionId,
       like: likeVal
     }
-
+    console.log("***************")
+    console.log(input)
+    console.log("***************")
     // procurar o post / comment
     let postComment: PostDB | CommentDB
     if ( action == POST_ACTION.POST){
@@ -60,26 +62,26 @@ export class LikeDislikeBusiness {
     if (likeDislikeDB === undefined) {
       await this.likesDislikesDataBase.insertLikeDislike(postLikeDislike)
       if (likeVal === 1) {
-        await this.likesDislikesDataBase.postIncreaseLike(actionId)
+        await this.likesDislikesDataBase.postIncreaseLike(action,actionId)
       } else {
-        await this.likesDislikesDataBase.postIncreaseDislike(actionId)
+        await this.likesDislikesDataBase.postIncreaseDislike(action,actionId)
       }
     } else { // existe um registro entre User x Post 
       // deletar o like/Dislike se for a mesma opção
       if (likeVal == likeDislikeDB.like) {
         await this.likesDislikesDataBase.deleteLikeDislike(actionId, userId)
         if (likeVal === 1) {
-          await this.likesDislikesDataBase.postDecreaseLike(actionId)
+          await this.likesDislikesDataBase.postDecreaseLike(action,actionId)
         } else {
-          await this.likesDislikesDataBase.postDecreaseDislike(actionId)
+          await this.likesDislikesDataBase.postDecreaseDislike(action,actionId)
         }
       } else { // trocar de like para dislike ou dislike para like (inverter)
         await this.likesDislikesDataBase.updateLikeDislike(postLikeDislike)
         if (likeVal==1){
-          await this.likesDislikesDataBase.postReverseDislikeToLike(actionId)
+          await this.likesDislikesDataBase.postReverseDislikeToLike(action,actionId)
         }
         else {
-          await this.likesDislikesDataBase.postReverseLikeToDislike(actionId)
+          await this.likesDislikesDataBase.postReverseLikeToDislike(action,actionId)
         }
       }
     }
