@@ -102,7 +102,6 @@ describe("Teste da signup", () => {
         expect(error.message).toBe("'email' já cadastrado")
       }
     }
-
   })
 
 })

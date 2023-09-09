@@ -19,6 +19,7 @@ const usersMock: UserDB[] = [
   created_at: new Date().toISOString()
   }
 ]
+
 export class UserDataBaseMock extends BaseDataBase {
 
   TABLE_NAME = "users"
@@ -50,4 +51,6 @@ export class UserDataBaseMock extends BaseDataBase {
   public createAdmin = async (idUser: string, userNewStatus: AdminDB ):Promise<void> =>{
    
   }
+
+
 }

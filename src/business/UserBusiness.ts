@@ -5,6 +5,7 @@ import { LoginInputDTO, LoginOutputDTO } from "../dtos/users/login.dto"
 import { CreateUserInputDTO, CreateUserOutputDTO } from "../dtos/users/singUp.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { ConflictError } from "../error/ConflictError"
+import { NotFoundError } from "../error/NotFound"
 import { AdminDB, TokenPayload, USER_ROLES, UserDB } from "../models/User"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenarator"
@@ -99,11 +100,11 @@ export class UserBusiness {
 
     const userDB: UserDB = await this.userDataBase.findUser(email)
     if (!userDB) {
-      throw new BadRequestError("Usuário não cadastrado")
+      throw new NotFoundError("'email' não encontrado")
     }
     const passworValid = await this.hashManager.compare(password, userDB.password)
     if (!passworValid) {
-      throw new BadRequestError("Senha invalida")
+      throw new BadRequestError("'password' incorreta")
     }
 
     // modelagem do objeto (payload)
@@ -137,11 +138,7 @@ export class UserBusiness {
     const id = payLoad.id
 
     const userDB: UserDB = await this.userDataBase.findById(id)
-
-    if (!userDB) {
-      throw new BadRequestError("Usuário não cadastrado")
-    }
-
+    
     // ajusta do status do usuário
     const userNewStatus: AdminDB = {
       role: isAdmin ? USER_ROLES.ADMIN : USER_ROLES.NORMAL
