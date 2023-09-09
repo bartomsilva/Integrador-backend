@@ -1,11 +1,11 @@
-import { UserBusiness } from "../../src/business/UserBusiness"
-import { HashManagerMock } from "../mocks/HashManagerMock"
-import { IdGeneratorMock } from "../mocks/IdGeneratorMock"
-import { TokenManagerMock } from "../mocks/TokenManagerMock"
-import { UserDataBaseMock } from "../mocks/UserDataBaseMock"
-import { CreateUserInputDTO, CreateUserSchema } from "../../src/dtos/users/singUp.dto"
+import { UserBusiness } from "../../../src/business/UserBusiness"
+import { HashManagerMock } from "../../mocks/HashManagerMock"
+import { IdGeneratorMock } from "../../mocks/IdGeneratorMock"
+import { TokenManagerMock } from "../../mocks/TokenManagerMock"
+import { UserDataBaseMock } from "../../mocks/UserDataBaseMock"
+import { CreateUserInputDTO, CreateUserSchema } from "../../../src/dtos/users/singUp.dto"
 import { ZodError } from "zod"
-import { ConflictError } from "../../src/error/ConflictError"
+import { ConflictError } from "../../../src/error/ConflictError"
 
 describe("Teste da signup", () => {
 

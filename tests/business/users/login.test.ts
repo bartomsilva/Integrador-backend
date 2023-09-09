@@ -1,11 +1,11 @@
-import { UserBusiness } from "../../src/business/UserBusiness"
-import { LoginSchema } from "../../src/dtos/users/login.dto"
-import { BadRequestError } from "../../src/error/BadRequest"
-import { NotFoundError } from "../../src/error/NotFound"
-import { HashManagerMock } from "../mocks/HashManagerMock"
-import { IdGeneratorMock } from "../mocks/IdGeneratorMock"
-import { TokenManagerMock } from "../mocks/TokenManagerMock"
-import { UserDataBaseMock } from "../mocks/UserDataBaseMock"
+import { UserBusiness } from "../../../src/business/UserBusiness"
+import { LoginSchema } from "../../../src/dtos/users/login.dto"
+import { BadRequestError } from "../../../src/error/BadRequest"
+import { NotFoundError } from "../../../src/error/NotFound"
+import { HashManagerMock } from "../../mocks/HashManagerMock"
+import { IdGeneratorMock } from "../../mocks/IdGeneratorMock"
+import { TokenManagerMock } from "../../mocks/TokenManagerMock"
+import { UserDataBaseMock } from "../../mocks/UserDataBaseMock"
 
 describe("Testando login", () => {
   const userBusiness = new UserBusiness(

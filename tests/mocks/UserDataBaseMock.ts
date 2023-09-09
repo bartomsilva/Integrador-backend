@@ -43,7 +43,6 @@ export class UserDataBaseMock extends BaseDataBase {
     } else {
       resultDB = usersMock
     }
-
     return resultDB
   }
 
