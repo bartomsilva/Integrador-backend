@@ -65,6 +65,22 @@ describe("Testando likedislike", () => {
     result = await likedislikeBusiness.likeDislike(input);
     expect(result).toBe("ok")
   });
+
+  test("registro que exite comentario, deve retornar = ok", async () => {
+    expect.assertions(1);
+    
+    const input = {
+      id: "id-mock-comment-1",
+      like: true,
+      action: POST_ACTION.COMMENT,
+      token: "id-mock-bart"
+    };
+
+    // teste o like
+    const result = await likedislikeBusiness.likeDislike(input);
+    expect(result).toBe("ok")   
+
+  });
   
   test("deve retornar = token inválido", async () => {
     expect.assertions(1);

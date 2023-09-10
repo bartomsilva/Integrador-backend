@@ -1,15 +1,17 @@
 import { LikesDislikesDB, PostDB } from "../../src/models/Post"
 import { BaseDataBase } from "../../src/database/BaseDataBase"
 import { postMock } from "./PostDataBase.Mock"
+import { commentMock } from "./CommentDataBase.Mock"
+import { CommentDB } from "../../src/models/Comments"
 
 const liksMock = [{
-  action_id : "id-mock-post1",
-  user_id : "id-mock-fulano",
+  action_id: "id-mock-post1",
+  user_id: "id-mock-fulano",
   like: 1
 },
 {
-  action_id : "id-mock-post3",
-  user_id : "id-mock-bart",
+  action_id: "id-mock-post3",
+  user_id: "id-mock-bart",
   like: 0
 }
 ]
@@ -28,7 +30,7 @@ export class LikesDislikesDataBaseMock extends BaseDataBase {
 
   //=====================  DELETE LIKE DISLIKE
   public deleteLikeDislike = async (actionId: string, userId: string): Promise<void> => {
-    
+
   }
 
 
@@ -60,14 +62,20 @@ export class LikesDislikesDataBaseMock extends BaseDataBase {
   // busca os detalhes de like / dislike
   public findLikeDislike = async (actionId: string, userId: string): Promise<LikesDislikesDB> => {
     const [resultDB]: LikesDislikesDB[] = liksMock
-    .filter( like => like.action_id==actionId && like.user_id==userId)
+      .filter(like => like.action_id == actionId && like.user_id == userId)
     return resultDB
   }
 
-    //============= FIND POST
-    public async findPost(id: string): Promise<PostDB[]> {
-      const result: PostDB[] = postMock.filter( post => post.id == id)
-      return result
+  //============= FIND POST
+  public async findPost(id: string): Promise<PostDB[]> {
+    const result: PostDB[] = postMock.filter(post => post.id == id)
+    return result
   }
+
+  public async findComment(id: string): Promise<CommentDB[]> {
+    const result: CommentDB[] = commentMock.filter(comment => comment.id == id)
+    return result
+  }
+
 
 }

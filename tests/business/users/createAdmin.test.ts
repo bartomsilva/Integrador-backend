@@ -13,15 +13,14 @@ describe("Testando Create Admin", () => {
     new HashManagerMock(),
     new TokenManagerMock()
   )
-
   
   test("deve retornar a mensagem token inválido", async () => {
+    expect.assertions(1)
     try {
       const input: CreateAdminInputDTO = {
         isAdmin: true,
         token: "token-falso"
       }
-
       const output = await userBusiness.createAdmin(input)
 
     } catch (error) {
@@ -30,4 +29,15 @@ describe("Testando Create Admin", () => {
       }
     }
   })  
+
+  test("deve retornar = ok ", async () => {
+      const input: CreateAdminInputDTO = {
+        isAdmin: true,
+        token: "id-mock-fulano"
+      }
+      const result = await userBusiness.createAdmin(input)
+      expect(result).toBe("ok")
+  })  
+
+
 })
