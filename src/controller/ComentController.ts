@@ -38,9 +38,9 @@ export class CommentController {
         token: req.headers.authorization
       })
 
-      await this.commentBusiness.createComment(input)
+      const response = await this.commentBusiness.createComment(input)
 
-      res.sendStatus(HTTP_CODE.CREATED)
+      res.status(HTTP_CODE.CREATED).send(response)
 
     } catch (error) {
       handlerError(res, error)
@@ -58,9 +58,9 @@ export class CommentController {
         token: req.headers.authorization
       })
 
-      await this.commentBusiness.editComment(id, input)
+      const response = await this.commentBusiness.editComment(id, input)
 
-      res.sendStatus(HTTP_CODE.OK)
+      res.status(HTTP_CODE.OK).send(response)
 
     } catch (error) {
       handlerError(res, error)

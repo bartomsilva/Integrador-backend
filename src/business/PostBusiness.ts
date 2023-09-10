@@ -72,22 +72,23 @@ export class PostBusiness {
     // pesquisa o post 
     const [resultPost] = await this.postDataBase.findPost(id)
 
-    if ( !resultPost) {
+    if (!resultPost) {
       throw new NotFoundError("'id' não encontrado")
     }
-    
+
     //checar se o usuário pode editar o post 
     if (resultPost.creator_id != creatorId) {
-      throw new UnAuthorizedError("Recurso negado")
+      throw new UnAuthorizedError("recurso negado")
     }
+
     await this.postDataBase.updatePost(updatePost, creatorId)
-    
+
     return "ok"
   }
 
 
   //============= DELETE POST
-  public deletePost = async (input:DeletePostInputDTO): Promise<void> => {
+  public deletePost = async (input: DeletePostInputDTO): Promise<string> => {
     const { id, token } = input
 
     const payLoad = this.tokenManager.getPayload(token)
@@ -97,23 +98,26 @@ export class PostBusiness {
     // pagar o id do usuário
     const { id: creatorId, role } = payLoad
 
-     // pesquisa o post 
-    const [resultPost]:PostDB[] = await this.postDataBase.findPost(id)
+    // pesquisa o post 
+    const [resultPost]: PostDB[] = await this.postDataBase.findPost(id)
 
-    if ( !resultPost) {
+    if (!resultPost) {
       throw new NotFoundError("'id' não encontrado")
     }
-     //checar se o usuário pode deletar o post 
+
+    //checar se o usuário pode deletar o post 
     if (resultPost.creator_id != creatorId && role != USER_ROLES.ADMIN) {
-      throw new UnAuthorizedError("Recurso negado")
+      throw new UnAuthorizedError("recurso negado")
     }
+
     await this.postDataBase.deletePost(id)
+    return "ok"
   }
 
   //============ GET POSTS
-  public getPost = async (input:GetPostInputDTO):Promise<GetPostOutputDTO[]> => {
+  public getPost = async (input: GetPostInputDTO): Promise<GetPostOutputDTO[]> => {
 
-    const { token } = input 
+    const { token } = input
     // validar o token
     const payLoad = this.tokenManager.getPayload(token)
     if (payLoad == null) {
@@ -122,9 +126,9 @@ export class PostBusiness {
 
     const resultDB = await this.postDataBase.getPost()
 
-    const output:GetPostOutputDTO[] = resultDB.map( post => {
+    const response: GetPostOutputDTO[] = resultDB.map(post => {
       //const comments = getComments(post.id)//
-      const postNew={
+      const postNew = {
         id: post.id,
         content: post.content,
         likes: post.likes,
@@ -135,10 +139,11 @@ export class PostBusiness {
         creator: {
           id: post.creator_id,
           name: post.creator_name
-        }      
-      }      
+        }
+      }
       return postNew
-    }) 
-     return output
-  }  
+    })
+
+    return response
+  }
 }

@@ -20,8 +20,8 @@ export interface CommentResultDB {
   likes: number,
   dislikes: number,  
   comments: number,
-  //created_at: string,
-  //updated_at: string, 
   creator_id: string,
-  creator_name: string
+  creator_name: string,
+  created_at: string,
+  updated_at: string, 
 }

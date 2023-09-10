@@ -73,9 +73,9 @@ export class UserController {
         token: req.headers.authorization
       })
 
-      await this.userBusiness.createAdmin(input);
+      const response = await this.userBusiness.createAdmin(input);
 
-      res.sendStatus(HTTP_CODE.OK)
+      res.status(HTTP_CODE.OK).send(response)
 
     } catch (error) {
       handlerError(res, error)

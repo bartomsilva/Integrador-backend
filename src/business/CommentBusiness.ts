@@ -18,7 +18,7 @@ export class CommentBusiness {
     private tokenManager: TokenManager) { }
 
   //=============== CREATE COMMMENT 
-  public createComment = async (input: CreateCommentInputDTO): Promise<void> => {
+  public createComment = async (input: CreateCommentInputDTO): Promise<string> => {
 
     const { postId, content, token } = input
 
@@ -50,11 +50,13 @@ export class CommentBusiness {
     }
     // enviando para ser salvo no banco de dados
     await this.commentDataBase.insertComment(newComment)
+    // incrementando o número de comentários no post
     await this.commentDataBase.incrementComments(postId)
+    return "ok"
   }
 
   //============= EDIT COMMENT
-  public editComment = async (id: string, input: UpdateCommentInputDTO): Promise<void> => {
+  public editComment = async (id: string, input: UpdateCommentInputDTO): Promise<string> => {
 
     const { content, token } = input
 
@@ -80,14 +82,15 @@ export class CommentBusiness {
     
     //checar se o usuário pode editar o comentario 
     if (resultComment.creator_id != creatorId) {
-      throw new UnAuthorizedError("Recurso negado")
+      throw new UnAuthorizedError("recurso negado")
     }
     await this.commentDataBase.updateComment(updateComment, creatorId)
+    return "ok"
   }
 
 
   //============= DELETE COMENTARIO
-  public deleteComment = async (input:DeleteCommentInputDTO): Promise<void> => {
+  public deleteComment = async (input:DeleteCommentInputDTO): Promise<string> => {
     const { id, token } = input
 
     const payLoad = this.tokenManager.getPayload(token)
@@ -105,10 +108,12 @@ export class CommentBusiness {
     }
      //checar se o usuário pode deletar o comentario 
     if (resultComment.creator_id != creatorId && role != USER_ROLES.ADMIN) {
-      throw new UnAuthorizedError("Recurso negado")
+      throw new UnAuthorizedError("recurso negado")
     }
     await this.commentDataBase.deleteComment(id)
     await this.commentDataBase.decrementComments(resultComment.post_id) 
+    return "ok"
+
   }
 
   //============ GET COMMENTS

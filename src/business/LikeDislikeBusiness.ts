@@ -13,7 +13,7 @@ export class LikeDislikeBusiness {
     private tokenManager: TokenManager) { }
 
   // tratativas da ação: like / dislike    
-  public likeDislike = async (input: LikeDislikeInputDTO): Promise<void> => {
+  public likeDislike = async (input: LikeDislikeInputDTO): Promise<string> => {
 
     // pega o id do post / comment
     const { id: actionId, like, action, token } = input
@@ -44,7 +44,7 @@ export class LikeDislikeBusiness {
     }
 
     if (postComment === undefined) {
-      throw new NotFoundError("id não encontrado")
+      throw new NotFoundError("'id' não encontrado")
     }
 
     // Verifica se o post/comment é do mesmo usuário
@@ -83,5 +83,6 @@ export class LikeDislikeBusiness {
         }
       }
     }
+    return "ok"
   }
 }

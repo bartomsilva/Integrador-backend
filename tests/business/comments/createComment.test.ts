@@ -1,0 +1,47 @@
+import { CommentBusiness } from "../../../src/business/CommentBusiness"
+import { BadRequestError } from "../../../src/error/BadRequest"
+import { CommentDataBaseMock } from "../../mocks/CommentDataBase.Mock"
+import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
+import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
+
+describe("Testando createComment", () => {
+  const commentBusiness = new CommentBusiness(
+    new CommentDataBaseMock(),
+    new IdGeneratorMock(),
+    new TokenManagerMock()
+  )
+
+  test("deve retornar = ok", async () => {
+    expect.assertions(1);
+
+    const input = {
+      postId: "id-mock-post1",
+      token: "id-mock-fulano",
+      content: "ok"
+    };
+
+    const result = await commentBusiness.createComment(input);
+    expect(result).toEqual("ok");
+  });
+
+  test("deve retornar = token inválido", async () => {
+    expect.assertions(1);
+    try {
+      const input = {
+        postId: "id-mock-post1",
+        token: "token-fail",
+        content: "ok"
+      };
+      const result = await commentBusiness.createComment(input);
+
+    } catch (error) {
+      if ( error instanceof BadRequestError){
+        expect(error.message).toEqual("token inválido");        
+      }
+
+    }
+  });
+
+
+
+}) 

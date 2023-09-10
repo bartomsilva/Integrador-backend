@@ -124,7 +124,7 @@ export class UserBusiness {
   }
 
   //========== CREATE ADMIN
-  public createAdmin = async (input: CreateAdminInputDTO): Promise<void> => {
+  public createAdmin = async (input: CreateAdminInputDTO): Promise<string> => {
 
     const { isAdmin, token } = input
 
@@ -144,5 +144,6 @@ export class UserBusiness {
       role: isAdmin ? USER_ROLES.ADMIN : USER_ROLES.NORMAL
     }
     await this.userDataBase.createAdmin(id, userNewStatus)
+    return "ok"
   }
 }

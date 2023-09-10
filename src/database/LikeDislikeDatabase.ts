@@ -21,10 +21,10 @@ export class LikesDislikesDatabase extends BaseDataBase {
   }
 
   //=====================  DELETE LIKE DISLIKE
-  public deleteLikeDislike = async (postId: string, userId: string): Promise<void> => {
+  public deleteLikeDislike = async (actionId: string, userId: string): Promise<void> => {
     await BaseDataBase.connection("likes_dislikes")
       .del()
-      .where({ action_id: postId })
+      .where({ action_id: actionId })
       .andWhere({ user_id: userId })
   }
 
@@ -75,10 +75,10 @@ export class LikesDislikesDatabase extends BaseDataBase {
   }
 
   // busca os detalhes de like / dislike
-  public findLikeDislike = async (id: string, User_Id: string): Promise<LikesDislikesDB> => {
+  public findLikeDislike = async (actionId: string, userId: string): Promise<LikesDislikesDB> => {
     const [resultDB]: LikesDislikesDB[] = await BaseDataBase.connection("likes_dislikes")
-      .where({ action_id: id })
-      .andWhere({ user_id: User_Id })
+      .where({ action_id: actionId })
+      .andWhere({ user_id: userId })
     return resultDB
   }
 }
