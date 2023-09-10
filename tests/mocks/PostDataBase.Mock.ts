@@ -1,5 +1,4 @@
 import { BaseDataBase } from "../../src/database/BaseDataBase"
-import { CommentDB } from "../../src/models/Comments"
 import { PostDB, PostResultDB, PostUpdateDB } from "../../src/models/Post"
 
 const postMock: PostResultDB[] = [

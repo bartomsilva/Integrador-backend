@@ -61,9 +61,8 @@ export class PostController {
           token: req.headers.authorization as string
         })
 
-      await this.postBusiness.deletePost(input)
-
-      res.sendStatus(HTTP_CODE.OK)
+      const response = await this.postBusiness.deletePost(input)
+      res.status(HTTP_CODE.OK).send(response)
 
     } catch (error) {
       handlerError(res, error)

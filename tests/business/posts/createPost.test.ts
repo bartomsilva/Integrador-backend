@@ -4,7 +4,6 @@ import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { BadRequestError } from "../../../src/error/BadRequest"
 
-
 describe("Testando createPost", () => {
   const postBusiness = new PostBusiness(
     new PostDataBaseMock(),
