@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
 import { handlerError } from "../error/handlerError"
-import { LikeDislikeSchema } from "../dtos/posts/likeDislike.dto"
+import { LikeDislikeSchema } from "../dtos/likeDislike/likeDislike.dto"
 import { HTTP_CODE } from "../util/util"
 
 export class LikeDislikeController {

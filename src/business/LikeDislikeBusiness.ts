@@ -1,5 +1,5 @@
 import { LikeDislikeDatabase } from "../database/LikeDislikeDatabase"
-import { LikeDislikeInputDTO } from "../dtos/posts/likeDislike.dto"
+import { LikeDislikeInputDTO } from "../dtos/likeDislike/likeDislike.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { NotFoundError } from "../error/NotFound"
 import { CommentDB } from "../models/Comments"
