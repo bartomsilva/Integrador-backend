@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { userRouter } from "./routes/userRouter"
 import { postRouter } from "./routes/postRouter"
 import { commentRouter } from "./routes/commentRouter"
+import { likeDislikeRouter } from "./routes/likeDislikesRouter"
 
 dotenv.config()
 
@@ -17,9 +18,14 @@ server.listen(PORT, () => {
 })
 
 //================ ROTAS
+  // users
 server.use("/users", userRouter)
+  // posts
 server.use("/posts", postRouter)
+  // comments
 server.use("/comments", commentRouter)
+  // likes dislikes
+server.use("/likes", likeDislikeRouter)
 
 
 

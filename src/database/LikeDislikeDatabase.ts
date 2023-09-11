@@ -1,7 +1,7 @@
 import { LikesDislikesDB } from "../models/Post"
 import { BaseDataBase } from "./BaseDataBase"
 
-export class LikesDislikesDatabase extends BaseDataBase {
+export class LikeDislikeDatabase extends BaseDataBase {
 
   TABLE_NAME = "likes_dislikes"
 
