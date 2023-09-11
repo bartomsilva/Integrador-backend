@@ -6,11 +6,10 @@ import { UpdateCommentSchema } from "../dtos/comments/updateComment.dto"
 import { DeleteCommentSchema } from "../dtos/comments/deleteComment.dto"
 import { GetCommentShema } from "../dtos/comments/getComment.dto"
 import { CommentBusiness } from "../business/CommentBusiness"
-import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
 
 export class CommentController {
-  constructor(private commentBusiness: CommentBusiness,
-    private likeDislikeBusiness: LikeDislikeBusiness) { }
+  constructor(private commentBusiness: CommentBusiness)
+     { }
 
   //============ GET COMMENT
   public getComment = async (req: Request, res: Response) => {

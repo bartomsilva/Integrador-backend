@@ -1,17 +1,16 @@
 import { Request, Response } from "express"
 import { PostBusiness } from "../business/PostBusiness"
-import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
 import { CreatePostSchema } from "../dtos/posts/createPost.dto"
 import { handlerError } from "../error/handlerError"
 import { UpdatePostSchema } from "../dtos/posts/updatePost.dto"
 import { DeletePostSchema } from "../dtos/posts/deletePost.dto"
 import { GetPostShema } from "../dtos/posts/getPost.dto"
-import { LikeDislikeSchema } from "../dtos/posts/likeDislike.dto"
 import { HTTP_CODE } from "../util/util"
 
 export class PostController {
   constructor(private postBusiness: PostBusiness,
-    private likeDislikeBusiness: LikeDislikeBusiness) { }
+    //private likeDislikeBusiness: LikeDislikeBusiness
+    ) { }
 
   //=============== CREATE POST
   public createPost = async (req: Request, res: Response) => {
@@ -85,22 +84,4 @@ export class PostController {
     }
   }
 
-  //================  LIKE DISLIKE
-  public likeDislike = async (req: Request, res: Response) => {
-
-    try {
-      const input = LikeDislikeSchema.parse({
-        id: req.params.id,
-        like: req.body.like,
-        action: req.body.action,
-        token: req.headers.authorization as string
-      })
-
-      const response = await this.likeDislikeBusiness.likeDislike(input)
-      res.status(HTTP_CODE.OK).send(response)
-
-    } catch (error) {
-      handlerError(res, error)
-    }
-  }
 }
