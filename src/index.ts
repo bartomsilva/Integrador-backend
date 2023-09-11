@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { userRouter } from "./routes/userRouter"
 import { postRouter } from "./routes/postRouter"
 import { commentRouter } from "./routes/commentRouter"
-import { likeDislikeRouter } from "./routes/likeDislikesRouter"
+import { likeDislikeRouter } from "./routes/likeDislikeRouter"
 
 dotenv.config()
 
