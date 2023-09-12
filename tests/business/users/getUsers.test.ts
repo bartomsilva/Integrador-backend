@@ -19,9 +19,7 @@ describe("Testando getUsers", () => {
     const input = GetUsersSchema.parse({
       token: "id-mock-bart"
     })
-
     const output = await userBusiness.getUsers(input)
-
     expect(output).toHaveLength(2)
     expect(output).toContainEqual({
       id: "id-mock-bart",
@@ -37,9 +35,7 @@ describe("Testando getUsers", () => {
       q: "Bart",
       token: "id-mock-bart"
     })
-
     const output = await userBusiness.getUsers(input)
-
     expect(output).toContainEqual({
       id: "id-mock-bart",
       name: "Bart",
@@ -54,9 +50,7 @@ describe("Testando getUsers", () => {
       const input = GetUsersSchema.parse({
         token: "id-mock-fulano"
       })
-
       const output = await userBusiness.getUsers(input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("somente admins podem acessar esse recurso")
@@ -69,9 +63,7 @@ describe("Testando getUsers", () => {
       const input = GetUsersSchema.parse({
         token: "token-falso"
       })
-
       const output = await userBusiness.getUsers(input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")

@@ -20,23 +20,18 @@ describe("Testando login", () => {
       email: "fulano@email.com",
       password: "Fulano123@"
     })
-
     const output = await userBusiness.login(input)
-
     expect(output).toEqual({
       token: "token-mock-fulano"
     })
   })
-
 
   test("deve gerar um token ao logar", async () => {
     const input = LoginSchema.parse({
       email: "bart@email.com",
       password: "Bart123@"
     })
-
     const output = await userBusiness.login(input)
-
     expect(output).toEqual({
       token: "token-mock-bart"
     })
@@ -50,7 +45,6 @@ describe("Testando login", () => {
         password: "Fulano123@"
       }
       const output = await userBusiness.login(input)
-
     } catch (error) {
       if (error instanceof NotFoundError) {
         expect(error.message).toEqual("'email' não encontrado")
@@ -58,7 +52,7 @@ describe("Testando login", () => {
     }
   })
 
-  test("deve retornar a mensagem 'email' ou 'password' incorretos ao tentar logar",
+  test("deve retornar a mensagem 'password' incorreta ao tentar logar",
     async () => {
       expect.assertions(1)
       try {
@@ -67,7 +61,6 @@ describe("Testando login", () => {
           password: "fulano12"
         }
         const output = await userBusiness.login(input)
-
       } catch (error) {
         if (error instanceof BadRequestError) {
           expect(error.message).toEqual("'password' incorreta")

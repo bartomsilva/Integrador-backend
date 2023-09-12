@@ -14,63 +14,57 @@ describe("Testando deleteComment", () => {
   )
 
   test("deve retornar = ok", async () => {
-    expect.assertions(1);
-
+    expect.assertions(1)
     const input = {
       id: "id-mock-comment-1",
       token: "id-mock-fulano"
     }
-
     const result = await commentBusiness.deleteComment(input);
-    expect(result).toEqual("ok");
+    expect(result).toEqual("ok")
   })
 
   test("deve retornar = token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-mock-comment-1",
         token: "token-fail"
       };
-      const result = await commentBusiness.deleteComment(input);
-
+      const result = await commentBusiness.deleteComment(input)
     } catch (error) {
       if (error instanceof BadRequestError) {
-        expect(error.message).toEqual("token inválido");
+        expect(error.message).toEqual("token inválido")
       }
     }
   })
 
   test("deve retornar = 'id' não encontrado", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-fail",
         token: "id-mock-fulano"
-      };
-      const result = await commentBusiness.deleteComment(input);
-
+      }
+      const result = await commentBusiness.deleteComment(input)
     } catch (error) {
       if (error instanceof NotFoundError) {
-        expect(error.message).toEqual("'id' não encontrado");
+        expect(error.message).toEqual("'id' não encontrado")
       }
     }
   })
 
   test("deve retornar = recurso negado", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-mock-comment-2",
         token: "id-mock-fulano"
       };
-      const result = await commentBusiness.deleteComment(input);
-
+      const result = await commentBusiness.deleteComment(input)
     } catch (error) {
       if (error instanceof UnAuthorizedError) {
-        expect(error.message).toEqual("recurso negado");
+        expect(error.message).toEqual("recurso negado")
       }
     }
   })
-
 })

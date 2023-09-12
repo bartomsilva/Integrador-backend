@@ -1,8 +1,8 @@
-import { CommentBusiness } from "../../../src/business/CommentBusiness"
 import { BadRequestError } from "../../../src/error/BadRequest"
-import { CommentDataBaseMock } from "../../mocks/CommentDataBase.Mock"
 import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
+import { CommentDataBaseMock } from "../../mocks/CommentDataBase.Mock"
+import { CommentBusiness } from "../../../src/business/CommentBusiness"
 
 describe("Testando createComment", () => {
   const commentBusiness = new CommentBusiness(
@@ -13,13 +13,11 @@ describe("Testando createComment", () => {
 
   test("deve retornar = ok", async () => {
     expect.assertions(1);
-
     const input = {
       postId: "id-mock-post1",
       token: "id-mock-fulano",
       content: "ok"
     };
-
     const result = await commentBusiness.createComment(input);
     expect(result).toEqual("ok");
   });
@@ -33,15 +31,10 @@ describe("Testando createComment", () => {
         content: "ok"
       };
       const result = await commentBusiness.createComment(input);
-
     } catch (error) {
       if ( error instanceof BadRequestError){
         expect(error.message).toEqual("token inválido");        
       }
-
     }
   });
-
-
-
 }) 

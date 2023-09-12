@@ -10,8 +10,7 @@ describe("Testando likedislike", () => {
   new TokenManagerMock()  )
 
   test("resgistro que não existe, deve retornar = ok", async () => {
-    expect.assertions(2);
-
+    expect.assertions(2)
     const input = {
       id: "id-mock-post2",
       like: true,
@@ -19,81 +18,71 @@ describe("Testando likedislike", () => {
       token: "id-mock-fulano"
     };
     // teste o like
-    let result = await likedislikeBusiness.likeDislike(input);
+    let result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")
     // teste o dislike
     input.like = false
-    result = await likedislikeBusiness.likeDislike(input);
-    expect(result).toBe("ok")    
-
-  });
+    result = await likedislikeBusiness.likeDislike(input)
+    expect(result).toBe("ok")  
+  })
   
   test("registro que exite, deve retornar = ok", async () => {
-    expect.assertions(2);
-    
+    expect.assertions(2)    
     const input = {
       id: "id-mock-post1",
       like: true,
       action: POST_ACTION.POST,
       token: "id-mock-fulano"
-    };
-
+    }
     // teste o like
-    let result = await likedislikeBusiness.likeDislike(input);
+    let result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")
     // teste o dislike
     input.like=false
-    result = await likedislikeBusiness.likeDislike(input);
+    result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")
   });
 
   test("registro que exite, deve retornar = ok", async () => {
-    expect.assertions(2);
-    
+    expect.assertions(2)    
     const input = {
       id: "id-mock-post3",
       like: true,
       action: POST_ACTION.POST,
       token: "id-mock-bart"
-    };
-
+    }
     // teste o like
-    let result = await likedislikeBusiness.likeDislike(input);
+    let result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")
     // teste o dislike
     input.like=false
-    result = await likedislikeBusiness.likeDislike(input);
+    result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")
   });
 
   test("registro que exite comentario, deve retornar = ok", async () => {
-    expect.assertions(1);
-    
+    expect.assertions(1)    
     const input = {
       id: "id-mock-comment-1",
       like: true,
       action: POST_ACTION.COMMENT,
       token: "id-mock-bart"
     };
-
     // teste o like
-    const result = await likedislikeBusiness.likeDislike(input);
+    const result = await likedislikeBusiness.likeDislike(input)
     expect(result).toBe("ok")   
-
   });
   
   test("deve retornar = token inválido", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-mock-post1",
         like: true,
         action: POST_ACTION.POST,
         token: "id-token-fail"
-      };
-  
-      const result = await likedislikeBusiness.likeDislike(input);
-      
+      }  
+      const result = await likedislikeBusiness.likeDislike(input)      
     } catch (error) {
       if ( error instanceof  BadRequestError){
         expect(error.message).toEqual("token inválido")
@@ -102,41 +91,36 @@ describe("Testando likedislike", () => {
   });
 
   test("deve retornar = id não encontrado", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-mock-post",
         like: true,
         action: POST_ACTION.POST,
         token: "id-mock-fulano"
-      };
-  
-      const result = await likedislikeBusiness.likeDislike(input);
-      
+      }  
+      const result = await likedislikeBusiness.likeDislike(input)      
     } catch (error) {
       if ( error instanceof  NotFoundError){
         expect(error.message).toEqual("'id' não encontrado")
       }      
     }
-  });
+  })
 
   test("deve retornar = ação inválida", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const input = {
         id: "id-mock-post1",
         like: true,
         action: POST_ACTION.POST,
         token: "id-mock-bart"
-      };
-  
-      const result = await likedislikeBusiness.likeDislike(input);
-      
+      }  
+      const result = await likedislikeBusiness.likeDislike(input)      
     } catch (error) {
       if ( error instanceof  BadRequestError){
         expect(error.message).toEqual("ação inválida")
       }      
     }
-  });
-    
+  })    
 }) 

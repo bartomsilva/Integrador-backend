@@ -14,16 +14,14 @@ describe("Testando editComment", () => {
   )
 
   test("deve retornar = ok", async () => {
-    expect.assertions(1);
-
+    expect.assertions(1)
     const commentId = "id-mock-comment-1"
     const input = {
       content: "ok",
       token: "id-mock-fulano"
     }
-
-    const result = await commentBusiness.editComment(commentId, input);
-    expect(result).toEqual("ok");
+    const result = await commentBusiness.editComment(commentId, input)
+    expect(result).toEqual("ok")
   })
 
   test("deve retornar = token inválido", async () => {
@@ -33,12 +31,11 @@ describe("Testando editComment", () => {
       const input = {
         content: "ok",
         token: "token-fail"
-      };
-      const result = await commentBusiness.editComment(commentId, input);
-
+      }
+      const result = await commentBusiness.editComment(commentId, input)
     } catch (error) {
       if (error instanceof BadRequestError) {
-        expect(error.message).toEqual("token inválido");
+        expect(error.message).toEqual("token inválido")
       }
     }
   })
@@ -50,31 +47,28 @@ describe("Testando editComment", () => {
       const input = {
         content: "ok",
         token: "id-mock-bart"
-      };
-      const result = await commentBusiness.editComment(commentId, input);
-
+      }
+      const result = await commentBusiness.editComment(commentId, input)
     } catch (error) {
       if (error instanceof UnAuthorizedError) {
-        expect(error.message).toEqual("recurso negado");
+        expect(error.message).toEqual("recurso negado")
       }
     }
   })
 
   test("deve retornar = 'id' não encontrado", async () => {
-    expect.assertions(1);
+    expect.assertions(1)
     try {
       const commentId = "id-fail"
       const input = {
         content: "ok",
         token: "id-mock-fulano"
-      };
-      const result = await commentBusiness.editComment(commentId, input);
-
+      }
+      const result = await commentBusiness.editComment(commentId, input)
     } catch (error) {
       if (error instanceof NotFoundError) {
-        expect(error.message).toEqual("'id' não encontrado");
+        expect(error.message).toEqual("'id' não encontrado")
       }
     }
   })
-
 })
