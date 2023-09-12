@@ -6,7 +6,6 @@ import { BadRequestError } from "../../../src/error/BadRequest"
 import { NotFoundError } from "../../../src/error/NotFound"
 import { UnAuthorizedError } from "../../../src/error/UnAuthorized"
 
-
 describe("Testando deletePost", () => {
   const postBusiness = new PostBusiness(
     new PostDataBaseMock(),
@@ -22,7 +21,6 @@ describe("Testando deletePost", () => {
         id: "id-mock-post1"
       }
       const result = await postBusiness.deletePost(input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")
@@ -38,7 +36,6 @@ describe("Testando deletePost", () => {
         id: "id-mock-post1"
       }
       const result = await postBusiness.deletePost(input)
-
     } catch (error) {
       if (error instanceof UnAuthorizedError) {
         expect(error.message).toEqual("recurso negado")
@@ -54,7 +51,6 @@ describe("Testando deletePost", () => {
         id: "id-fail"
       }
       const result = await postBusiness.deletePost(input)
-
     } catch (error) {
       if (error instanceof NotFoundError) {
         expect(error.message).toEqual("'id' não encontrado")
@@ -71,5 +67,4 @@ describe("Testando deletePost", () => {
     const result = await postBusiness.deletePost(input)
     expect(result).toEqual("ok")
   })
-
 }) 

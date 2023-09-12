@@ -4,7 +4,6 @@ import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { BadRequestError } from "../../../src/error/BadRequest"
 
-
 describe("Testando getPost", () => {
   const postBusiness = new PostBusiness(
     new PostDataBaseMock(),
@@ -19,7 +18,6 @@ describe("Testando getPost", () => {
         token: "token-fail",
       }
       const result = await postBusiness.getPost(input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")
@@ -46,5 +44,4 @@ describe("Testando getPost", () => {
         creator: { id: 'id-mock-bart', name: 'Bart' }
       })
   })
-
 }) 

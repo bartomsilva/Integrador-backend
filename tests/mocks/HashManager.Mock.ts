@@ -10,7 +10,6 @@ export class HashManagerMock {
     plaintext: string,
     hash: string
   ): Promise<boolean> => {
-
     switch (plaintext) {
       case "Fulano123@":
         return hash === "hash-mock-fulano"

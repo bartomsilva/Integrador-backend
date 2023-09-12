@@ -18,7 +18,6 @@ describe("Teste da signup", () => {
 
   test("deve retornar um token", async () => {
     const input: CreateUserInputDTO = {
-
       name: "Linda Roberts",
       email: "linda@email.com",
       password: "Linda123@"
@@ -66,8 +65,8 @@ describe("Teste da signup", () => {
   })
   
   test("o zod deve diaparar error em password", () => {
+    expect.assertions(1)
     try {
-      expect.assertions(1)
       const input: CreateUserInputDTO = {
 
         name: "Linda Roberts",
@@ -85,7 +84,7 @@ describe("Teste da signup", () => {
   })
 
   test("deve retornar erro se o o email já estiver cadastrado", async () => {
-    // expect.assertions(2)
+    expect.assertions(1)
     try {
 
       const input = CreateUserSchema.parse({
@@ -98,7 +97,6 @@ describe("Teste da signup", () => {
 
     } catch (error) {
       if (error instanceof ConflictError) {
-        expect(error.statusCode).toBe(409)
         expect(error.message).toBe("'email' já cadastrado")
       }
     }

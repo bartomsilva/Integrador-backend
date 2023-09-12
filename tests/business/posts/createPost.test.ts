@@ -11,16 +11,14 @@ describe("Testando createPost", () => {
     new TokenManagerMock()
   )
 
-  test("Criando um post, deve retornar uma mensagem", async () => {
-    expect.assertions(1);
-    
+  test("Criando um post, deve retornar = a mensagem enviada", async () => {
+    expect.assertions(1)    
     const input = {
       token: "id-mock-fulano",
       content: "vamos pra cima com tudo"
-    };
-    
-    const result = await postBusiness.createPost(input);
-    expect(result.content).toEqual("vamos pra cima com tudo");
+    }    
+    const result = await postBusiness.createPost(input)
+    expect(result.content).toEqual("vamos pra cima com tudo")
   });
 
   test("Criando um post, deve retornar token invalido", async ()=>{
@@ -29,15 +27,12 @@ describe("Testando createPost", () => {
       const input = {
         token: "token-fail",
         content: "vamos pra cima com tudo"
-      }
-      
-      const result = await postBusiness.createPost(input)
-        
+      }      
+      const result = await postBusiness.createPost(input)        
     } catch (error) {
       if ( error instanceof BadRequestError){
           expect(error.message).toEqual("token inválido")        
       }
     }
-  })
-  
+  })  
 }) 

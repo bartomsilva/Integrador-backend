@@ -22,7 +22,6 @@ describe("Testando Create Admin", () => {
         token: "token-falso"
       }
       const output = await userBusiness.createAdmin(input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")
@@ -38,6 +37,4 @@ describe("Testando Create Admin", () => {
       const result = await userBusiness.createAdmin(input)
       expect(result).toBe("ok")
   })  
-
-
 })

@@ -15,12 +15,10 @@ describe("Testando getComments", () => {
 
   test("deve retornar = 2 objetos", async () => {
     expect.assertions(1);
-
     const input = {
       postId: "id-mock-post1",
       token: "id-mock-fulano"
     }
-
     const result = await commentBusiness.getComment(input);
     expect(result).toHaveLength(2)
   })
@@ -31,9 +29,8 @@ describe("Testando getComments", () => {
       const input = {
         postId: "id-mock-post1",
         token: "token-fail"
-      };
-      const result = await commentBusiness.getComment(input);
-
+      }
+      const result = await commentBusiness.getComment(input)
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido");
@@ -41,15 +38,13 @@ describe("Testando getComments", () => {
     }
   })
 
-  test("deve retornar = []", async () => {
-    expect.assertions(1);
+  test("deve retornar um array vazio = []", async () => {
+    expect.assertions(1)
     const input = {
       postId: "id-mock-postX",
       token: "id-mock-fulano"
     }
     const result = await commentBusiness.getComment(input);
-
     expect(result).toEqual([]);
-  })
-  
+  })  
 })

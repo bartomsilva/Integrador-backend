@@ -32,7 +32,6 @@ describe("Testando editPost", () => {
         content: "vamos pra cima com tudo"
       }
       const result = await postBusiness.editPost("id-mock-post1",input)
-
     } catch (error) {
       if (error instanceof BadRequestError) {
         expect(error.message).toEqual("token inválido")
@@ -48,7 +47,6 @@ describe("Testando editPost", () => {
         content: "vamos pra cima com tudo"
       }
       const result = await postBusiness.editPost("id-mock-post1",input)
-
     } catch (error) {
       if (error instanceof UnAuthorizedError) {
         expect(error.message).toEqual("recurso negado")
@@ -64,12 +62,10 @@ describe("Testando editPost", () => {
         content: "vamos pra cima com tudo"
       }
       const result = await postBusiness.editPost("id-mock-fail",input)
-
     } catch (error) {
       if (error instanceof NotFoundError) {
         expect(error.message).toEqual("'id' não encontrado")
       }
     }
   })
-
 }) 
