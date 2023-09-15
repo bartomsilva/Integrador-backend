@@ -21,17 +21,19 @@ export class PostDataBase extends BaseDataBase {
   //=============== DELETE POST 
   public deletePost = async (postId: string): Promise<void> => {
     await BaseDataBase.connection(this.TABLE_NAME)
-      .del().where("id", "=", postId)
+      .del().where({id: postId})
+    await BaseDataBase.connection("likes_dislikes")
+      .del().where({action_id :postId})
   }
 
   //============ GET ALL POST
-  public getPost = async ():Promise<PostResultDB[]> => {
+  public getPost = async (): Promise<PostResultDB[]> => {
 
-    const output: PostResultDB[] =  await BaseDataBase.connection("posts as p")
-      .select("p.id", "p.content", "p.likes", "p.dislikes","p.comments", "p.created_at",
-        "p.updated_at", "p.creator_id", "u.name as creator_name")        
+    const output: PostResultDB[] = await BaseDataBase.connection("posts as p")
+      .select("p.id", "p.content", "p.likes", "p.dislikes", "p.comments", "p.created_at",
+        "p.updated_at", "p.creator_id", "u.name as creator_name")
       .innerJoin("users as u", "p.creator_id", "u.id")
-      return output
+    return output
   }
 }
 
