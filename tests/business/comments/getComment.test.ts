@@ -1,7 +1,5 @@
 import { CommentBusiness } from "../../../src/business/CommentBusiness"
 import { BadRequestError } from "../../../src/error/BadRequest"
-import { NotFoundError } from "../../../src/error/NotFound"
-import { UnAuthorizedError } from "../../../src/error/UnAuthorized"
 import { CommentDataBaseMock } from "../../mocks/CommentDataBase.Mock"
 import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"

@@ -3,6 +3,7 @@ import { PostDataBaseMock } from "../../mocks/PostDataBase.Mock"
 import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { BadRequestError } from "../../../src/error/BadRequest"
+import exp from "constants"
 
 describe("Testando getPost", () => {
   const postBusiness = new PostBusiness(
@@ -28,7 +29,7 @@ describe("Testando getPost", () => {
   test("get post, deve retornar = 3 objetos", async () => {
     expect.assertions(2)
     const input = {
-      token: "id-mock-bart"
+      token: "id-mock-fulano"
     }
     const result = await postBusiness.getPost(input)
     expect(result).toHaveLength(3)
@@ -39,9 +40,9 @@ describe("Testando getPost", () => {
         likes: 0,
         dislikes: 0,
         comments: 0,
-        createdAt: expect.any(String),
         updatedAt: expect.any(String),
-        creator: { id: 'id-mock-bart', name: 'Bart' }
+        creator: { id: 'id-mock-bart', name: 'Bart' },
+        liked: expect.any(String)
       })
   })
 }) 

@@ -1,6 +1,6 @@
 import { knex } from "knex"
 import dotenv from "dotenv"
-import { PostDB } from "../models/Post"
+import { LikesDislikesDB, PostDB } from "../models/Post"
 import { CommentDB } from "../models/Comments"
 dotenv.config()
 export abstract class BaseDataBase {
@@ -22,30 +22,24 @@ export abstract class BaseDataBase {
 
     public abstract TABLE_NAME: string
 
-    // FIND BY ID
-    public async findById(id: string): Promise<any> {
-        return await BaseDataBase.connection(this.TABLE_NAME).where({ id })
-    }
-
-    // FIND BY NAME
-    public async findByName(name: string): Promise<any> {
-        return await BaseDataBase.connection(this.TABLE_NAME).where("name", "like", `%${name}%`)
-    }
-
-    // FIND ALL 
-    public async findAll(): Promise<any> {
-        return await BaseDataBase.connection(this.TABLE_NAME)
-    }
-
+    
     //============= FIND POST
     public async findPost(id: string): Promise<PostDB[]> {
         const result: PostDB[] = await BaseDataBase.connection("posts").where({ id })
         return result
     }
+    
     //============= FIND COMMENT
     public async findComment(id: string): Promise<CommentDB[]> {
         const result: CommentDB[] = await BaseDataBase.connection("comments").where({ id })
         return result
     }
 
+    // busca os detalhes de like / dislike
+    public findLikeDislike = async (actionId: string, userId: string): Promise<LikesDislikesDB> => {
+        const [resultDB]: LikesDislikesDB[] = await BaseDataBase.connection("likes_dislikes")
+            .where({ action_id: actionId })
+            .andWhere({ user_id: userId })
+        return resultDB
+    }
 }

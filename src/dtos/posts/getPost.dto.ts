@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { LIKED } from "../../models/Post";
 
 export interface GetPostInputDTO {
   token: string 
@@ -10,12 +11,12 @@ export interface GetPostOutputDTO {
   likes: number,
   dislikes: number,  
   comments: number,
-  createdAt: string,
-  updatedAt: string 
+  updatedAt: string, 
   creator: {
     id: string,
     name: string
   }
+  liked: LIKED;
 }
 
 export const GetPostShema = z.object(

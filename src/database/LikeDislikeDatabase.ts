@@ -38,21 +38,21 @@ export class LikeDislikeDatabase extends BaseDataBase {
   }
 
   // subtrai um do like
-  public postDecreaseLike = async (action:string, id: string): Promise<void> => {
+  public postDecreaseLike = async (action: string, id: string): Promise<void> => {
     await BaseDataBase.connection(action)
       .where({ id })
       .decrement("likes")
   }
 
   // soma um ao dislike
-  public postIncreaseDislike = async (action:string, id: string): Promise<void> => {
+  public postIncreaseDislike = async (action: string, id: string): Promise<void> => {
     await BaseDataBase.connection(action)
       .where({ id })
       .increment("dislikes")
   }
 
   // subtrai um do dislike
-  public postDecreaseDislike = async (action:string, id: string): Promise<void> => {
+  public postDecreaseDislike = async (action: string, id: string): Promise<void> => {
     await BaseDataBase.connection(action)
       .where({ id })
       .decrement("dislikes")
@@ -73,12 +73,6 @@ export class LikeDislikeDatabase extends BaseDataBase {
       .decrement("likes")
       .increment("dislikes")
   }
+ 
 
-  // busca os detalhes de like / dislike
-  public findLikeDislike = async (actionId: string, userId: string): Promise<LikesDislikesDB> => {
-    const [resultDB]: LikesDislikesDB[] = await BaseDataBase.connection("likes_dislikes")
-      .where({ action_id: actionId })
-      .andWhere({ user_id: userId })
-    return resultDB
-  }
 }
