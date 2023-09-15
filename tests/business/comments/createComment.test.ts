@@ -3,6 +3,7 @@ import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { CommentDataBaseMock } from "../../mocks/CommentDataBase.Mock"
 import { CommentBusiness } from "../../../src/business/CommentBusiness"
+import { NotFoundError } from "../../../src/error/NotFound"
 
 describe("Testando createComment", () => {
   const commentBusiness = new CommentBusiness(
@@ -34,6 +35,23 @@ describe("Testando createComment", () => {
     } catch (error) {
       if ( error instanceof BadRequestError){
         expect(error.message).toEqual("token inválido");        
+      }
+    }
+  });
+
+  test("deve retornar = post não encontrado", async () => {
+    expect.assertions(1);
+    try {
+      const input = {
+        postId: "id-mock-post-fake",
+        token: "id-mock-fulano",
+        content: "ok"
+      };
+      const result = await commentBusiness.createComment(input);
+    } catch (error) {
+      console.log(error)
+      if ( error instanceof NotFoundError){
+        expect(error.message).toEqual("post não encontrado");        
       }
     }
   });

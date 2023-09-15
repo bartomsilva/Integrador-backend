@@ -6,7 +6,7 @@ import { UpdatePostInputDTO } from "../dtos/posts/updatePost.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { NotFoundError } from "../error/NotFound"
 import { UnAuthorizedError } from "../error/UnAuthorized"
-import { PostDB, PostUpdateDB } from "../models/Post"
+import { LIKED, PostDB, PostUpdateDB } from "../models/Post"
 import { USER_ROLES } from "../models/User"
 import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
@@ -118,7 +118,6 @@ export class PostBusiness {
   public getPost = async (input: GetPostInputDTO): Promise<GetPostOutputDTO[]> => {
 
     const { token } = input
-    // validar o token
     const payLoad = this.tokenManager.getPayload(token)
     if (payLoad == null) {
       throw new BadRequestError("token inválido")
@@ -126,24 +125,33 @@ export class PostBusiness {
 
     const resultDB = await this.postDataBase.getPost()
 
-    const response: GetPostOutputDTO[] = resultDB.map(post => {
-      //const comments = getComments(post.id)//
+    const response = await Promise.all(resultDB.map(async (post) => {
+      
+      const resultLikedDB = await this.postDataBase.
+      findLikeDislike(post.id, payLoad.id)
+      
+      // valor default - DEVOLVE NO / LIKE / DISLIKE
+      let liked: LIKED = LIKED.NOLIKED
+      if (resultLikedDB != undefined) {
+        liked = resultLikedDB.like == 1 ? LIKED.LIKE : LIKED.DISLIKE
+      }
+
       const postNew = {
         id: post.id,
         content: post.content,
         likes: post.likes,
         dislikes: post.dislikes,
         comments: post.comments,
-        createdAt: post.created_at,
         updatedAt: post.updated_at,
         creator: {
           id: post.creator_id,
           name: post.creator_name
-        }
+        },
+        liked
+        // : await this.postDataBase.findLikeDislike(post.id, payLoad.id) != undefined
       }
       return postNew
-    })
-
+    }))
     return response
   }
 }

@@ -41,3 +41,9 @@ export enum POST_ACTION {
   POST = "posts",
   COMMENT = "comments"
 }
+
+export enum LIKED {
+  LIKE = "like",
+  DISLIKE = "dislike",
+  NOLIKED = "no"
+}

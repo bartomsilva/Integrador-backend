@@ -7,6 +7,7 @@ import { BadRequestError } from "../error/BadRequest"
 import { NotFoundError } from "../error/NotFound"
 import { UnAuthorizedError } from "../error/UnAuthorized"
 import { CommentDB, CommentResultDB, CommentUpdateDB } from "../models/Comments"
+import { LIKED } from "../models/Post"
 import { USER_ROLES } from "../models/User"
 import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
@@ -32,15 +33,29 @@ export class CommentBusiness {
     // da validação do token
     const { id: creatorId } = payLoad
 
-    // gera um novo id para o post
+    // pega os dados do post
+    const [postDB] = await this.commentDataBase.findPost(postId)
+    
+    // verifica se o post existe
+    if(postDB == undefined){
+      throw new NotFoundError("post não encontrado")
+    }
+
+    // // valida se quem está tentando comentar não é o próprio usuário
+    // deixe livre poder comentar no próprio post
+    // if (creatorId == postDB.creator_id){
+    //   throw new UnAuthorizedError("recurso negado")
+    // }
+
+    // gera um novo id para o comentário
     const id = this.idGenerator.generate()
 
-    // aqui cria o objeto com os dados do novo post
+    // aqui cria o objeto com os dados do novo comentário
     const newComment: CommentDB = {
       id,
       post_id: postId,
       creator_id: creatorId,
-      parental_post_id:"",
+      parental_post_id: "",
       content,
       likes: 0,
       dislikes: 0,
@@ -76,10 +91,10 @@ export class CommentBusiness {
     // pesquisa o comment 
     const [resultComment] = await this.commentDataBase.findComment(id)
 
-    if ( !resultComment) {
+    if (!resultComment) {
       throw new NotFoundError("'id' não encontrado")
     }
-    
+
     //checar se o usuário pode editar o comentario 
     if (resultComment.creator_id != creatorId) {
       throw new UnAuthorizedError("recurso negado")
@@ -90,7 +105,7 @@ export class CommentBusiness {
 
 
   //============= DELETE COMENTARIO
-  public deleteComment = async (input:DeleteCommentInputDTO): Promise<string> => {
+  public deleteComment = async (input: DeleteCommentInputDTO): Promise<string> => {
     const { id, token } = input
 
     const payLoad = this.tokenManager.getPayload(token)
@@ -100,27 +115,27 @@ export class CommentBusiness {
     // pagar o id do usuário
     const { id: creatorId, role } = payLoad
 
-     // pesquisa o comentario 
-    const [resultComment]:CommentDB[] = await this.commentDataBase.findComment(id)
+    // pesquisa o comentario 
+    const [resultComment]: CommentDB[] = await this.commentDataBase.findComment(id)
 
-    if ( !resultComment) {
+    if (!resultComment) {
       throw new NotFoundError("'id' não encontrado")
     }
-     //checar se o usuário pode deletar o comentario 
+    //checar se o usuário pode deletar o comentario 
     if (resultComment.creator_id != creatorId && role != USER_ROLES.ADMIN) {
       throw new UnAuthorizedError("recurso negado")
     }
     await this.commentDataBase.deleteComment(id)
-    await this.commentDataBase.decrementComments(resultComment.post_id) 
+    await this.commentDataBase.decrementComments(resultComment.post_id)
     return "ok"
 
   }
 
   //============ GET COMMENTS
-  public getComment = async (input:GetCommentInputDTO):Promise<GetCommentOutputDTO[]> => {
+  public getComment = async (input: GetCommentInputDTO): Promise<GetCommentOutputDTO[]> => {
 
-    const { postId, token } = input 
-    
+    const { postId, token } = input
+
     // validar o token
     const payLoad = this.tokenManager.getPayload(token)
     if (payLoad == null) {
@@ -128,9 +143,20 @@ export class CommentBusiness {
     }
 
     const resultDB:CommentResultDB[] = await this.commentDataBase.getComment(postId)
-    
-    const output:GetCommentOutputDTO[] = resultDB.map( comment => {
-      const commentNew={
+
+    const response = await Promise.all(resultDB.map(async (comment) => {
+
+      const resultLikedDB = await this.commentDataBase.
+        findLikeDislike(comment.id, payLoad.id)
+
+      // valor default
+      let liked:LIKED = LIKED.NOLIKED
+
+      if (resultLikedDB != undefined) {
+        liked = resultLikedDB.like == 1 ? LIKED.LIKE : LIKED.DISLIKE
+      }
+
+      const commentNew = {
         id: comment.id,
         postId: comment.post_id,
         parentalPostId: comment.parental_post_id,
@@ -141,10 +167,11 @@ export class CommentBusiness {
         creator: {
           id: comment.creator_id,
           name: comment.creator_name
-        }      
-      }      
+        },
+        liked
+      }
       return commentNew
-    }) 
-     return output
-  }  
+    }))
+    return response
+  }
 }

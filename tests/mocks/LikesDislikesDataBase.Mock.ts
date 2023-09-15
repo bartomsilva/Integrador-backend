@@ -4,7 +4,7 @@ import { postMock } from "./PostDataBase.Mock"
 import { commentMock } from "./CommentDataBase.Mock"
 import { CommentDB } from "../../src/models/Comments"
 
-const liksMock = [{
+export const liksMock = [{
   action_id: "id-mock-post1",
   user_id: "id-mock-fulano",
   like: 1
@@ -13,7 +13,20 @@ const liksMock = [{
   action_id: "id-mock-post3",
   user_id: "id-mock-bart",
   like: 0
+},
+{
+  action_id: "id-mock-comment-1",
+  user_id: "id-mock-fulano",
+  like: 0
+},
+{
+  action_id: "id-mock-comment-2",
+  user_id: "id-mock-fulano",
+  like: 1
 }
+
+
+
 ]
 
 export class LikesDislikesDataBaseMock extends BaseDataBase {
