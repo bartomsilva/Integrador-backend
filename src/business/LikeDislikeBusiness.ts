@@ -48,9 +48,9 @@ export class LikeDislikeBusiness {
     }
 
     // Verifica se o post/comment é do mesmo usuário
-    if (postComment.creator_id === userId) {
-      throw new BadRequestError("ação inválida")
-    }
+    // if (postComment.creator_id === userId) {
+    //   throw new BadRequestError("ação inválida")
+    // }
 
     // pesquisa se ( likes_dislikes ) se existe registro: User x Post
     const likeDislikeDB: LikesDislikesDB = 
