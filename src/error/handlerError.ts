@@ -6,7 +6,6 @@ import { HTTP_CODE } from "../util/util"
 
 export const handlerError = (res: Response, error: unknown) => {
 
-  console.log(error)
   if (error instanceof ZodError) {
     res.status(HTTP_CODE.BAD_REQUEST).send(error.issues)
   } else if (error instanceof BaseError) {
