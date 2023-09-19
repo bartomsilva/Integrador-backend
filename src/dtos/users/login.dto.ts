@@ -7,6 +7,10 @@ export interface LoginInputDTO {
 
 export interface LoginOutputDTO 
 {
+  user: {
+    userId: string
+    userName: string
+  },
   token: string
 }
 
