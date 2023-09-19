@@ -7,6 +7,10 @@ export interface CreateUserInputDTO {
 }
 export interface CreateUserOutputDTO 
 {
+  user: {
+    userId: string,
+    userName: string
+  }
   token: string
 }
 

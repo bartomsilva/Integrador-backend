@@ -87,7 +87,14 @@ export class UserBusiness {
     const token = this.tokenManager.createToken(tokenPayload)
 
     // retorno 
-    const output: CreateUserOutputDTO = { token: token }
+    const output: CreateUserOutputDTO =
+    {
+      user: {
+        userId: newUserDB.id,
+        userName: newUserDB.name
+      },
+      token: token
+    }
 
     return (output)
 
@@ -117,7 +124,14 @@ export class UserBusiness {
     // criação do token string a partir do payload
     const token = this.tokenManager.createToken(tokenPayload)
 
-    const output: LoginOutputDTO = { token: token }
+    const output: LoginOutputDTO =
+    {
+      user: {
+        userId: userDB.id,
+        userName: userDB.name
+      },
+      token: token
+    }
 
     return output
 
@@ -138,7 +152,7 @@ export class UserBusiness {
     const id = payLoad.id
 
     const userDB: UserDB = await this.userDataBase.findById(id)
-    
+
     // ajusta do status do usuário
     const userNewStatus: AdminDB = {
       role: isAdmin ? USER_ROLES.ADMIN : USER_ROLES.NORMAL
