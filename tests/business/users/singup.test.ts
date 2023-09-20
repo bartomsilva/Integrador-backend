@@ -23,10 +23,16 @@ describe("Teste da signup", () => {
       password: "Linda123@"
     }
     const output = await userBusiness.createUser(input)
-    expect(output).toEqual({ token: "token-mock" })
+    expect(output).toEqual({
+      user: {
+        userId: "id-mock",
+        userName: "Linda Roberts"
+      },
+      token: "token-mock"
+    })
   })
 
-  test("o zod deve diaparar error em name", () => {
+  test("o zod deve disparar error em name", () => {
     expect.assertions(1)
     try {
       const input: CreateUserInputDTO = {
@@ -45,7 +51,7 @@ describe("Teste da signup", () => {
     }
   })
 
-  test("o zod deve diaparar error em email", () => {
+  test("o zod deve disparar error em email", () => {
     expect.assertions(1)
     try {
       const input: CreateUserInputDTO = {
@@ -64,7 +70,7 @@ describe("Teste da signup", () => {
     }
   })
   
-  test("o zod deve diaparar error em password", () => {
+  test("o zod deve disparar error em password", () => {
     expect.assertions(1)
     try {
       const input: CreateUserInputDTO = {
