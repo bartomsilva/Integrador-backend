@@ -22,8 +22,12 @@ describe("Testando login", () => {
     })
     const output = await userBusiness.login(input)
     expect(output).toEqual({
+      user: {
+        userId: "id-mock-fulano",
+        userName: "Fulano"
+      },
       token: "token-mock-fulano"
-    })
+    })    
   })
 
   test("deve gerar um token ao logar", async () => {
@@ -33,6 +37,10 @@ describe("Testando login", () => {
     })
     const output = await userBusiness.login(input)
     expect(output).toEqual({
+      user: {
+        userId: "id-mock-bart",
+        userName: "Bart"
+      },
       token: "token-mock-bart"
     })
   })
