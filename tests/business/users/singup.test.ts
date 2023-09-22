@@ -23,7 +23,13 @@ describe("Teste da signup", () => {
       password: "Linda123@"
     }
     const output = await userBusiness.createUser(input)
-    expect(output).toEqual({ token: "token-mock" })
+    expect(output).toEqual({
+      user: {
+        userId: "id-mock",
+        userName: "Linda Roberts"
+      },
+      token: "token-mock"
+    })
   })
 
   test("o zod deve diaparar error em name", () => {
