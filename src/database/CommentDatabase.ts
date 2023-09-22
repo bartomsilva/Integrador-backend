@@ -34,6 +34,7 @@ export class CommentDataBase extends BaseDataBase {
         "p.comments", "p.creator_id", "u.name as creator_name")
       .innerJoin("users as u", "p.creator_id", "u.id")
       .where({ post_id: postId })
+      .orderBy("p.updated_at", "desc")
     return output
   }
 
