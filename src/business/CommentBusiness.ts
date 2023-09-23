@@ -41,12 +41,6 @@ export class CommentBusiness {
       throw new NotFoundError("post não encontrado")
     }
 
-    // // valida se quem está tentando comentar não é o próprio usuário
-    // deixe livre poder comentar no próprio post
-    // if (creatorId == postDB.creator_id){
-    //   throw new UnAuthorizedError("recurso negado")
-    // }
-
     // gera um novo id para o comentário
     const id = this.idGenerator.generate()
 

@@ -1,4 +1,4 @@
--- Active: 1694182600804@@127.0.0.1@3306
+-- Active: 1695410995173@@127.0.0.1@3306
 CREATE TABLE users(  
     id         VARCHAR(40) NOT NULL PRIMARY KEY,
     name       VARCHAR(50) NOT NULL,
@@ -18,7 +18,6 @@ CREATE TABLE posts(
     created_at      VARCHAR(20) NOT NULL,
     updated_at      VARCHAR(20) NOT NULL,
     FOREIGN KEY(creator_id) REFERENCES users(id)
-    ON DELETE CASCADE  
 );
 
 CREATE TABLE comments(
@@ -33,20 +32,8 @@ CREATE TABLE comments(
     created_at      VARCHAR(20) NOT NULL,
     updated_at      VARCHAR(20) NOT NULL,
     FOREIGN KEY(creator_id) REFERENCES users(id)
-    ON DELETE CASCADE  
     FOREIGN KEY(post_id) REFERENCES posts(id)
-    ON DELETE CASCADE  
 );
--- CREATE TABLE likes_dislikes(
---     user_id VARCHAR(40),
---     action_id VARCHAR(40),    
---     like    INTEGER(1),
---     FOREIGN KEY(user_id) REFERENCES users(id)
---     FOREIGN KEY(action_id) REFERENCES posts(id)
---     ON DELETE CASCADE
---     FOREIGN KEY(action_id) REFERENCES comments(id)
---     ON DELETE CASCADE
--- );
 CREATE TABLE likes_dislikes(
     user_id VARCHAR(40),
     action_id VARCHAR(40),    
