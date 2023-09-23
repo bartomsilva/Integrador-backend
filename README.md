@@ -1,5 +1,6 @@
 <h1 align="left" margin-top="0">Integrador</h1> 
-O Integrador é uma API que trata de uma rede social, ela tem as funcionalidades de login e cadastro de novos usuários, onde os usuários podem incluir, alterar ou deletar suas publicações, além de poder dar like ou dislike nas publicações e comentar os posts de outros usuários.
+O Labeddit é uma que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, inclur, editar, excluir e curitir posts, além de permitir comentar os posts. 
+
 
 <span id='indice'></span>
 ## Índice:
@@ -7,9 +8,9 @@ O Integrador é uma API que trata de uma rede social, ela tem as funcionalidades
 - <a href="#layout">Layout</a>
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
-- <a href="#comorodar">Como rodar este projeto</a>
+- <a href="#comorodar">Como rodar este projeto localmente</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#link">Documentação</a>
+- <a href="#link">Documentação no Postman </a>
 - <a href="#author">Pessoas autoras</a>
 <hr/>
 
@@ -18,21 +19,22 @@ O Integrador é uma API que trata de uma rede social, ela tem as funcionalidades
 	
 ## Layout: 
 #### a) Estrutura das pastas
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/2f17d1d7-7dca-4ec2-9d0a-3794fd1ff390" width="155px"/>
 
 #### b) Endpoints implementados
-- [X]  Singup
+- [X]  Signup
 - [X]  Login 
 - [X]  Create post
 - [X]  Get posts 
 - [X]  Edit post
 - [X]  Delete post
 - [X]  Create comment
-- [x]  Edite comment
+- [X]  Get comments
+- [x]  Edit comment
 - [x]  Delete comment
-- [X]  Like/Dislike - post/comments
+- [X]  Like/Dislike - post / comments
 
-
-importante: endpoints dos posts protegidos, precisa enviar um token válido para poder acessar.
+importante: os endpoints de posts e comments são protegidos, e preciso enviar um token válido para poder acessar.
 
 <hr/>
 <span id="requests"></span>
@@ -45,6 +47,8 @@ importante: endpoints dos posts protegidos, precisa enviar um token válido para
 - /posts
 #### Requisições de Comentários
 - /comments
+#### Requisições de Likes
+- /likes
 
 <hr/>
 <span id="example"></span>
@@ -52,31 +56,53 @@ importante: endpoints dos posts protegidos, precisa enviar um token válido para
 
 ## Exemplos de requisição:
 
-#### POST /users/singup
-Permite o cadastro de um usuário e retorna um token. 
+#### POST /users/signup
+<br>
+Permite o cadastro de um usuário.
 
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="160px"/>
 
 
 #### POST /users/login 
+<br>
 Permite o usuário efetuar login e devolve um token. 
 
-
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="160px/>
+<p></p>	
+	
 #### POST /posts 
+<br>
 Cria um novo post.
+
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/acee37b4-3d13-402d-94ff-f763d4ae3995" height="140px/>
 
 
 #### GET /posts 
 Retorna a lista de todos os posts.
 
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/603948e6-75b4-444d-bb9c-0e832b4395c6" height="160px/>
+
 
 #### PUT /posts 
 Permite editar o conteúdo do post, epena o autor do post pode efetuar a edição.
+
+![image](https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)
 
 
 #### DELETE /posts  
 Permite deletar um post, mas apenas o próprio autor do post ou um usuário admin pode deletar um post.
 
-#### POST /posts/:id/like  
+![image](https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)
+
+#### POST likes  
 Permite dar um like ou dislike em um post.
 
 **** incluir a parte dos comentários***** 
