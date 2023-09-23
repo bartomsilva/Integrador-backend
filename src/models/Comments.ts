@@ -9,8 +9,6 @@ export interface CommentDB extends PostDB {
 // UPDATE DO COMMENT
 export interface CommentUpdateDB extends PostUpdateDB {} 
 
-
-
 // COMMENTS
 export interface CommentResultDB {
   id: string,  

@@ -111,6 +111,7 @@ export class PostBusiness {
     }
 
     await this.postDataBase.deletePost(id)
+    
     return "ok"
   }
 
@@ -148,7 +149,6 @@ export class PostBusiness {
           name: post.creator_name
         },
         liked
-        // : await this.postDataBase.findLikeDislike(post.id, payLoad.id) != undefined
       }
       return postNew
     }))

@@ -21,7 +21,6 @@ export abstract class BaseDataBase {
     })
 
     public abstract TABLE_NAME: string
-
     
     //============= FIND POST
     public async findPost(id: string): Promise<PostDB[]> {

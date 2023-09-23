@@ -20,10 +20,13 @@ export class CommentDataBase extends BaseDataBase {
 
   //=============== DELETE COMMENT 
   public deleteComment = async (commentId: string): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME)
-      .del().where("id", "=", commentId)
+
     await BaseDataBase.connection("likes_dislikes")
       .del().where({ action_id: commentId })
+
+    await BaseDataBase.connection(this.TABLE_NAME)
+      .del().where({ id: commentId })
+
   }
 
   //============ GET COMMENTS FOR POST
