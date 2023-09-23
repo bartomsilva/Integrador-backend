@@ -2,7 +2,7 @@ import { UserDataBase } from "../database/UserDataBase"
 import { CreateAdminInputDTO } from "../dtos/users/createAdmin.dto"
 import { GetUsersInputDTO, GetUsersOutputDTO } from "../dtos/users/getUsers.dto"
 import { LoginInputDTO, LoginOutputDTO } from "../dtos/users/login.dto"
-import { CreateUserInputDTO, CreateUserOutputDTO } from "../dtos/users/singUp.dto"
+import { CreateUserInputDTO, CreateUserOutputDTO } from "../dtos/users/signUp.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { ConflictError } from "../error/ConflictError"
 import { NotFoundError } from "../error/NotFound"
@@ -51,7 +51,7 @@ export class UserBusiness {
     return output
   }
 
-  //=========== SING UP / CREATE USER
+  //=========== SIGN UP / CREATE USER
   public createUser = async (input: CreateUserInputDTO): Promise<CreateUserOutputDTO> => {
 
     const { name, email, password } = input

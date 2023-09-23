@@ -3,7 +3,7 @@ import { LikeDislikeInputDTO } from "../dtos/likeDislike/likeDislike.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { NotFoundError } from "../error/NotFound"
 import { CommentDB } from "../models/Comments"
-import { PostDB, LikesDislikesDB, POST_ACTION} from "../models/Post"
+import { PostDB, LikesDislikesDB, POST_ACTION } from "../models/Post"
 import { TokenManager } from "../services/TokenManager"
 
 export class LikeDislikeBusiness {
@@ -34,10 +34,10 @@ export class LikeDislikeBusiness {
       action_id: actionId,
       like: likeVal
     }
-  
+
     // procurar o post / comment
     let postComment: PostDB | CommentDB
-    if ( action == POST_ACTION.POST){
+    if (action == POST_ACTION.POST) {
       [postComment] = await this.likesDislikesDataBase.findPost(actionId)
     } else {
       [postComment] = await this.likesDislikesDataBase.findComment(actionId)
@@ -48,43 +48,43 @@ export class LikeDislikeBusiness {
     }
 
     // Verifica se o post/comment é do mesmo usuário
-    // if (postComment.creator_id === userId) {
-    //   throw new BadRequestError("ação inválida")
-    // }
+    if (postComment.creator_id === userId) {
+      throw new BadRequestError("ação inválida")
+    }
 
     // pesquisa se ( likes_dislikes ) se existe registro: User x Post
-    const likeDislikeDB: LikesDislikesDB = 
-    await this.likesDislikesDataBase.findLikeDislike(actionId, userId)
+    const likeDislikeDB: LikesDislikesDB =
+      await this.likesDislikesDataBase.findLikeDislike(actionId, userId)
 
     // inserir na tabela (caso não haja registro)
     if (likeDislikeDB === undefined) {
       await this.likesDislikesDataBase.insertLikeDislike(postLikeDislike)
       if (likeVal === 1) {
-        await this.likesDislikesDataBase.postIncreaseLike(action,actionId)
+        await this.likesDislikesDataBase.postIncreaseLike(action, actionId)
       } else {
-        await this.likesDislikesDataBase.postIncreaseDislike(action,actionId)
+        await this.likesDislikesDataBase.postIncreaseDislike(action, actionId)
       }
     } else { // existe um registro entre User x Post 
       // deletar o like/Dislike se for a mesma opção
       if (likeVal == likeDislikeDB.like) {
         await this.likesDislikesDataBase.deleteLikeDislike(actionId, userId)
         if (likeVal === 1) {
-          await this.likesDislikesDataBase.postDecreaseLike(action,actionId)
+          await this.likesDislikesDataBase.postDecreaseLike(action, actionId)
         } else {
-          await this.likesDislikesDataBase.postDecreaseDislike(action,actionId)
+          await this.likesDislikesDataBase.postDecreaseDislike(action, actionId)
         }
       } else { // trocar de like para dislike ou dislike para like (inverter)
         await this.likesDislikesDataBase.updateLikeDislike(postLikeDislike)
-        if (likeVal==1){
-          await this.likesDislikesDataBase.postReverseDislikeToLike(action,actionId)
+        if (likeVal == 1) {
+          await this.likesDislikesDataBase.postReverseDislikeToLike(action, actionId)
         }
         else {
-          await this.likesDislikesDataBase.postReverseLikeToDislike(action,actionId)
+          await this.likesDislikesDataBase.postReverseLikeToDislike(action, actionId)
         }
       }
     }
     return "ok"
   }
 
-  
+
 }

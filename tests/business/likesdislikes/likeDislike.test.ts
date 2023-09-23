@@ -107,20 +107,20 @@ describe("Testando likedislike", () => {
     }
   })
 
-  // test("deve retornar = ação inválida", async () => {
-  //   expect.assertions(1)
-  //   try {
-  //     const input = {
-  //       id: "id-mock-post1",
-  //       like: true,
-  //       action: POST_ACTION.POST,
-  //       token: "id-mock-bart"
-  //     }  
-  //     const result = await likedislikeBusiness.likeDislike(input)      
-  //   } catch (error) {
-  //     if ( error instanceof  BadRequestError){
-  //       expect(error.message).toEqual("ação inválida")
-  //     }      
-  //   }
-  // })    
+  test("deve retornar = ação inválida", async () => {
+    expect.assertions(1)
+    try {
+      const input = {
+        id: "id-mock-post1",
+        like: true,
+        action: POST_ACTION.POST,
+        token: "id-mock-bart"
+      }  
+      const result = await likedislikeBusiness.likeDislike(input)      
+    } catch (error) {
+      if ( error instanceof  BadRequestError){
+        expect(error.message).toEqual("ação inválida")
+      }      
+    }
+  })    
 }) 

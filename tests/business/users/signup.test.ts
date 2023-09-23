@@ -3,12 +3,11 @@ import { HashManagerMock } from "../../mocks/HashManager.Mock"
 import { IdGeneratorMock } from "../../mocks/IdGenerator.Mock"
 import { TokenManagerMock } from "../../mocks/TokenManager.Mock"
 import { UserDataBaseMock } from "../../mocks/UserDataBase.Mock"
-import { CreateUserInputDTO, CreateUserSchema } from "../../../src/dtos/users/singUp.dto"
+import { CreateUserInputDTO, CreateUserSchema } from "../../../src/dtos/users/signUp.dto"
 import { ZodError } from "zod"
 import { ConflictError } from "../../../src/error/ConflictError"
 
 describe("Teste da signup", () => {
-
   const userBusiness = new UserBusiness(
     new UserDataBaseMock(),
     new IdGeneratorMock(),
