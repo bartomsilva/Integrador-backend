@@ -24,9 +24,9 @@ com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do 
 </center>
 
 #### Camadas: 
-- <b>Controller:</b> trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
-- <b>Business:<b/> toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
-- <b>Database:<b/> trata da leitura e armazenameto dos dados.
+- **Controller:** trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
+- **Business:** toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
+- **Database:** trata da leitura e armazenameto dos dados.
 
 <hr/>
 <span id="requests"></span>
@@ -61,14 +61,14 @@ Permite o cadastro de um usuário, é requerido, nome, email e senha.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a"/>
 
 #### POST /users/login 
 Permite o usuário efetuar login e devolve um token, é requerido email e senha. 
 
 - Exemplo de retorno
 
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" />
 
 #### POST /posts 
 Cria um novo post, é requerido o token e o texto do post.
@@ -81,7 +81,7 @@ Devolve uma lista contendo todos posts, é requirido apenas o token.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/603948e6-75b4-444d-bb9c-0e832b4395c6" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/4f9143a6-e790-4780-b978-233aebb0d252"/>
 
 #### PUT /posts 
 Permite editar o conteúdo do post, epena o autor do post pode efetuar a edição, é requerido o token, id do posto e o novo texto.
@@ -95,7 +95,7 @@ Permite deletar um post, somento o autor do post ou um admin podem deletar um po
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="140px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="120px"/>
 
 #### POST /comments  
 Cria um novo comentário, é requeirido o token, id do post e o texto contendo o comentário.
@@ -129,15 +129,12 @@ Devolve uma lista constendo todos comentários de um determinado post, é requer
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0cb5759b-73e1-44ff-9a26-fd61a906f469" heigth="160px"/>
 
 
-
 #### POST likes  
 Permite curtir as postagens e comentários, através de um like ou dislike, e requerido o token, id do post ou comentário, 
 
 - Exemplo de retorno
 
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/c522161c-2ddb-410f-bcc2-3f96e2eb9fa6" height="140px"/>
-
-
 
 
 <hr/>
@@ -150,22 +147,19 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 
 <p>Caso queira baixar e instalar este projeto em seu computador, é necessário que tenha o git e o node instalados.</p>
 
-### Links:  <a href="https://nodejs.org/en">Node</a> - <a href="https://git-scm.com/">Git</a>
+### Links:  
+<a href="https://nodejs.org/en">Node</a> - <a href="https://git-scm.com/">Git</a>
 
 <p>Se já tem ambos instalados ou após instalar, siga os passos abaixo:</p>
 
-
+```
 # Copie o link a baixo
-
 https://github.com/bartomsilva/Integrador-backend.git
 
-
 # Abra um terminal e digite o seguinte comando
-
 git clone (cole a url que copiou aqui)
 
 # acesse a pasta criada 
-
 cd Integrador-backend
 
 # Instale as dependências
@@ -180,8 +174,8 @@ renomeie o arquivo .env.example para .env
 npm run start
 ou 
 yarn start
-
 ```
+
 <hr/>
 <span id="tecnologias"></span>
 <a href="#indice">:arrow_backward:Indíce</a>
