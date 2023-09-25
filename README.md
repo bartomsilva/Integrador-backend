@@ -35,15 +35,19 @@ com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do 
 ## Requisições (Paths): 
 #### Requisições de Usuários
 - /users
+  
   endpoints: login / signup
 #### Requisições de Posts
 - /posts
+  
   endpoints: create post / get posts / edit post / delete post
 #### Requisições de Comentários
 - /comments
+  
   endpoints: create comment / get comments by post / edit comment / delete comment
 #### Requisições de Likes
 - /likes
+  
   endopoint: like (faz o like e dislike juntos)
 
 <hr/>
@@ -57,14 +61,14 @@ Permite o cadastro de um usuário, é requerido, nome, email e senha.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="140px"/>
 
 #### POST /users/login 
 Permite o usuário efetuar login e devolve um token, é requerido email e senha. 
 
 - Exemplo de retorno
 
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="140px"/>
 
 #### POST /posts 
 Cria um novo post, é requerido o token e o texto do post.
@@ -84,21 +88,21 @@ Permite editar o conteúdo do post, epena o autor do post pode efetuar a ediçã
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)" height="140px"/>
 
 #### DELETE /posts  
 Permite deletar um post, somento o autor do post ou um admin podem deletar um post, é requerido o token e id do post.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="140px"/>
 
 #### POST /comments  
 Cria um novo comentário, é requeirido o token, id do post e o texto contendo o comentário.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/2cb20ae3-da0b-4d64-b805-4b9c9f87b0eb" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/2cb20ae3-da0b-4d64-b805-4b9c9f87b0eb" height="140px"/>
 
 
 #### PUT /comments  
@@ -106,7 +110,7 @@ Efetua a auteração do texto de um comentário, é requeirido o token, id do co
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/ea0a6f5c-0243-4e24-9b40-4b4afbff4ee3" heigth="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/ea0a6f5c-0243-4e24-9b40-4b4afbff4ee3" heigth="140px"/>
 
 #### DELETE /comments  
 Excluir um comentário, é requerido o token e id do comentário, essa operação só pode ser efetuada por quem postou o comentário,
@@ -114,7 +118,7 @@ um administrador ou pelo criador do post.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0f81deba-6958-4844-a5da-cf405f927c1d" heigth="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0f81deba-6958-4844-a5da-cf405f927c1d" heigth="140px"/>
 
 
 #### GET /comments  
@@ -131,7 +135,7 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 
 - Exemplo de retorno
 
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/c522161c-2ddb-410f-bcc2-3f96e2eb9fa6" height="160px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/c522161c-2ddb-410f-bcc2-3f96e2eb9fa6" height="140px"/>
 
 
 
@@ -150,19 +154,19 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 
 <p>Se já tem ambos instalados ou após instalar, siga os passos abaixo:</p>
 
-```bash
 
 # Copie o link a baixo
 
-https://github.com/bartomsilva/Labook-backend
+https://github.com/bartomsilva/Integrador-backend.git
+
 
 # Abra um terminal e digite o seguinte comando
 
-git clone (cole a url aqui)
+git clone (cole a url que copiou aqui)
 
-# acesse a página criada 
+# acesse a pasta criada 
 
-cd Labook-backend
+cd Integrador-backend
 
 # Instale as dependências
 npm install
@@ -182,6 +186,7 @@ yarn start
 <span id="tecnologias"></span>
 <a href="#indice">:arrow_backward:Indíce</a>
 
+
 ## 💻 Tecnologias:
 <div align="center">
 
@@ -200,9 +205,11 @@ yarn start
 
 <span id="link"></span>
 
-## Documentação: 
+## Links do Projeto: 
 
-https://documenter.getpostman.com/view/26149268/2s9Xy2NBNw
+<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn">link da documentação<a/>
+<a href="">Link do repositório do Front-end<a/>
+
 
 <span id="author"></span>
 
