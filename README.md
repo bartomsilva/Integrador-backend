@@ -18,7 +18,9 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 	
 ## Descrição:
 <center>
-Esta P[agina foi construída utilizando utilizando o React com template Vite
+Esta API foi construída utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database),
+utilizando o Nodejs com typescricpt além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar
+com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
 </center>
 
 #### Camadas: 
