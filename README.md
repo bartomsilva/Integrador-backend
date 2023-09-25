@@ -1,11 +1,10 @@
-<h1 align="left" margin-top="0">Integrador</h1> 
-O Labeddit é uma que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, inclur, editar, excluir e curitir posts, além de permitir comentar os posts. 
-
+<h1 align="left" margin-top="0">Labeddit Backend</h1> 
+O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
 
 <span id='indice'></span>
 ## Índice:
 
-- <a href="#layout">Layout</a>
+- <a href="#Descrição">Layout</a>
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
@@ -17,11 +16,19 @@ O Labeddit é uma que trata de uma rede social: tem as funcionalidades de login,
 <span id="layout"></span>
 <a href="#indice">:arrow_backward:Indíce</a>
 	
-## Layout: 
-#### a) Estrutura das pastas
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/2f17d1d7-7dca-4ec2-9d0a-3794fd1ff390" width="155px"/>
+## Descrição:
+<center>
+Esta API foi construída sob camadas, aplicando os conceitos de Programação Orientada a Objetos e foi divididada em três camadas: (Controller, Business e Database),
+utilizando o Nodejs com typescricpt além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar
+com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
+</center>
 
-#### b) Endpoints implementados
+#### Camadas: 
+- Controller: trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
+- Business: toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
+- Database: trata da leitura e armazenameto dos dados.
+
+#### a) Endpoints 
 - [X]  Signup
 - [X]  Login 
 - [X]  Create post
@@ -94,18 +101,24 @@ Retorna a lista de todos os posts.
 #### PUT /posts 
 Permite editar o conteúdo do post, epena o autor do post pode efetuar a edição.
 
-![image](https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)
-
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)"/>
 
 #### DELETE /posts  
 Permite deletar um post, mas apenas o próprio autor do post ou um usuário admin pode deletar um post.
 
-![image](https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)
+- Exemplo de retorno
+<p></p>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)"/>
 
 #### POST likes  
 Permite dar um like ou dislike em um post.
 
 **** incluir a parte dos comentários***** 
+
+
+
 
 <hr/>
 <span id='comorodar'></span>
