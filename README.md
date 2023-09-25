@@ -84,7 +84,7 @@ Cria um novo post, é requerido o token e o texto do post.
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/acee37b4-3d13-402d-94ff-f763d4ae3995" height="140px"/>
 
 #### GET /posts 
-Retorna a lista de todos os posts, é requirido apenas o token.
+Devolve uma lista contendo todos posts, é requirido apenas o token.
 
 - Exemplo de retorno
   
@@ -98,7 +98,7 @@ Permite editar o conteúdo do post, epena o autor do post pode efetuar a ediçã
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/b17daf01-89a4-45ef-9888-76a7a6ef787f)" height="160px"/>
 
 #### DELETE /posts  
-Permite deletar um post, mas apenas o próprio autor do post ou um usuário admin pode deletar um post, é requerido o token e id do post.
+Permite deletar um post, somento o autor do post ou um admin podem deletar um post, é requerido o token e id do post.
 
 - Exemplo de retorno
   
@@ -129,7 +129,7 @@ um administrador ou pelo criador do post.
 
 
 #### GET /comments  
-Dedvolve um lista constendo todos comentários de um determinado post, é requerido um token. 
+Devolve uma lista constendo todos comentários de um determinado post, é requerido apenas o token. 
 
 - Exemplo de retorno
   
@@ -138,8 +138,11 @@ Dedvolve um lista constendo todos comentários de um determinado post, é requer
 
 
 #### POST likes  
-Permite curtir as postagens e comentários, através de um like ou dislike.
+Permite curtir as postagens e comentários, através de um like ou dislike, e requerido o token, id do post ou comentário, 
 
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/c522161c-2ddb-410f-bcc2-3f96e2eb9fa6" height="160px"/>
 
 
 
