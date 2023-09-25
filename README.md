@@ -4,7 +4,7 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 <span id='indice'></span>
 ## Índice:
 
-- <a href="#Descrição">Layout</a>
+- <a href="#Descrição">Descrição</a>
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
@@ -18,30 +18,15 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 	
 ## Descrição:
 <center>
-Esta API foi construída sob camadas, aplicando os conceitos de Programação Orientada a Objetos e foi divididada em três camadas: (Controller, Business e Database),
+Esta API foi construída utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database),
 utilizando o Nodejs com typescricpt além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar
 com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
 </center>
 
 #### Camadas: 
-- Controller: trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
-- Business: toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
-- Database: trata da leitura e armazenameto dos dados.
-
-#### a) Endpoints 
-- [X]  Signup
-- [X]  Login 
-- [X]  Create post
-- [X]  Get posts 
-- [X]  Edit post
-- [X]  Delete post
-- [X]  Create comment
-- [X]  Get comments
-- [x]  Edit comment
-- [x]  Delete comment
-- [X]  Like/Dislike - post / comments
-
-Observação: os endpoints de posts e comments são protegidos, e preciso enviar um token válido para poder acessar.
+- <b>Controller:</b> trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
+- <b>Business:<b/> toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
+- <b>Database:<b/> trata da leitura e armazenameto dos dados.
 
 <hr/>
 <span id="requests"></span>
@@ -50,12 +35,16 @@ Observação: os endpoints de posts e comments são protegidos, e preciso enviar
 ## Requisições (Paths): 
 #### Requisições de Usuários
 - /users
+  endpoints: login / signup
 #### Requisições de Posts
 - /posts
+  endpoints: create post / get posts / edit post / delete post
 #### Requisições de Comentários
 - /comments
+  endpoints: create comment / get comments by post / edit comment / delete comment
 #### Requisições de Likes
 - /likes
+  endopoint: like (faz o like e dislike juntos)
 
 <hr/>
 <span id="example"></span>
