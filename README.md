@@ -61,14 +61,14 @@ Permite o cadastro de um usuário, é requerido, nome, email e senha.
 
 - Exemplo de retorno
   
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="140px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/08de2113-ff4b-46c7-ae04-38ab7aba407a" height="160px"/>
 
 #### POST /users/login 
 Permite o usuário efetuar login e devolve um token, é requerido email e senha. 
 
 - Exemplo de retorno
 
-<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="140px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" height="160px"/>
 
 #### POST /posts 
 Cria um novo post, é requerido o token e o texto do post.
