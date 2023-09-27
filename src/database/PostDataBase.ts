@@ -1,6 +1,5 @@
 import { PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
 import { BaseDataBase } from "./BaseDataBase";
-import { CommentDataBase } from "./CommentDatabase";
 
 export class PostDataBase extends BaseDataBase {
 

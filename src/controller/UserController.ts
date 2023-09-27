@@ -6,6 +6,7 @@ import { CreateUserSchema } from "../dtos/users/signUp.dto"
 import { LoginSchema } from "../dtos/users/login.dto"
 import { CreateAdminSchema } from "../dtos/users/createAdmin.dto"
 import { HTTP_CODE } from "../util/util"
+import { CheckUserSchema } from "../dtos/users/checkUser.dto"
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
 
@@ -72,14 +73,24 @@ export class UserController {
         isAdmin: req.body.isAdmin,
         token: req.headers.authorization
       })
-
       const response = await this.userBusiness.createAdmin(input);
-
       res.status(HTTP_CODE.OK).send(response)
-
     } catch (error) {
       handlerError(res, error)
     }
   }
 
+  // CHECK LOGIN
+  public checkLogin = async (req: Request, res: Response): Promise<void> => {
+
+    try {
+      const input = CheckUserSchema.parse({
+        token: req.headers.authorization
+      })
+      const response = await this.userBusiness.checkLogin(input);
+      res.status(HTTP_CODE.OK).send(response)
+    } 
+    // não desejo enviar um retorno de erro para o front
+    catch (error) {}
+  }
 }

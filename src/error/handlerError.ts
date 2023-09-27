@@ -5,7 +5,6 @@ import { ZodError } from "zod"
 import { HTTP_CODE } from "../util/util"
 
 export const handlerError = (res: Response, error: unknown) => {
-
   if (error instanceof ZodError) {
     res.status(HTTP_CODE.BAD_REQUEST).send(error.issues[0])
   } else if (error instanceof BaseError) {

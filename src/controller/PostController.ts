@@ -25,7 +25,6 @@ export class PostController {
 
       res.status(HTTP_CODE.CREATED).send(response)
       
-
     } catch (error) {
       handlerError(res, error)
     }

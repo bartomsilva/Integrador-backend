@@ -30,3 +30,6 @@ userRouter.post("/login", userController.login)
 
 //================== CREATE ADMIN
 userRouter.post("/createadmin", userController.createAdmin)
+
+//================== CHECK LOGIN
+userRouter.post("/checklogin", userController.checkLogin)

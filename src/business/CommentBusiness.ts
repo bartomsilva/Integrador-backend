@@ -35,9 +35,9 @@ export class CommentBusiness {
 
     // pega os dados do post
     const [postDB] = await this.commentDataBase.findPost(postId)
-    
+
     // verifica se o post existe
-    if(postDB == undefined){
+    if (postDB == undefined) {
       throw new NotFoundError("post não encontrado")
     }
 
@@ -115,8 +115,12 @@ export class CommentBusiness {
     if (!resultComment) {
       throw new NotFoundError("'id' não encontrado")
     }
+    const [resultPost] = await this.commentDataBase.findPost(resultComment.post_id)
+
     //checar se o usuário pode deletar o comentario 
-    if (resultComment.creator_id != creatorId && role != USER_ROLES.ADMIN) {
+    if (resultComment.creator_id != creatorId
+      && role != USER_ROLES.ADMIN
+      && resultPost.creator_id != creatorId) {
       throw new UnAuthorizedError("recurso negado")
     }
     await this.commentDataBase.deleteComment(id)
@@ -136,7 +140,7 @@ export class CommentBusiness {
       throw new BadRequestError("token inválido")
     }
 
-    const resultDB:CommentResultDB[] = await this.commentDataBase.getComment(postId)
+    const resultDB: CommentResultDB[] = await this.commentDataBase.getComment(postId)
 
     const response = await Promise.all(resultDB.map(async (comment) => {
 
@@ -144,7 +148,7 @@ export class CommentBusiness {
         findLikeDislike(comment.id, payLoad.id)
 
       // valor default
-      let liked:LIKED = LIKED.NOLIKED
+      let liked: LIKED = LIKED.NOLIKED
 
       if (resultLikedDB != undefined) {
         liked = resultLikedDB.like == 1 ? LIKED.LIKE : LIKED.DISLIKE

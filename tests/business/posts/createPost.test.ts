@@ -11,14 +11,14 @@ describe("Testando createPost", () => {
     new TokenManagerMock()
   )
 
-  test("Criando um post, deve retornar = a mensagem enviada", async () => {
+  test("Criando um post, deve retornar = ok", async () => {
     expect.assertions(1)    
     const input = {
       token: "id-mock-fulano",
       content: "vamos pra cima com tudo"
     }    
     const result = await postBusiness.createPost(input)
-    expect(result.content).toEqual("vamos pra cima com tudo")
+    expect(result).toEqual("ok")
   });
 
   test("Criando um post, deve retornar token invalido", async ()=>{

@@ -1,4 +1,6 @@
+import { pathToFileURL } from "url"
 import { UserDataBase } from "../database/UserDataBase"
+import { CheckUserInputDTO, CheckUserOutputDTO } from "../dtos/users/checkUser.dto"
 import { CreateAdminInputDTO } from "../dtos/users/createAdmin.dto"
 import { GetUsersInputDTO, GetUsersOutputDTO } from "../dtos/users/getUsers.dto"
 import { LoginInputDTO, LoginOutputDTO } from "../dtos/users/login.dto"
@@ -160,4 +162,22 @@ export class UserBusiness {
     await this.userDataBase.createAdmin(id, userNewStatus)
     return "ok"
   }
+
+   //==========   CHECK LOGIN
+   public checkLogin = async (input: CheckUserInputDTO): Promise<CheckUserOutputDTO> => {
+
+    const {token } = input
+    // validação token 
+    const payLoad = this.tokenManager.getPayload(token)
+    if (payLoad == undefined) {
+      throw new BadRequestError("token inválido")
+    }
+    const output: CheckUserOutputDTO = {
+      userId: payLoad.id,
+      userName: payLoad.name     
+    }
+    return output
+  }
+
+  
 }
