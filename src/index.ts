@@ -12,7 +12,7 @@ const server = express()
 server.use(express.json())
 server.use(cors())
 
-const PORT = Number(process.env.PORT) || 3000 
+const PORT = Number(process.env.PORT) || 3003 
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`)
 })
