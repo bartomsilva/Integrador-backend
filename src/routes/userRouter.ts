@@ -23,7 +23,7 @@ const userController = new UserController
 userRouter.get("/", userController.getUsers)
 
 //================== SING UP / CREATE USER
-userRouter.post("/singup", userController.createUser)
+userRouter.post("/signup", userController.createUser)
 
 //=================== LOGIN
 userRouter.post("/login", userController.login)
