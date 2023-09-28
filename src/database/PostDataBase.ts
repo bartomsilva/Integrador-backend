@@ -6,32 +6,48 @@ export class PostDataBase extends BaseDataBase {
   TABLE_NAME = "posts"
 
   //============ GET ALL POST
-  public getPost = async (): Promise<PostResultDB[]> => {
-
+  // public getPost = async (): Promise<PostResultDB[]> => {
+  public getPost = async () => {
+    BaseDataBase.connect()
     const response = await BaseDataBase.connection("posts as p")
       .select("p.id", "p.content", "p.likes", "p.dislikes", "p.comments", "p.created_at",
         "p.updated_at", "p.creator_id", "u.name as creator_name")
       .leftJoin("users as u", "p.creator_id", "u.id")
       .orderBy("p.updated_at", "desc")
+    BaseDataBase.disconnect()
     return response
   }
 
   //=============== INSERT POST
   public insertPost = async (newPost: PostDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME).insert(newPost)
+    try {
+      BaseDataBase.connect()
+      await BaseDataBase.connection(this.TABLE_NAME).insert(newPost)
+    } catch (error) { }
+    finally {
+      await BaseDataBase.disconnect()
+    }
   }
 
   //=============== UPDATE POST 
   public updatePost = async (updatePost: PostUpdateDB, creatorId: string): Promise<void> => {
+    try {
+      BaseDataBase.connect()
+
+    } catch (error) {
+      BaseDataBase.disconnect()
+    }
     await BaseDataBase.connection(this.TABLE_NAME)
       .update(updatePost)
       .where("id", "=", updatePost.id)
       .andWhere("creator_id", "=", creatorId)
+    BaseDataBase.disconnect()
   }
 
   //=============== DELETE POST 
   public deletePost = async (postId: string): Promise<void> => {
 
+    BaseDataBase.connect()
     // procurar comentários ligados ao post 
     const commentIds = await BaseDataBase.connection('comments')
       .pluck('id') // pluck pega apenas essa coluna
@@ -56,6 +72,8 @@ export class PostDataBase extends BaseDataBase {
     await BaseDataBase.connection('posts')
       .del()
       .where('id', postId)
+
+    BaseDataBase.disconnect()
   }
 
 }

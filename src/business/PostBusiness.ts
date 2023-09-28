@@ -6,7 +6,7 @@ import { UpdatePostInputDTO } from "../dtos/posts/updatePost.dto"
 import { BadRequestError } from "../error/BadRequest"
 import { NotFoundError } from "../error/NotFound"
 import { UnAuthorizedError } from "../error/UnAuthorized"
-import { LIKED, POST_ACTION, PostDB, PostUpdateDB } from "../models/Post"
+import { LIKED, POST_ACTION, PostDB, PostResultDB, PostUpdateDB } from "../models/Post"
 import { USER_ROLES } from "../models/User"
 import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
@@ -47,6 +47,7 @@ export class PostBusiness {
       updated_at: new Date().toISOString()
     }
     // enviando para ser salvo no banco de dados
+    
     await this.postDataBase.insertPost(newPost)
     return "ok"
   }
@@ -116,7 +117,7 @@ export class PostBusiness {
   }
 
   //============ GET POSTS
-  public getPost = async (input: GetPostInputDTO): Promise<GetPostOutputDTO[]> => {
+  public getPost = async (input: GetPostInputDTO): Promise<GetPostOutputDTO[]|undefined> => {
 
     const { token } = input
     const payLoad = this.tokenManager.getPayload(token)
@@ -124,7 +125,7 @@ export class PostBusiness {
       throw new BadRequestError("token inválido")
     }
 
-    const resultDB = await this.postDataBase.getPost()
+    const resultDB = await this.postDataBase.getPost() 
 
     const response = await Promise.all(resultDB.map(async (post) => {
       

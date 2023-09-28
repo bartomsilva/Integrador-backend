@@ -35,9 +35,9 @@ export class UserBusiness {
     }
 
     //somente admins tem acesso a este recurso
-    if (payload.role != USER_ROLES.ADMIN) {
-      throw new BadRequestError("somente admins podem acessar esse recurso")
-    }
+    // if (payload.role != USER_ROLES.ADMIN) {
+    //   throw new BadRequestError("somente admins podem acessar esse recurso")
+    // }
 
     const resultDB: UserDB[] = await this.userDataBase.getUser(q)
 

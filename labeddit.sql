@@ -1,4 +1,4 @@
--- Active: 1695410995173@@127.0.0.1@3306
+-- Active: 1695914564972@@127.0.0.1@3306
 CREATE TABLE users(  
     id         VARCHAR(40) NOT NULL PRIMARY KEY,
     name       VARCHAR(50) NOT NULL,
