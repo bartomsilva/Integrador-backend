@@ -32,7 +32,7 @@ export class CommentController {
   public createComment = async (req: Request, res: Response) => {
     try {
       const input = CreateCommentSchema.parse({
-        postId: req.body.postId,
+        postId: req.params.id,
         content: req.body.content,
         token: req.headers.authorization
       })

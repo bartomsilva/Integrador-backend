@@ -47,8 +47,8 @@ export class CommentBusiness {
     // aqui cria o objeto com os dados do novo comentário
     const newComment: CommentDB = {
       id,
-      post_id: postId,
       creator_id: creatorId,
+      post_id: postId,
       parental_post_id: "",
       content,
       likes: 0,
