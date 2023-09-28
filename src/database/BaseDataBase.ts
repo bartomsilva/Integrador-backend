@@ -6,11 +6,9 @@ dotenv.config()
 export abstract class BaseDataBase {
 
     protected static connection: Knex;
-    protected static connected = false;
 
     protected static connect(): void {
-        // if (!BaseDataBase.connection) {
-        if (!BaseDataBase.connected) {
+        if (!BaseDataBase.connection) {
             BaseDataBase.connection = knex({
                 client: 'sqlite3',
                 connection: {
@@ -25,17 +23,14 @@ export abstract class BaseDataBase {
                     },
                 },
             });
-            BaseDataBase.connected = true
         }
     }
 
     protected static async disconnect(): Promise<void> {
         // if (BaseDataBase.connection) {
-        if (BaseDataBase.connected) {
             // await BaseDataBase.connection.destroy();
             // BaseDataBase.connection = undefined;
-            BaseDataBase.connected=false
-        }
+        // }
     }
 
     public abstract TABLE_NAME: string
