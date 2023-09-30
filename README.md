@@ -25,9 +25,9 @@ Esta API, encontra-se hospedada na AWS no serviço AC2, que é um serviço do ti
 </center>
 
 #### Camadas: 
-- **Controller:** trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
-- **Business:** toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
-- **Database:** trata da leitura e armazenameto dos dados.
+- **Controller:** Trata das requisições vindas dos clientes, aqui é feita a primeira validação utilizando o ZOD.
+- **Business:** Toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
+- **Database:** Trata da leitura e armazenameto dos dados.
 
 <hr/>
 <span id="requests"></span>
