@@ -194,6 +194,7 @@ yarn start
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/36e9a0dd-c546-4b30-adfb-65ed7f36630e" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/7891f0ec-fafd-4fd4-98aa-61ba9a29b1f5" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/540d223e-81e0-4a88-b883-a08bdf8d441e" height="55px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d99eea9-a8a2-4abb-839b-af2ea1c9483f" height="55px"/>
 
 </div>
 <hr/>
