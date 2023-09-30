@@ -9,7 +9,7 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#link">Documentação no Postman </a>
+- <a href="#link">Documentação</a>
 - <a href="#author">Pessoas autoras</a>
 <hr/>
 
@@ -21,6 +21,9 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 Esta API foi construída utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database),
 utilizando o Nodejs com typescricpt além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar
 com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
+
+- link do front-end: 
+<a href="https://github.com/bartomsilva/Integrador-frontend">**Link do Frontend**</a>
 </center>
 
 #### Camadas: 
