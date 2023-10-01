@@ -1,5 +1,5 @@
 <h1 align="left" margin-top="0">Labeddit Backend</h1> 
-O Labeddit Backend é uma API que faz parte do projeto final Integrador (full stack), projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
+O Labeddit é uma API que faz parte do projeto final Integrador (full stack), projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
 
 <span id='indice'></span>
 ## Índice:
@@ -8,7 +8,7 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador (full st
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
-- <a href="#tecnologias e serviços">Tecnologias Utilizadas</a>
+- <a href="#tecnologias">Tecnologias Utilizadas</a>
 - <a href="#link">Documentação</a>
 - <a href="#linkfront">Link do front-end</a>
 - <a href="#author">Pessoas autoras</a>
