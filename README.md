@@ -10,6 +10,7 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador (full st
 - <a href="#comorodar">Como rodar este projeto localmente</a>
 - <a href="#tecnologias e serviços">Tecnologias Utilizadas</a>
 - <a href="#link">Documentação</a>
+- <a href="#linkfront">Link do front-end</a>
 - <a href="#author">Pessoas autoras</a>
 <hr/>
 
@@ -201,11 +202,18 @@ yarn start
 
 <span id="link"></span>
 
-## Links do Projeto: 
+## Documentação: 
 
 <a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn">link da documentação<a/>
-<a href="">Link do repositório do Front-end<a/>
 
+
+<span id="linkfront"></span>
+
+## Front-end: 
+
+<a href="https://github.com/bartomsilva/Integrador-frontend">Link do repositório do Front-end<a/>
+<a href="http://18.204.122.118:3000/posts">Acesso a Página (deploy na AWS)</a>
+<a href="labeddit-bart-silva.surge.sh">Acesso a Página (deploy sorge)</a>
 
 <span id="author"></span>
 
