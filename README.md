@@ -213,7 +213,7 @@ yarn start
 
 <a href="https://github.com/bartomsilva/Integrador-frontend">Link do repositório do Front-end<a/><br>
 <a href="http://18.204.122.118:3000/posts">Acesso a Página (deploy na AWS)</a><br>
-<a href="http://labeddit-bart-silva.surge.sh">Acesso a Página (deploy surge)</a>
+<a href="https://labeddit-bart-silva.surge.sh">Acesso a Página (deploy surge)</a>
 
 <span id="author"></span>
 
