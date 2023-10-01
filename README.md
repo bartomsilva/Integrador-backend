@@ -147,7 +147,7 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 <p>Caso queira baixar e instalar este projeto em seu computador, é necessário que tenha o git e o node instalados.</p>
 
 ### Links:  
-<a href="https://nodejs.org/en">Node</a> - <a href="https://git-scm.com/">Git</a>
+<a href="https://nodejs.org/en" target="_blank">Node</a> - <a href="https://git-scm.com/" target="_blank">Git</a>
 
 <p>Se já tem ambos instalados ou após instalar, siga os passos abaixo:</p>
 
@@ -201,16 +201,16 @@ yarn start
 
 ## Documentação: 
 
-<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn">link da documentação<a/>
+<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn" target="_blank">link da documentação<a/>
 
 
 <span id="linkfront"></span>
 
 ## Front-end: 
 
-<a href="https://github.com/bartomsilva/Integrador-frontend">Link do repositório do Front-end<a/><br>
-<a href="http://18.204.122.118:3000/posts">Acesso a Página (deploy na AWS)</a><br>
-<a href="https://labeddit-bart-silva.surge.sh">Acesso a Página (deploy surge)</a>
+<a href="https://github.com/bartomsilva/Integrador-frontend" target="_blank">Link do repositório do Front-end<a/><br>
+<a href="http://18.204.122.118:3000/posts" target="_blank">Acesso a Página (deploy na AWS)</a><br>
+<a href="https://labeddit-bart-silva.surge.sh" target="_blank">Acesso a Página (deploy surge)</a>
 
 <span id="author"></span>
 
