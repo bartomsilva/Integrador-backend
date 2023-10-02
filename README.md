@@ -1,5 +1,5 @@
 <h1 align="left" margin-top="0">Labeddit Backend</h1> 
-O Labeddit é uma API que faz parte do projeto final Integrador (full stack), projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
+Labeddit é uma API que faz parte do projeto final Integrador (full stack), projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
 
 <span id='indice'></span>
 ## Índice:
@@ -19,7 +19,7 @@ O Labeddit é uma API que faz parte do projeto final Integrador (full stack), pr
 	
 ## Descrição:
 <center>
-Esta API, encontra-se hospedada na AWS usando AC2, que é um serviço do tipo IAAS, também utilizado o serviço de IP estático, o que garante o acesso constante do módulo front-end. Contruí a Labeddit, utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database) que são gerencidas através de roteamento, a linguagem utilizada foi nodejs com typescricpt, além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
+Esta API, encontra-se hospedada na AWS usando AC2, que é um serviço do tipo IAAS, também utiliza o serviço de IP estático, o que garante o acesso constante do módulo front-end. Contruí a Labeddit, utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database) que são gerencidas através de roteamento, a linguagem utilizada foi nodejs com typescricpt, além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
 </center>
 
 #### Camadas: 
