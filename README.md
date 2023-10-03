@@ -190,7 +190,7 @@ yarn start
 Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções acima, em seguida execute:
 
 npm test resumo
-ou 
+ou
 yarn resumo
 ```
 
