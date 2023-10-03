@@ -8,6 +8,7 @@ Labeddit é uma API que faz parte do projeto final Integrador (full stack), proj
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
+- <a href="#testes">Come executar testes</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
 - <a href="#link">Documentação</a>
 - <a href="#linkfront">Link do front-end</a>
@@ -146,6 +147,7 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 
 <p>Caso queira baixar e instalar este projeto em seu computador, é necessário que tenha o git e o node instalados.</p>
 
+
 ### Links:  
 <a href="https://nodejs.org/en" target="_blank">Node</a> - <a href="https://git-scm.com/" target="_blank">Git</a>
 
@@ -173,6 +175,23 @@ renomeie o arquivo .env.example para .env
 npm run start
 ou 
 yarn start
+```
+
+<hr/>
+<span id='testes'></span>
+<a href="#indice">:arrow_backward:Indíce</a>
+
+
+## 📄 Testes em Jest:
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
+```
+Testei 100% das funcionalidades da Business, para realizar os testes, siga as instruções acima,
+em seguida execute:</p>
+
+npm test resumo
+ou 
+yarn resumo
 ```
 
 <hr/>
