@@ -1,5 +1,5 @@
 <h1 align="left" margin-top="0">Labeddit Backend</h1> 
-O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
+Labeddit é uma API que faz parte do projeto final Integrador (full stack), projeto de cunho acadêmico, que trata de uma rede social: tem as funcionalidades de login, cadastro de novos usuários, incluir, editar, excluir e curtir posts, além de permitir comentar os posts. 
 
 <span id='indice'></span>
 ## Índice:
@@ -8,8 +8,10 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
+- <a href="#testes">Como executar testes</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#link">Documentação no Postman </a>
+- <a href="#link">Documentação</a>
+- <a href="#linkfront">Link do front-end</a>
 - <a href="#author">Pessoas autoras</a>
 <hr/>
 
@@ -18,15 +20,13 @@ O Labeddit Backend é uma API que faz parte do projeto final Integrador, projeto
 	
 ## Descrição:
 <center>
-Esta API foi construída utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database),
-utilizando o Nodejs com typescricpt além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar
-com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado foi o Sqlite.
+Esta API, encontra-se hospedada na AWS usando AC2, que é um serviço do tipo IAAS, também utiliza o serviço de IP estático, o que garante o acesso constante do módulo front-end. Contruí a Labeddit, utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database) que são gerencidas através de roteamento, a linguagem utilizada é o Nodejs com typescricpt, além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado é o Sqlite.
 </center>
 
 #### Camadas: 
-- **Controller:** trata das requisições vinda dos clientes, aqui é feita a primeira validação utilizando o ZOD.
-- **Business:** toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
-- **Database:** trata da leitura e armazenameto dos dados.
+- **Controller:** Trata das requisições vindas dos clientes, aqui é feita a primeira validação utilizando o ZOD.
+- **Business:** Toda regra de negócio vai aqui, essa camada também e responsável por modelar os dados a rerem salvos ou retornados.
+- **Database:** Trata da leitura e armazenameto dos dados.
 
 <hr/>
 <span id="requests"></span>
@@ -147,8 +147,9 @@ Permite curtir as postagens e comentários, através de um like ou dislike, e re
 
 <p>Caso queira baixar e instalar este projeto em seu computador, é necessário que tenha o git e o node instalados.</p>
 
+
 ### Links:  
-<a href="https://nodejs.org/en">Node</a> - <a href="https://git-scm.com/">Git</a>
+<a href="https://nodejs.org/en" target="_blank">Node</a> - <a href="https://git-scm.com/" target="_blank">Git</a>
 
 <p>Se já tem ambos instalados ou após instalar, siga os passos abaixo:</p>
 
@@ -177,6 +178,23 @@ yarn start
 ```
 
 <hr/>
+<span id='testes'></span>
+<a href="#indice">:arrow_backward:Indíce</a>
+
+
+## 📄 Testes em Jest:
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
+
+```
+Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções acima, em seguida execute:
+
+npm test resumo
+ou
+yarn resumo
+```
+
+<hr/>
 <span id="tecnologias"></span>
 <a href="#indice">:arrow_backward:Indíce</a>
 
@@ -193,17 +211,25 @@ yarn start
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/36e9a0dd-c546-4b30-adfb-65ed7f36630e" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/7891f0ec-fafd-4fd4-98aa-61ba9a29b1f5" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/540d223e-81e0-4a88-b883-a08bdf8d441e" height="55px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d99eea9-a8a2-4abb-839b-af2ea1c9483f" height="55px"/>
 
 </div>
 <hr/>
 
 <span id="link"></span>
 
-## Links do Projeto: 
+## Documentação: 
 
-<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn">link da documentação<a/>
-<a href="">Link do repositório do Front-end<a/>
+<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn" target="_blank">link da documentação<a/>
 
+
+<span id="linkfront"></span>
+
+## Front-end: 
+
+<a href="https://github.com/bartomsilva/Integrador-frontend" target="_blank">Link do repositório do Front-end<a/><br>
+<a href="http://18.204.122.118:3000/posts" target="_blank">Acesso a Página (deploy na AWS)</a><br>
+<a href="https://labeddit-bart-silva.surge.sh" target="_blank">Acesso a Página (deploy surge)</a>
 
 <span id="author"></span>
 
