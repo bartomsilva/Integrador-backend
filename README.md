@@ -181,7 +181,6 @@ yarn start
 <span id='testes'></span>
 <a href="#indice">:arrow_backward:Indíce</a>
 
-
 ## 📄 Testes em Jest:
 
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
