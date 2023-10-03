@@ -8,7 +8,7 @@ Labeddit é uma API que faz parte do projeto final Integrador (full stack), proj
 - <a href="#requests">Requisições</a>
 - <a href="#example">Exemplo de Requisições</a>
 - <a href="#comorodar">Como rodar este projeto localmente</a>
-- <a href="#testes">Come executar testes</a>
+- <a href="#testes">Como executar testes</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
 - <a href="#link">Documentação</a>
 - <a href="#linkfront">Link do front-end</a>
@@ -181,12 +181,13 @@ yarn start
 <span id='testes'></span>
 <a href="#indice">:arrow_backward:Indíce</a>
 
+
 ## 📄 Testes em Jest:
 
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
+
 ```
-Testei 100% das funcionalidades da Business, para realizar os testes, siga as instruções acima,
-em seguida execute:</p>
+Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções acima, em seguida execute:
 
 npm test resumo
 ou 
