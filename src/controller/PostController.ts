@@ -8,8 +8,7 @@ import { GetPostShema } from "../dtos/posts/getPost.dto"
 import { HTTP_CODE } from "../util/util"
 
 export class PostController {
-  constructor(private postBusiness: PostBusiness,
-    //private likeDislikeBusiness: LikeDislikeBusiness
+  constructor(private postBusiness: PostBusiness
     ) { }
 
   //=============== CREATE POST
@@ -72,6 +71,7 @@ export class PostController {
     try {
 
       const input = GetPostShema.parse({
+        postId: req.params.id,
         token: req.headers.authorization
       })
 

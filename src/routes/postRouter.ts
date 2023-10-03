@@ -21,6 +21,10 @@ postRouter.post("/",postController.createPost)
 //================== GET POSTS
 postRouter.get("/",postController.getPost)
 
+//================== GET POSTS
+postRouter.get("/:id",postController.getPost)
+
+
 //================== EDIT POST
 postRouter.put("/:id",postController.editPost)
 

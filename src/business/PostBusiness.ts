@@ -1,3 +1,4 @@
+import { BaseDataBase } from "../database/BaseDataBase"
 import { PostDataBase } from "../database/PostDataBase"
 import { CreatePostInputDTO } from "../dtos/posts/createPost.dto"
 import { DeletePostInputDTO } from "../dtos/posts/deletePost.dto"
@@ -119,13 +120,19 @@ export class PostBusiness {
   //============ GET POSTS
   public getPost = async (input: GetPostInputDTO): Promise<GetPostOutputDTO[]|undefined> => {
 
-    const { token } = input
+    const { postId, token } = input
     const payLoad = this.tokenManager.getPayload(token)
+    let resultDB
+
     if (payLoad == null) {
       throw new BadRequestError("token inválido")
     }
 
-    const resultDB = await this.postDataBase.getPost() 
+    if(postId){
+      resultDB = await this.postDataBase.findPost(postId)
+    } else {
+      resultDB = await this.postDataBase.getPost() 
+   }
 
     const response = await Promise.all(resultDB.map(async (post) => {
       

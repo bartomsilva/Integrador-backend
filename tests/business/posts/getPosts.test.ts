@@ -45,4 +45,24 @@ describe("Testando getPost", () => {
         liked: expect.any(String)
       })
   })
+  test("get post by id, deve retornar = 1 objeto", async () => {
+    expect.assertions(2)
+    const input = {
+      postId: "id-mock-post2",
+      token: "id-mock-fulano"
+    }
+    const result = await postBusiness.getPost(input)
+    expect(result).toHaveLength(1)
+    expect(result).toContainEqual(
+      {
+        id: "id-mock-post2",
+        content: "mock-post-2",
+        likes: 0,
+        dislikes: 0,
+        comments: 0,
+        updatedAt: expect.any(String),
+        creator: { id: 'id-mock-bart', name: 'Bart' },
+        liked: expect.any(String)
+      })
+  })
 }) 
