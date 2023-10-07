@@ -7,6 +7,12 @@ import { LoginSchema } from "../dtos/users/login.dto"
 import { CreateAdminSchema } from "../dtos/users/createAdmin.dto"
 import { HTTP_CODE } from "../util/util"
 import { CheckUserSchema } from "../dtos/users/checkUser.dto"
+import { ResetPasswordSchema } from "../dtos/users/resetPassword.dto"
+import nodemailer from "nodemailer"
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
 
@@ -28,14 +34,15 @@ export class UserController {
     }
   }
 
-  //=========== SING UP / CREATE USER
+  //=========== SIGN UP / CREATE USER
   public createUser = async (req: Request, res: Response): Promise<void> => {
 
     try {
       const input = CreateUserSchema.parse({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        news_letter: req.body.newsLetter
       })
 
       const output = await this.userBusiness.createUser(input);
@@ -89,8 +96,68 @@ export class UserController {
       })
       const response = await this.userBusiness.checkLogin(input);
       res.status(HTTP_CODE.OK).send(response)
-    } 
+    }
     // não desejo enviar um retorno de erro para o front
-    catch (error) {}
+    catch (error) { }
+  }
+
+  // RESET PASSWORD
+  public resetPassword = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const input = { email: req.params.email }
+      const response = await this.userBusiness.resetPassword(input);
+      res.status(HTTP_CODE.OK).send('<h4>reset feito com sucesso, cadastre no form de login sua nova senha.<h4/>')
+    }
+    // não desejo enviar um retorno de erro para o front
+    catch (error) { }
+  }
+
+  // SENE EMAIL
+  public sendEmail = async (req: Request, res: Response): Promise<void> => {
+
+    const email = req.body.email
+
+    console.log("email back", email)
+    let transport = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true 465, false demais
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
+      }
+    });
+
+
+    let message = {
+      from: 'Labeddit',
+      to: email,
+      subject: "reset password",
+      html: `
+      <h3>Olá, segue o link para liberar o cadastro de sua nova senha.<h3>
+      <a href="http://localhost:3003/users/resetpassword/${email}" _self>Clique aqui</a>
+      `
+    };
+
+
+    transport.sendMail(message, function (err) {
+      if (err) {
+        return res.status(400).json({
+          erro: true,
+          mensagem: "E-mail não enviado com sucesso!"
+        })
+
+      } else {
+        return res.json({
+          erro: false,
+          mensagem: "E-mail enviado com sucesso!"
+        })
+
+      }
+
+    })
+
+
   }
 }
+

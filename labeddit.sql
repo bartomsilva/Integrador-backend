@@ -1,11 +1,13 @@
--- Active: 1695926771203@@127.0.0.1@3306
+-- Active: 1696006865998@@127.0.0.1@3306
 CREATE TABLE users(  
     id         VARCHAR(40) NOT NULL PRIMARY KEY,
     name       VARCHAR(50) NOT NULL,
     email      VARCHAR(40) NOT NULL UNIQUE,
     password   VARCHAR(20) NOT NULL,
     role       VARCHAR(20) NOT NULL, 
-    created_at VARCHAR(20) NOT NULL  
+    created_at VARCHAR(20) NOT NULL,
+    news_letter VARCHAR(1),
+    reset_password VARCHAR(1)  
 );
 
 CREATE TABLE posts(
@@ -40,4 +42,6 @@ CREATE TABLE likes_dislikes(
     like    INTEGER(1)
 );
 
-
+-- 
+ALTER TABLE users ADD COLUMN news_letter VARCHAR(1);
+ALTER TABLE users ADD COLUMN reset_password VARCHAR(1);

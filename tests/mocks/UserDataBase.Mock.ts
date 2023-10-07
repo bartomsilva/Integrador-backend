@@ -8,7 +8,9 @@ const usersMock: UserDB[] = [
     email: "fulano@email.com",
     password: "hash-mock-fulano",  // Fulano123@
     role: USER_ROLES.NORMAL,
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
+    news_letter:"",
+    reset_password:""
   },
   {
     id: "id-mock-bart",
@@ -16,7 +18,9 @@ const usersMock: UserDB[] = [
     email: "bart@email.com",
     password: "hash-mock-bart",  // Bart123@
     role: USER_ROLES.ADMIN,
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
+    news_letter:"",
+    reset_password:"*"
   }
 ]
 
@@ -70,6 +74,14 @@ export class UserDataBaseMock extends BaseDataBase {
   }
 
 
+   // troca o Status para reset de senha
+   public resetPassword = async (idUser: string): Promise<void> => {
+      }
+
+   // atualiza a senha no banco de dados
+   public updatePassword = async (idUser: string, newPassword:string): Promise<void> => {
+   
+  }
 
 
 }

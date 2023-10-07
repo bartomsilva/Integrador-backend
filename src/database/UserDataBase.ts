@@ -29,6 +29,21 @@ export class UserDataBase extends BaseDataBase {
       where({ id: idUser })
   }
 
+  // troca o Status para reset de senha
+  public resetPassword = async (userEmail: string): Promise<void> => {
+    await BaseDataBase.
+      connection(this.TABLE_NAME).
+      update({"reset_password":"*"}).
+      where({ email: userEmail })
+  }
+
+   // atualiza a senha no banco de dados
+   public updatePassword = async (idUser: string, newPassword:string): Promise<void> => {
+    await BaseDataBase.
+      connection(this.TABLE_NAME).
+      update({"password": newPassword, "reset_password":null}).
+      where({ id: idUser })
+  }
   //============== BUSCA SE O USUÁRIO JÁ FOI CADASTRADO 
   public findUser = async (email: string): Promise<UserDB> => {
     const [result]: UserDB[] = await BaseDataBase.connection("users").where({ email })

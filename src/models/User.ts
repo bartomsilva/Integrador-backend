@@ -16,7 +16,9 @@ export interface UserDB {
   email: string,
   password: string,
   role: USER_ROLES,  
-  created_at: string  
+  created_at: string,
+  news_letter?: string, 
+  reset_password?: string 
 }
  
 export interface AdminDB {

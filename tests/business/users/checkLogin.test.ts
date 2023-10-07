@@ -24,7 +24,6 @@ describe("Testando checkLogin", () => {
       await userBusiness.checkLogin(input)
     } catch (error) {
       if (error instanceof BadRequestError) {
-        console.log(error)
         expect(error.message).toEqual("token inválido")
       }
     }

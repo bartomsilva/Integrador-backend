@@ -49,7 +49,6 @@ describe("Testando createComment", () => {
       };
       const result = await commentBusiness.createComment(input);
     } catch (error) {
-      console.log(error)
       if ( error instanceof NotFoundError){
         expect(error.message).toEqual("post não encontrado");        
       }

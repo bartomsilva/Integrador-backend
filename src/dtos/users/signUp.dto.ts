@@ -3,10 +3,10 @@ import z from 'zod'
 export interface CreateUserInputDTO {
   name: string,
   email: string,
-  password: string
+  password: string,
+  news_letter?: string
 }
-export interface CreateUserOutputDTO 
-{
+export interface CreateUserOutputDTO {
   user: {
     userId: string,
     userName: string
@@ -34,5 +34,6 @@ export const CreateUserSchema = z.object({
       invalid_type_error: "'password' deve ser do tipo string"
     }).refine((value) => /^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$/g.test(value)
       , "'password' deve ter entre 6 e 15 caracteres, incluindo números, " +
-      "letras minusculas e no mínimo uma letra maiuscula, e um caracter especial")
+      "letras minusculas e no mínimo uma letra maiuscula, e um caracter especial"),
+  news_letter: z.string().optional()
 }).transform(data => data as CreateUserInputDTO)

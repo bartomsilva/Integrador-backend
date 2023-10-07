@@ -33,3 +33,9 @@ userRouter.post("/createadmin", userController.createAdmin)
 
 //================== CHECK LOGIN
 userRouter.post("/checklogin", userController.checkLogin)
+
+//================== RESET SENHA
+userRouter.get("/resetpassword/:email", userController.resetPassword)
+
+//================== SEND EMAIL
+userRouter.post("/sendemail", userController.sendEmail)

@@ -1,4 +1,3 @@
-import { pathToFileURL } from "url"
 import { UserDataBase } from "../database/UserDataBase"
 import { CheckUserInputDTO, CheckUserOutputDTO } from "../dtos/users/checkUser.dto"
 import { CreateAdminInputDTO } from "../dtos/users/createAdmin.dto"
@@ -12,6 +11,7 @@ import { AdminDB, TokenPayload, USER_ROLES, UserDB } from "../models/User"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
+import { ResetPasswordInputDTO} from "../dtos/users/resetPassword.dto"
 
 export class UserBusiness {
   constructor(
@@ -56,7 +56,7 @@ export class UserBusiness {
   //=========== SIGN UP / CREATE USER
   public createUser = async (input: CreateUserInputDTO): Promise<CreateUserOutputDTO> => {
 
-    const { name, email, password } = input
+    const { name, email, password, news_letter } = input
 
     const newId = this.idGenerator.generate()
     const hashedPassword = await this.hashManager.hash(password)
@@ -67,7 +67,8 @@ export class UserBusiness {
       email,
       password: hashedPassword,
       role: USER_ROLES.NORMAL,
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
+      news_letter
     }
     // verifica se o email já está em uso
     const userExist = await this.userDataBase.findUser(email)
@@ -112,8 +113,14 @@ export class UserBusiness {
       throw new NotFoundError("'email' não encontrado")
     }
     const passworValid = await this.hashManager.compare(password, userDB.password)
-    if (!passworValid) {
+    if (!passworValid && userDB.reset_password!="*") {
       throw new BadRequestError("'password' incorreta")
+    }
+
+    // atualiza a senha do usuário
+    if( userDB.reset_password=="*"){
+      const hashedPassword = await this.hashManager.hash(password)
+      this.userDataBase.updatePassword(userDB.id,hashedPassword)
     }
 
     // modelagem do objeto (payload)
@@ -163,10 +170,10 @@ export class UserBusiness {
     return "ok"
   }
 
-   //==========   CHECK LOGIN
-   public checkLogin = async (input: CheckUserInputDTO): Promise<CheckUserOutputDTO> => {
+  //==========   CHECK LOGIN
+  public checkLogin = async (input: CheckUserInputDTO): Promise<CheckUserOutputDTO> => {
 
-    const {token } = input
+    const { token } = input
     // validação token 
     const payLoad = this.tokenManager.getPayload(token)
     if (payLoad == undefined) {
@@ -174,10 +181,20 @@ export class UserBusiness {
     }
     const output: CheckUserOutputDTO = {
       userId: payLoad.id,
-      userName: payLoad.name     
+      userName: payLoad.name
     }
     return output
   }
 
-  
+  //==========   RESET PASSWORD
+  public resetPassword = async (input: ResetPasswordInputDTO): Promise<string> => {
+    const { email } = input
+    // validação do id 
+    const resultDB = this.userDataBase.findUser(email)
+    if (resultDB == undefined) {
+      throw new BadRequestError("'email' inválido")
+    }
+    await this.userDataBase.resetPassword(email)
+    return 'ok'
+  }
 }

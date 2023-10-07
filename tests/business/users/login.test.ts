@@ -44,6 +44,7 @@ describe("Testando login", () => {
       token: "token-mock-bart"
     })
   })
+  
 
   test("deve retornar a mensagem email não encontrado ao tentar logar", async () => {
     expect.assertions(1)
@@ -66,7 +67,7 @@ describe("Testando login", () => {
       try {
         const input = {
           email: "fulano@email.com",
-          password: "fulano12"
+          password: "fulano122@"
         }
         const output = await userBusiness.login(input)
       } catch (error) {
