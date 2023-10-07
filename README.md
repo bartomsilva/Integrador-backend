@@ -10,8 +10,8 @@ Labeddit é uma API que faz parte do projeto final Integrador (full stack), proj
 - <a href="#comorodar">Como rodar este projeto localmente</a>
 - <a href="#testes">Como executar testes</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#link">Documentação</a>
-- <a href="#linkfront">Link do front-end</a>
+- <a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn" target="_blank">Documentação</a>
+- <a href="https://github.com/bartomsilva/Integrador-frontend" target="__blank)">Link do front-end</a>
 - <a href="#author">Pessoas autoras</a>
 <hr/>
 
@@ -215,21 +215,6 @@ yarn resumo
 
 </div>
 <hr/>
-
-<span id="link"></span>
-
-## Documentação: 
-
-<a href="https://documenter.getpostman.com/view/26149268/2s9YJW7SGn" target="_blank">link da documentação<a/>
-
-
-<span id="linkfront"></span>
-
-## Front-end: 
-
-<a href="https://github.com/bartomsilva/Integrador-frontend" target="_blank">Link do repositório do Front-end<a/><br>
-<a href="http://18.204.122.118:3000/posts" target="_blank">Acesso a Página (deploy na AWS)</a><br>
-<a href="https://labeddit-bart-silva.surge.sh" target="_blank">Acesso a Página (deploy surge)</a>
 
 <span id="author"></span>
 
