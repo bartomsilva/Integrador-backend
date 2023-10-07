@@ -42,6 +42,3 @@ CREATE TABLE likes_dislikes(
     like    INTEGER(1)
 );
 
--- 
-ALTER TABLE users ADD COLUMN news_letter VARCHAR(1);
-ALTER TABLE users ADD COLUMN reset_password VARCHAR(1);
