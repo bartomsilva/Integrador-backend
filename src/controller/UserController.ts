@@ -135,7 +135,7 @@ export class UserController {
       subject: "reset password",
       html: `
       <h3>Olá, segue o link para liberar o cadastro de sua nova senha.<h3>
-      <a href="http://localhost:3003/users/resetpassword/${email}" _self>Clique aqui</a>
+      <a href="http://${process.env.SERVER_PATH}:3003/users/resetpassword/${email}" _self>Clique aqui</a>
       `
     };
 
