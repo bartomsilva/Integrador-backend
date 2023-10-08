@@ -123,6 +123,8 @@ Permite deletar um post, somento o autor do post ou um admin podem deletar um po
   
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="120px"/>
 
+<hr/>
+
 #### POST /comments  
 Cria um novo comentário, é requeirido o token, id do post e o texto contendo o comentário.
 
@@ -154,6 +156,7 @@ Devolve uma lista constendo todos comentários de um determinado post, é requer
   
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0cb5759b-73e1-44ff-9a26-fd61a906f469" heigth="160px"/>
 
+<hr/>
 
 #### POST likes  
 Permite curtir as postagens e comentários, através de um like ou dislike, e requerido o token, id do post ou comentário, 
