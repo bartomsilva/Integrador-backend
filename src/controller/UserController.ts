@@ -93,7 +93,9 @@ export class UserController {
       res.status(HTTP_CODE.OK).send(response)
     }
     // não desejo enviar um retorno de erro para o front
-    catch (error) { }
+    catch (error) { 
+      handlerError(res, error)
+    }
   }
 
   // RESET PASSWORD
@@ -104,7 +106,9 @@ export class UserController {
       res.status(HTTP_CODE.OK).send('<h4>reset feito com sucesso, cadastre no form de login sua nova senha.<h4/>')
     }
     // não desejo enviar um retorno de erro para o front
-    catch (error) { }
+    catch (error) { 
+      handlerError(res, error)
+    }
   }
 
   // SENE EMAIL
@@ -114,6 +118,7 @@ export class UserController {
       const response = await this.userBusiness.sendEmail(email)
       res.status(HTTP_CODE.OK).send(response)       
     } catch (error) {
+      handlerError(res, error)
     }
   }
 }
