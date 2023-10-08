@@ -70,6 +70,27 @@ Permite o usuário efetuar login e devolve um token, é requerido email e senha.
 
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" />
 
+#### POST /users/checklogin 
+Verifica a autencidade de um token e devolve em caso positivo um objeto contendo dados do user.
+
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/949be52a-d43e-474d-85e5-1053a15b7f6c" />
+
+#### POST /users/sendemail 
+Envia para o usuário, email contendo um link para que o mesmo possa habilitar a troca de senha.
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/344d1b79-8dab-4892-a8b2-94ebfddf987e"/>
+
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d7dedb8-2677-4c71-b858-2d6c8c7daed0" />
+
+
+
+
+
+
 #### POST /posts 
 Cria um novo post, é requerido o token e o texto do post.
 
