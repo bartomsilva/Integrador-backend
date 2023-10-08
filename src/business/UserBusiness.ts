@@ -195,7 +195,7 @@ export class UserBusiness {
   public resetPassword = async (input: ResetPasswordInputDTO): Promise<string> => {
     const { email } = input
     // validação do id 
-    const resultDB = this.userDataBase.findUser(email)
+    const resultDB = await this.userDataBase.findUser(email)
     if (resultDB == undefined) {
       throw new BadRequestError("'email' inválido")
     }
@@ -204,7 +204,7 @@ export class UserBusiness {
   }
 
   // ENVIAR EMAIL
-  public sendEmail = async (email: string): Promise<void> => {
+  public sendEmail = async (email: string): Promise<string> => {
 
     const resultDB = await this.userDataBase.findUser(email)
 
@@ -232,9 +232,9 @@ export class UserBusiness {
     `
     };
 
-    transport.sendMail(message, function (err) {
-      if (err) { }
-    })
+    transport.sendMail(message)
+    return "ok"
+
   }
 
 }

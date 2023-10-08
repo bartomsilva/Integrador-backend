@@ -112,7 +112,6 @@ export class UserController {
     try {
       const email = req.body.email
       const response = await this.userBusiness.sendEmail(email)
-      console.log(response)
       res.status(HTTP_CODE.OK).send(response)       
     } catch (error) {
     }
