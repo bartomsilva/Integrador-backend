@@ -217,9 +217,9 @@ yarn start
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
 
 ```
-Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções acima, em seguida execute:
+Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções abaixo, em seguida execute:
 
-npm test resumo
+npm run resumo
 ou
 yarn resumo
 ```
