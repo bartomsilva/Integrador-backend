@@ -22,6 +22,7 @@ Labeddit é uma API que faz parte do projeto final Integrador (full stack), proj
 <center>
 Esta API, encontra-se hospedada na AWS usando AC2, que é um serviço do tipo IAAS, também utiliza o serviço de IP estático, o que garante o acesso constante do módulo front-end. Contruí a Labeddit, utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database) que são gerencidas através de roteamento, a linguagem utilizada é o Nodejs com typescricpt, além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado é o Sqlite.
 </center>
+sobre este projeto: https://youtu.be/NQRaxjMZraI
 
 #### Camadas: 
 - **Controller:** Trata das requisições vindas dos clientes, aqui é feita a primeira validação utilizando o ZOD.
@@ -256,7 +257,7 @@ yarn resumo
 <p>Bartolomeu Mariano ( Bart Silva )</p>
 
 linkedin: https://www.linkedin.com/in/bart-silva-br/
-
+sobre min: https://youtu.be/HxY9bHXo0O8
 <span id='next'></span>
 
 
