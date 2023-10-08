@@ -198,7 +198,8 @@ ou
 yarn install
 
 # Configurando o ambiente
-renomeie o arquivo .env.example para .env	
+renomeie o arquivo .env.example para .env
+* para poder enviar email´s, altere os dados (USER_EMAIL, USER_PASS <-senha APP) de acordo com sua conta google.
 
 # Executando o Projeto
 npm run start
@@ -241,6 +242,8 @@ yarn resumo
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/7891f0ec-fafd-4fd4-98aa-61ba9a29b1f5" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/540d223e-81e0-4a88-b883-a08bdf8d441e" height="55px"/>
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d99eea9-a8a2-4abb-839b-af2ea1c9483f" height="55px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/164301f0-9b2e-488b-80f2-f09e28f77650" height="55px"/>
+
 
 </div>
 <hr/>
