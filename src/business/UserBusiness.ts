@@ -11,7 +11,12 @@ import { AdminDB, TokenPayload, USER_ROLES, UserDB } from "../models/User"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
-import { ResetPasswordInputDTO} from "../dtos/users/resetPassword.dto"
+import { ResetPasswordInputDTO } from "../dtos/users/resetPassword.dto"
+import nodemailer from "nodemailer"
+import dotenv from 'dotenv'
+import { promises } from "dns"
+
+dotenv.config()
 
 export class UserBusiness {
   constructor(
@@ -113,14 +118,14 @@ export class UserBusiness {
       throw new NotFoundError("'email' não encontrado")
     }
     const passworValid = await this.hashManager.compare(password, userDB.password)
-    if (!passworValid && userDB.reset_password!="*") {
+    if (!passworValid && userDB.reset_password != "*") {
       throw new BadRequestError("'password' incorreta")
     }
 
     // atualiza a senha do usuário
-    if( userDB.reset_password=="*"){
+    if (userDB.reset_password == "*") {
       const hashedPassword = await this.hashManager.hash(password)
-      this.userDataBase.updatePassword(userDB.id,hashedPassword)
+      this.userDataBase.updatePassword(userDB.id, hashedPassword)
     }
 
     // modelagem do objeto (payload)
@@ -197,4 +202,39 @@ export class UserBusiness {
     await this.userDataBase.resetPassword(email)
     return 'ok'
   }
+
+  // ENVIAR EMAIL
+  public sendEmail = async (email: string): Promise<void> => {
+
+    const resultDB = await this.userDataBase.findUser(email)
+
+    if (!resultDB) {
+      throw new NotFoundError("Email não cadastrado")
+    }
+
+    let transport = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true 465, false demais
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
+      }
+    });
+
+    let message = {
+      from: 'Labeddit <process.env.MAIL_USER>',
+      to: email,
+      subject: "reset password",
+      html: `
+    <h3>Olá, segue o link para liberar o cadastro de sua nova senha.<h3>
+    <a href="http://${process.env.SERVER_PATH}:3003/users/resetpassword/${email}" _self>Clique aqui</a>
+    `
+    };
+
+    transport.sendMail(message, function (err) {
+      if (err) { }
+    })
+  }
+
 }

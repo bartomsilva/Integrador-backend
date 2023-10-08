@@ -7,11 +7,6 @@ import { LoginSchema } from "../dtos/users/login.dto"
 import { CreateAdminSchema } from "../dtos/users/createAdmin.dto"
 import { HTTP_CODE } from "../util/util"
 import { CheckUserSchema } from "../dtos/users/checkUser.dto"
-import { ResetPasswordSchema } from "../dtos/users/resetPassword.dto"
-import nodemailer from "nodemailer"
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
@@ -114,50 +109,13 @@ export class UserController {
 
   // SENE EMAIL
   public sendEmail = async (req: Request, res: Response): Promise<void> => {
-
-    const email = req.body.email
-
-    console.log("email back", email)
-    let transport = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // true 465, false demais
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
-      }
-    });
-
-
-    let message = {
-      from: 'Labeddit',
-      to: email,
-      subject: "reset password",
-      html: `
-      <h3>Olá, segue o link para liberar o cadastro de sua nova senha.<h3>
-      <a href="http://${process.env.SERVER_PATH}:3003/users/resetpassword/${email}" _self>Clique aqui</a>
-      `
-    };
-
-
-    transport.sendMail(message, function (err) {
-      if (err) {
-        return res.status(400).json({
-          erro: true,
-          mensagem: "E-mail não enviado com sucesso!"
-        })
-
-      } else {
-        return res.json({
-          erro: false,
-          mensagem: "E-mail enviado com sucesso!"
-        })
-
-      }
-
-    })
-
-
+    try {
+      const email = req.body.email
+      const response = await this.userBusiness.sendEmail(email)
+      console.log(response)
+      res.status(HTTP_CODE.OK).send(response)       
+    } catch (error) {
+    }
   }
 }
 
