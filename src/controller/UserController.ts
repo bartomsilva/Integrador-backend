@@ -103,7 +103,7 @@ export class UserController {
     try {
       const input = { email: req.params.email }
       const response = await this.userBusiness.resetPassword(input);
-      res.status(HTTP_CODE.OK).send('<h4>reset feito com sucesso, cadastre no form de login sua nova senha.<h4/>')
+      res.status(HTTP_CODE.OK).send('reset feito com sucesso, cadastre na página de login sua nova senha.')
     }
     // não desejo enviar um retorno de erro para o front
     catch (error) { 
