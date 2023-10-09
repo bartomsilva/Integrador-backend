@@ -22,6 +22,7 @@ Labeddit é uma API que faz parte do projeto final Integrador (full stack), proj
 <center>
 Esta API, encontra-se hospedada na AWS usando AC2, que é um serviço do tipo IAAS, também utiliza o serviço de IP estático, o que garante o acesso constante do módulo front-end. Contruí a Labeddit, utilizando a arquitetura em camadas, aplicando os conceitos de Programação Orientada a Objetos e foi dividida em três camadas: (Controller, Business e Database) que são gerencidas através de roteamento, a linguagem utilizada é o Nodejs com typescricpt, além das biblíotecas: JWT (geração de tokens de acesso), UUII (criar os id´s), BCRYPT (criptografia de senhas), DOTENV (trabalhar com variáveis de ambiente), ZOD (validação de dados) e o KNEX (tratamento do banco de dados), o banco de dados utilizado é o Sqlite.
 </center>
+sobre este projeto: https://youtu.be/NQRaxjMZraI
 
 #### Camadas: 
 - **Controller:** Trata das requisições vindas dos clientes, aqui é feita a primeira validação utilizando o ZOD.
@@ -70,6 +71,32 @@ Permite o usuário efetuar login e devolve um token, é requerido email e senha.
 
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/8462dba1-a9e1-4e2e-849a-5a31e2da8297" />
 
+#### POST /users/checklogin 
+Verifica a autenticidade de um token e devolve em caso positivo um objeto contendo dados do user.
+
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/949be52a-d43e-474d-85e5-1053a15b7f6c" />
+
+#### POST /users/sendemail 
+Envia para o usuário, email contendo um link para que o mesmo possa habilitar a troca de senha.
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/344d1b79-8dab-4892-a8b2-94ebfddf987e"/>
+
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d7dedb8-2677-4c71-b858-2d6c8c7daed0" />
+
+
+#### POST /users/resetpassword 
+Efetua o reset da password, permitindo ao usuário cadastrar uma nova senha durante o login. 
+
+- Exemplo de retorno
+
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/aa56d5a7-d3cf-4318-8009-5f3c6a62b1fd" />
+
+<hr/>
+
 #### POST /posts 
 Cria um novo post, é requerido o token e o texto do post.
 
@@ -96,6 +123,8 @@ Permite deletar um post, somento o autor do post ou um admin podem deletar um po
 - Exemplo de retorno
   
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/bca0a5f4-cf57-41e0-9583-5b4c33056c17)" height="120px"/>
+
+<hr/>
 
 #### POST /comments  
 Cria um novo comentário, é requeirido o token, id do post e o texto contendo o comentário.
@@ -128,6 +157,7 @@ Devolve uma lista constendo todos comentários de um determinado post, é requer
   
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0cb5759b-73e1-44ff-9a26-fd61a906f469" heigth="160px"/>
 
+<hr/>
 
 #### POST likes  
 Permite curtir as postagens e comentários, através de um like ou dislike, e requerido o token, id do post ou comentário, 
@@ -169,7 +199,8 @@ ou
 yarn install
 
 # Configurando o ambiente
-renomeie o arquivo .env.example para .env	
+renomeie o arquivo .env.example para .env
+* para poder enviar email´s, altere os dados (USER_EMAIL, USER_PASS <-senha APP) de acordo com sua conta google.
 
 # Executando o Projeto
 npm run start
@@ -187,9 +218,9 @@ yarn start
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/6b810784-f491-4510-8a76-2532eeff349a" heigth="60px"/>
 
 ```
-Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções acima, em seguida execute:
+Testei 100% das funcionalidades da Business, para realizar os testes siga as instruções abaixo, em seguida execute:
 
-npm test resumo
+npm run resumo
 ou
 yarn resumo
 ```
@@ -212,6 +243,8 @@ yarn resumo
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/7891f0ec-fafd-4fd4-98aa-61ba9a29b1f5" height="55px"/>
 <img src="https://github.com/bartomsilva/Labook-backend/assets/106079184/540d223e-81e0-4a88-b883-a08bdf8d441e" height="55px"/>
 <img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/0d99eea9-a8a2-4abb-839b-af2ea1c9483f" height="55px"/>
+<img src="https://github.com/bartomsilva/Integrador-backend/assets/106079184/164301f0-9b2e-488b-80f2-f09e28f77650" height="55px"/>
+
 
 </div>
 <hr/>
@@ -224,7 +257,7 @@ yarn resumo
 <p>Bartolomeu Mariano ( Bart Silva )</p>
 
 linkedin: https://www.linkedin.com/in/bart-silva-br/
-
+sobre min: https://youtu.be/HxY9bHXo0O8
 <span id='next'></span>
 
 
