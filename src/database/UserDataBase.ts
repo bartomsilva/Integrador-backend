@@ -1,70 +1,85 @@
-import { AdminDB, UserDB } from "../models/User"
-import { BaseDataBase } from "./BaseDataBase"
+import mongoose from 'mongoose';
+import { AdminDB, UserDB } from "../models/User";
+import { BaseDataBase } from "./BaseDataBase";
+import User from './models/users.db';
+
 
 export class UserDataBase extends BaseDataBase {
+  
+  TABLE_NAME = "users";
 
-  TABLE_NAME = "users"
-
-  //============= SING UP
+  //============= CADASTRO DE USUÁRIO
   public insertUser = async (newUser: UserDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME).insert(newUser)
+    const UserModel = mongoose.model<UserDB>('Users') 
+    const newUserDB = new User(newUser)
+    const userInstance = new UserModel(newUserDB)
+    await userInstance.save()
   }
-
-  // GET USERS E ALL USERS
+  
+  // OBTÉM USUÁRIOS E TODOS OS USUÁRIOS
   public getUser = async (q: string): Promise<UserDB[]> => {
-    let resultDB: UserDB[]
+    let resultDB: UserDB[];
     if (q) {
       resultDB = await this.findByName(q)
     } else {
       resultDB = await this.findAll()
     }
-    return resultDB
+    return resultDB;
   }
 
-  // troca o Status do usuário para admin ou revoga
+  // Altera o status do usuário para admin ou revoga
   public createAdmin = async (idUser: string, userNewStatus: AdminDB): Promise<void> => {
-    await BaseDataBase.
-      connection(this.TABLE_NAME).
-      update(userNewStatus).
-      where({ id: idUser })
+    const UserModel = mongoose.model<UserDB>('Users') 
+    await UserModel.updateOne({ id: idUser }, { $set: userNewStatus });
   }
+  
 
-  // troca o Status para reset de senha
+  // Altera o status para reset de senha
   public resetPassword = async (userEmail: string): Promise<void> => {
-    await BaseDataBase.
-      connection(this.TABLE_NAME).
-      update({"reset_password":"*"}).
-      where({ email: userEmail })
+    const UserModel = mongoose.model<UserDB>('Users')
+    await UserModel.updateOne({ email: userEmail }, { $set: { "reset_password": "*" } })
   }
+  
 
-   // atualiza a senha no banco de dados
-   public updatePassword = async (idUser: string, newPassword:string): Promise<void> => {
-    await BaseDataBase.
-      connection(this.TABLE_NAME).
-      update({"password": newPassword, "reset_password":null}).
-      where({ id: idUser })
+  // Atualiza a senha no banco de dados
+  public updatePassword = async (idUser: string, newPassword: string): Promise<void> => {
+    const UserModel = mongoose.model<UserDB>('Users') 
+    await UserModel.updateOne(
+      { id: idUser },
+      { $set: { "password": newPassword, "reset_password": null } }
+    );
   }
-  //============== BUSCA SE O USUÁRIO JÁ FOI CADASTRADO 
-  public findUser = async (email: string): Promise<UserDB> => {
-    const [result]: UserDB[] = await BaseDataBase.connection("users").where({ email })
-    return result
-  }
+  
 
-  // FIND BY ID
+  //============== VERIFICA SE O USUÁRIO JÁ FOI CADASTRADO 
+  public findUser = async (email: string): Promise<UserDB|any> => {
+    const UserModel = mongoose.model<UserDB>('Users') 
+    const result: UserDB|any = await UserModel.findOne({ email })
+    return result;
+  }
+  
+
+  // BUSCA POR ID
   public async findById(id: string): Promise<any> {
-    const result = await BaseDataBase.connection(this.TABLE_NAME).where({ id })
-    return result
+    // const UserModel = mongoose.model<UserDB>('Users') 
+    //const result = await UserModel.findOne({ id })
+    const result = await mongoose.model('Users').findOne({ id })
+    return result;
   }
+  
 
-  // FIND BY NAME
+  // BUSCA POR NOME
   public async findByName(name: string): Promise<UserDB[]> {
-    const result = await BaseDataBase.connection(this.TABLE_NAME).where("name", "like", `%${name}%`)
+    // const UserModel = mongoose.model<UserDB>('Users') 
+    const result = await mongoose.model('Users').find({ "name": { $regex: new RegExp(name, 'i') } }).exec()
     return result
   }
+  
 
-  // // FIND ALL 
+  // BUSCA TODOS OS USUÁRIOS
   public async findAll(): Promise<UserDB[]> {
-    const result = await BaseDataBase.connection(this.TABLE_NAME)
-    return result
+    // const UserModel = mongoose.model<UserDB>('Users') 
+    const result = await mongoose.model('Users').find()
+    return result;
   }
-}
+}  

@@ -1,53 +1,55 @@
+import mongoose from 'mongoose';
 import { CommentDB, CommentResultDB, CommentUpdateDB } from "../models/Comments";
 import { BaseDataBase } from "./BaseDataBase";
+import Comment from './models/comments.db';
+
 
 export class CommentDataBase extends BaseDataBase {
 
-  TABLE_NAME = "comments"
+  TABLE_NAME = "Comments";
+
 
   //=============== INSERT COMMENT
   public insertComment = async (newComment: CommentDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME).insert(newComment)
+    const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
+    const newCommentDB = new Comment(newComment)
+    const commentInstance = new CommentModel(newCommentDB);
+    await commentInstance.save();
   }
 
   //=============== UPDATE COMMENT 
   public updateComment = async (updateComment: CommentUpdateDB, creatorId: string): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME)
-      .update(updateComment)
-      .where("id", "=", updateComment.id)
-      .andWhere("creator_id", "=", creatorId)
+    const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
+    await CommentModel.updateOne({ id: updateComment.id, creator_id: creatorId }, updateComment);
   }
 
   //=============== DELETE COMMENT 
   public deleteComment = async (commentId: string): Promise<void> => {
-    await BaseDataBase.connection("likes_dislikes")
-      .del().where({ action_id: commentId })
+    const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
+    // Remova os likes do comentário
+    await mongoose.model('LikesDislikes').deleteMany({ action_id: commentId });
 
-    await BaseDataBase.connection(this.TABLE_NAME)
-      .del().where({ id: commentId })
+    // Remova o comentário
+    await CommentModel.deleteOne({ id: commentId });
   }
 
   //============ GET COMMENTS FOR POST
-  public getComment = async (postId: string): Promise<CommentResultDB[]> => {
-    const output: CommentResultDB[] = await BaseDataBase.connection("comments as p")
-      .select("p.id", "p.post_id", "p.content", "p.likes", "p.dislikes",
-        "p.comments", "p.creator_id", "u.name as creator_name")
-      .innerJoin("users as u", "p.creator_id", "u.id")
-      .where({ post_id: postId })
-      .orderBy("p.updated_at", "desc")
-    return output
+  public getComment = async (postId: string): Promise<CommentResultDB[]|any> => {
+    const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
+    const output = await CommentModel.find({ post_id: postId })
+      .select("id post_id content likes dislikes comments creator_id created_at updated_at")
+      .populate('creator_id', 'name') // Adiciona a referência populada do criador
+      .sort({ updated_at: -1 });
+    return output;
   }
 
-  // rotitna de que incrementa o número de comentarios dos posts
+  // Rotina que incrementa o número de comentários nos posts
   public incrementComments = async (postId: string): Promise<void> => {
-    await BaseDataBase.connection("posts")
-      .where({ id: postId })
-      .increment("comments")
+    await mongoose.model('Posts').updateOne({ id: postId }, { $inc: { comments: 1 } });
   }
-  // rotitna de que decrementa o número de comentarios dos posts
+
+  // Rotina que decrementa o número de comentários nos posts
   public decrementComments = async (postId: string): Promise<void> => {
-    await BaseDataBase.connection("posts")
-      .where({ id: postId })
-      .decrement("comments")
+    await mongoose.model('Posts').updateOne({ id: postId }, { $inc: { comments: -1 } });
   }
 }

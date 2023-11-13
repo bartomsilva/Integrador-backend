@@ -122,7 +122,7 @@ export class PostBusiness {
 
     const { postId, token } = input
     const payLoad = this.tokenManager.getPayload(token)
-    let resultDB
+    let resultDB:any[]
 
     if (payLoad == null) {
       throw new BadRequestError("token inválido")

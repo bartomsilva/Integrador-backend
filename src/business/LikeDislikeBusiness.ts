@@ -56,8 +56,10 @@ export class LikeDislikeBusiness {
     const likeDislikeDB: LikesDislikesDB =
       await this.likesDislikesDataBase.findLikeDislike(actionId, userId)
 
+      console.log("66666666666", likeDislikeDB)
+
     // inserir na tabela (caso não haja registro)
-    if (likeDislikeDB === undefined) {
+    if (likeDislikeDB === undefined || likeDislikeDB == null) {
       await this.likesDislikesDataBase.insertLikeDislike(postLikeDislike)
       if (likeVal === 1) {
         await this.likesDislikesDataBase.postIncreaseLike(action, actionId)

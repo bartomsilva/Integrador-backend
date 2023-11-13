@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import { LikesDislikesDB } from "../models/Post"
 import { BaseDataBase } from "./BaseDataBase"
+import LikeDislike from './models/likesdislikes.db';
 
 export class LikeDislikeDatabase extends BaseDataBase {
 
@@ -7,67 +9,61 @@ export class LikeDislikeDatabase extends BaseDataBase {
 
   //======================  INSERT LIKE DISLIKE
   public insertLikeDislike = async (likeDislike: LikesDislikesDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME).insert(likeDislike)
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
+    const newLikeDislikeDB = new LikeDislike(likeDislike)
+    const likeDislikeInstance = new LikeDislikeModel(newLikeDislikeDB)
+    await likeDislikeInstance.save()
   }
 
   //====================== UPDATE LIKE DISLIKE  - atualiza o status do like
   public updateLikeDislike = async (likeDislike: LikesDislikesDB): Promise<void> => {
-    await BaseDataBase.connection(this.TABLE_NAME)
-      .update({ like: likeDislike.like })
-      .where({ user_id: likeDislike.user_id })
-      .andWhere({ action_id: likeDislike.action_id })
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
+    await LikeDislikeModel.updateOne(
+      { user_id: likeDislike.user_id, action_id: likeDislike.action_id },
+      { $set: { "like": likeDislike.like } }
+    )
   }
 
   //=====================  DELETE LIKE DISLIKE
   public deleteLikeDislike = async (actionId: string, userId: string): Promise<void> => {
-    await BaseDataBase.connection("likes_dislikes")
-      .del()
-      .where({ action_id: actionId })
-      .andWhere({ user_id: userId })
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
+    await LikeDislikeModel.deleteOne({ action_id: actionId, user_id: userId });
   }
-
   //======================= LIKES E DISLIKES IN POSTS   
   // soma um ao like  
   public postIncreaseLike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .increment("likes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: 1 } });
   }
 
   // subtrai um do like
   public postDecreaseLike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .decrement("likes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: -1 } });
   }
 
   // soma um ao dislike
   public postIncreaseDislike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .increment("dislikes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { dislikes: 1 } });
   }
 
   // subtrai um do dislike
   public postDecreaseDislike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .decrement("dislikes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { dislikes: -1 } });
   }
 
   // atualiza o status - de Like para Dislike
   public postReverseDislikeToLike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .decrement("dislikes")
-      .increment("likes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: 1, dislikes: -1 } });
+
   }
 
   // atualiza o status - de Dislike para Like
   public postReverseLikeToDislike = async (action: string, id: string): Promise<void> => {
-    await BaseDataBase.connection(action)
-      .where({ id })
-      .decrement("likes")
-      .increment("dislikes")
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
+    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: -1, dislikes: 1 } });
   }
 }
