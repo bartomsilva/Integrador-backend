@@ -23,46 +23,20 @@ export class UserBusiness {
     private tokenManager: TokenManager
   ) { }
 
-  //=========== GET USER
-  public getUsers = async (input: GetUsersInputDTO): Promise<GetUsersOutputDTO[]> => {
-
-    const { q, token } = input
-
-    // geramos o payload a partir do token
-    const payload = this.tokenManager.getPayload(token)
-
-    // validamos a assinatura do token (vem null se inválido)
-    if (payload === null) {
-      throw new BadRequestError("token inválido")
-    }
-
-    const resultDB: UserDB[] = await this.userDataBase.getUser(q)
-
-    // const output: GetUsersOutputDTO[] = resultDB.map((user) => {
-    const output: any = resultDB.map((user) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        createdAt: user.created_at
-      }
-    })
-    return output
-  }
-
+ 
   //=========== SIGN UP / CREATE USER
   public createUser = async (input: CreateUserInputDTO): Promise<CreateUserOutputDTO> => {
 
     const { name, email, password, news_letter } = input
     const hashedPassword = await this.hashManager.hash(password)
-    const newUserDB = {
+    const newUserDB: UserDB = {
       name,
       email,
       password: hashedPassword,
       role: USER_ROLES.NORMAL,
       created_at: new Date().toISOString(),
-      news_letter
+      news_letter: news_letter || ' ',
+      reset_password: ' '
     }
     // verifica se o email já está em uso
     const userExist = await this.userDataBase.findUser(email)
@@ -74,8 +48,8 @@ export class UserBusiness {
     const response = await this.userDataBase.insertUser(newUserDB)
 
     // modelagem do objeto (payload)
-    const tokenPayload = {
-      id: response._id,
+    const tokenPayload: TokenPayload = {
+      id: response._id as string,
       name: newUserDB.name,
       role: newUserDB.role
     }
@@ -87,7 +61,7 @@ export class UserBusiness {
     const output: CreateUserOutputDTO =
     {
       user: {
-        userId: response._id,
+        userId: response._id as string,
         userName: newUserDB.name
       },
       token: token
@@ -102,7 +76,7 @@ export class UserBusiness {
 
     const { email, password } = input
 
-    const userDB: UserDB = await this.userDataBase.findUser(email)
+    const userDB = await this.userDataBase.findUser(email)
     if (!userDB) {
       throw new NotFoundError("'email' não encontrado")
     }
@@ -140,6 +114,34 @@ export class UserBusiness {
 
   }
 
+   //=========== GET USER
+   public getUsers = async (input: GetUsersInputDTO): Promise<GetUsersOutputDTO[]> => {
+
+    const { q, token } = input
+
+    // geramos o payload a partir do token
+    const payload = this.tokenManager.getPayload(token)
+
+    // validamos a assinatura do token (vem null se inválido)
+    if (payload === null) {
+      throw new BadRequestError("token inválido")
+    }
+
+    const resultDB: UserDB[] = await this.userDataBase.getUser(q)
+
+    // const output: GetUsersOutputDTO[] = resultDB.map((user) => {
+    const output: any = resultDB.map((user) => {
+      return {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        createdAt: user.created_at
+      }
+    })
+    return output
+  }
+
   //========== CREATE ADMIN
   public createAdmin = async (input: CreateAdminInputDTO): Promise<string> => {
 
@@ -154,7 +156,7 @@ export class UserBusiness {
     // id do usuário
     const id = payLoad.id
 
-    const userDB: UserDB = await this.userDataBase.findById(id)
+    const userDB = await this.userDataBase.findById(id)
 
     // ajusta do status do usuário
     const userNewStatus: AdminDB = {

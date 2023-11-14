@@ -1,48 +1,53 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 import { PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
 import { BaseDataBase } from "./BaseDataBase";
-import Post from './models/posts.db';
-// const User = require('./models/users.db'); // Importe o modelo User
+import { Post,postSchema } from './models/posts.db';
+import { commentSchema } from './models/comments.db';
+import { likeDislikeSchema } from './models/likesdislikes.db';
 
 export class PostDataBase extends BaseDataBase {
 
-  TABLE_NAME = "posts";
+  TABLE_NAME = "Posts";
 
   //============= GET ALL POST
   public getPost = async (): Promise<PostResultDB[] | any> => {
-    const PostModel = mongoose.model<PostDB>('Posts') 
+    
+    const PostModel = mongoose.model<PostDB>(this.TABLE_NAME,postSchema) 
+
     const response = await PostModel.find()
       .select("_id content likes dislikes comments created_at updated_at creator_id")
-      .populate('creator', 'name') 
+      .populate('creator_id', 'name') 
       .sort({ updated_at: -1 });
+      console.log("modelo",response)
     return response ;
   } 
  
   //=============== INSERT POST
   public insertPost = async (newPost: PostDB): Promise<void> => {
-    const PostModel = mongoose.model<PostDB>('Posts') 
+    const PostModel = mongoose.model<PostDB>(this.TABLE_NAME) 
     const newPostDB = new Post(newPost)
     const postInstance = new PostModel(newPostDB);
     await postInstance.save();
-  }
+  } 
 
   //=============== UPDATE POST 
   public updatePost = async (updatePost: PostUpdateDB, creatorId: string): Promise<void> => {
-   const PostModel = mongoose.model<PostDB>('Posts') 
-   await PostModel.updateOne({ id: updatePost.id, creator_id: creatorId }, updatePost);
+   const PostModel = mongoose.model<PostDB>(this.TABLE_NAME) 
+   await PostModel.updateOne({ _id: updatePost.id, creator_id: creatorId }, updatePost);
   }
 
   //=============== DELETE POST 
   public deletePost = async (postId: string): Promise<void> => {
-    const PostModel = mongoose.model<PostDB>('Posts') 
+    const PostModel = mongoose.model<PostDB>(this.TABLE_NAME, postSchema) 
+    
     // Remova os likes do post
-    await mongoose.model('LikesDislikes').deleteMany({ action_id: postId });
+    await mongoose.model('LikesDislikes', likeDislikeSchema).deleteMany({ action_id: postId });
 
     // Remova os comentários ligados ao post
-    await mongoose.model('Comment').deleteMany({ post_id: postId });
+    await mongoose.model('Comment',commentSchema).deleteMany({ post_id: postId });
 
     // Remova o post
-    await PostModel.deleteOne({ id: postId });
+    await PostModel.deleteOne({ _id: postId });
   }
 }
 

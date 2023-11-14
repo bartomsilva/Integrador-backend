@@ -6,10 +6,10 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, required: true },
   created_at: { type: String, required: true },
-  news_letter: { type: String },
-  reset_password: { type: String },
+  news_letter: { type: String, required: true },
+  reset_password: { type: String, required: true },
 });
 
 const User = mongoose.model('Users', userSchema);
 
-module.exports = User;
+module.exports = { User, userSchema }

@@ -33,13 +33,9 @@ export class PostBusiness {
     // da validação do token
     const { id: creatorId } = payLoad
 
-    // gera um novo id para o post
-    // const id = this.idGenerator.generate()
-
     // aqui cria o objeto com os dados do novo post
     const newPost: PostDB = {
       creator_id: creatorId,
-      creator: creatorId,
       content,
       likes: 0,
       dislikes: 0,
@@ -79,7 +75,7 @@ export class PostBusiness {
     }
 
     //checar se o usuário pode editar o post 
-    if (resultPost.creator_id != creatorId) {
+    if (resultPost.creator_id.toString() != creatorId) {
       throw new UnAuthorizedError("recurso negado")
     }
 
@@ -108,7 +104,7 @@ export class PostBusiness {
     }
 
     //checar se o usuário pode deletar o post 
-    if (resultPost.creator_id != creatorId && role != USER_ROLES.ADMIN) {
+    if (resultPost.creator_id.toString() != creatorId && role != USER_ROLES.ADMIN) {
       throw new UnAuthorizedError("recurso negado")
     }
 
@@ -153,8 +149,8 @@ export class PostBusiness {
         comments: post.comments,
         updatedAt: post.updated_at,
         creator: {
-          id: post.creator._id,
-          name: post.creator.name
+          id: post.creator_id._id,
+          name: post.creator_id.name
         },
         liked
       }

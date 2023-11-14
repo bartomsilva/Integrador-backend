@@ -14,7 +14,7 @@ export const LikeDislikeSchema = z.object({
       required_error: "'id' é obrigatório",
       invalid_type_error: "'id' deve ser uma string" 
     }
-  ).refine((Id) => Id.length === 36,{message: "id inválido"} ),
+  ),
 
   like: z.boolean(
     {

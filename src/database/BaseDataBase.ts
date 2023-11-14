@@ -13,6 +13,7 @@ export abstract class BaseDataBase {
 
   public abstract TABLE_NAME: string;
 
+  
   //============= FIND POST
   public async findPost(id: string): Promise<PostDB[]> {
     const result: PostDB[] = await mongoose.model('Posts').find({ _id: id });

@@ -1,23 +1,19 @@
 import mongoose from 'mongoose';
 import { LikesDislikesDB } from "../models/Post"
 import { BaseDataBase } from "./BaseDataBase"
-import LikeDislike from './models/likesdislikes.db';
 
 export class LikeDislikeDatabase extends BaseDataBase {
 
-  TABLE_NAME = "likes_dislikes"
+  TABLE_NAME = "LikesDislikes"
 
   //======================  INSERT LIKE DISLIKE
   public insertLikeDislike = async (likeDislike: LikesDislikesDB): Promise<void> => {
-    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
-    const newLikeDislikeDB = new LikeDislike(likeDislike)
-    const likeDislikeInstance = new LikeDislikeModel(newLikeDislikeDB)
-    await likeDislikeInstance.save()
+      await mongoose.model<LikesDislikesDB>(this.TABLE_NAME).create(likeDislike);
   }
 
   //====================== UPDATE LIKE DISLIKE  - atualiza o status do like
   public updateLikeDislike = async (likeDislike: LikesDislikesDB): Promise<void> => {
-    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(this.TABLE_NAME)
     await LikeDislikeModel.updateOne(
       { user_id: likeDislike.user_id, action_id: likeDislike.action_id },
       { $set: { "like": likeDislike.like } }
@@ -26,7 +22,7 @@ export class LikeDislikeDatabase extends BaseDataBase {
 
   //=====================  DELETE LIKE DISLIKE
   public deleteLikeDislike = async (actionId: string, userId: string): Promise<void> => {
-    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes')
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>(this.TABLE_NAME)
     await LikeDislikeModel.deleteOne({ action_id: actionId, user_id: userId });
   }
   //======================= LIKES E DISLIKES IN POSTS   

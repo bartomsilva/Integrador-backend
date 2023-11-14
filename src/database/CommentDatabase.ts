@@ -1,14 +1,13 @@
 import mongoose from 'mongoose';
 import { CommentDB, CommentResultDB, CommentUpdateDB } from "../models/Comments";
 import { BaseDataBase } from "./BaseDataBase";
-import Comment from './models/comments.db';
+import {Comment} from './models/comments.db';
 // const User = require('./models/users.db'); // Importe o modelo User
 
 
 export class CommentDataBase extends BaseDataBase {
 
   TABLE_NAME = "Comments";
-
 
   //=============== INSERT COMMENT
   public insertComment = async (newComment: CommentDB): Promise<void> => {
@@ -21,7 +20,7 @@ export class CommentDataBase extends BaseDataBase {
   //=============== UPDATE COMMENT 
   public updateComment = async (updateComment: CommentUpdateDB, creatorId: string): Promise<void> => {
     const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
-    await CommentModel.updateOne({ id: updateComment.id, creator_id: creatorId }, updateComment);
+    await CommentModel.updateOne({ _id: updateComment.id, creator_id: creatorId }, updateComment);
   }
 
   //=============== DELETE COMMENT 
@@ -31,7 +30,7 @@ export class CommentDataBase extends BaseDataBase {
     await mongoose.model('LikesDislikes').deleteMany({ action_id: commentId });
 
     // Remova o comentário
-    await CommentModel.deleteOne({ id: commentId });
+    await CommentModel.deleteOne({ _id: commentId });
   }
 
   //============ GET COMMENTS FOR POST
@@ -39,18 +38,18 @@ export class CommentDataBase extends BaseDataBase {
     const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
     const output = await CommentModel.find({ post_id: postId })
       .select("_id post_id content likes dislikes comments creator_id created_at updated_at")
-      .populate('creator', 'name') // Adiciona a referência populada do criador
+      .populate('creator_id', 'name') // Adiciona a referência populada do criador
       .sort({ updated_at: -1 });
     return output;
   }
 
   // Rotina que incrementa o número de comentários nos posts
   public incrementComments = async (postId: string): Promise<void> => {
-    await mongoose.model('Posts').updateOne({ id: postId }, { $inc: { comments: 1 } });
+    await mongoose.model('Posts').updateOne({ _id: postId }, { $inc: { comments: 1 } });
   }
 
   // Rotina que decrementa o número de comentários nos posts
   public decrementComments = async (postId: string): Promise<void> => {
-    await mongoose.model('Posts').updateOne({ id: postId }, { $inc: { comments: -1 } });
+    await mongoose.model('Posts').updateOne({ _id: postId }, { $inc: { comments: -1 } });
   }
 }

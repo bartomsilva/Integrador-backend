@@ -8,4 +8,4 @@ const likeDislikeSchema = new mongoose.Schema({
 
 const LikeDislike = mongoose.model('LikesDislikes', likeDislikeSchema);
 
-module.exports = LikeDislike;
+module.exports = { LikeDislike, likeDislikeSchema};

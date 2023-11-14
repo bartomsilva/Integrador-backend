@@ -1,7 +1,6 @@
 // INSERT  DO POST
 export interface PostDB {
   creator_id: string,
-  creator: string,
   content: string,
   likes: number,
   dislikes: number,  
