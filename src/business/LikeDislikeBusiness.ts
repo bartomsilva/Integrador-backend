@@ -47,17 +47,17 @@ export class LikeDislikeBusiness {
       throw new NotFoundError("'id' não encontrado")
     }
 
-    // Verifica se o post/comment é do mesmo usuário
-    if (postComment.creator_id === userId) {
+     // Verifica se o post/comment é do mesmo usuário
+    if (postComment.creator_id == userId) {
       throw new BadRequestError("ação inválida")
     }
+
 
     // pesquisa se ( likes_dislikes ) se existe registro: User x Post
     const likeDislikeDB: LikesDislikesDB =
       await this.likesDislikesDataBase.findLikeDislike(actionId, userId)
-
     // inserir na tabela (caso não haja registro)
-    if (likeDislikeDB === undefined) {
+    if (likeDislikeDB === undefined || likeDislikeDB == null) {
       await this.likesDislikesDataBase.insertLikeDislike(postLikeDislike)
       if (likeVal === 1) {
         await this.likesDislikesDataBase.postIncreaseLike(action, actionId)

@@ -11,24 +11,6 @@ import { CheckUserSchema } from "../dtos/users/checkUser.dto"
 export class UserController {
   constructor(private userBusiness: UserBusiness) { }
 
-  //========== GET USERS
-  public getUsers = async (req: Request, res: Response): Promise<void> => {
-    try {
-
-      const input = GetUsersSchema.parse({
-        q: req.query.q,
-        token: req.headers.authorization
-      })
-
-      const output = await this.userBusiness.getUsers(input)
-
-      res.status(HTTP_CODE.OK).send(output)
-
-    } catch (error) {
-      handlerError(res, error)
-    }
-  }
-
   //=========== SIGN UP / CREATE USER
   public createUser = async (req: Request, res: Response): Promise<void> => {
 
@@ -67,6 +49,27 @@ export class UserController {
     }
   }
 
+  //========== GET USERS
+  public getUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+
+      const input = GetUsersSchema.parse({
+        q: req.query.q,
+        token: req.headers.authorization
+      })
+
+      const output = await this.userBusiness.getUsers(input)
+
+      res.status(HTTP_CODE.OK).send(output)
+
+    } catch (error) {
+      handlerError(res, error)
+    }
+  }
+
+
+
+
   // CREATE ADMIN
   public createAdmin = async (req: Request, res: Response): Promise<void> => {
 
@@ -93,7 +96,7 @@ export class UserController {
       res.status(HTTP_CODE.OK).send(response)
     }
     // não desejo enviar um retorno de erro para o front
-    catch (error) { 
+    catch (error) {
       handlerError(res, error)
     }
   }
@@ -106,7 +109,7 @@ export class UserController {
       res.status(HTTP_CODE.OK).send('reset feito com sucesso, cadastre na página de login sua nova senha.')
     }
     // não desejo enviar um retorno de erro para o front
-    catch (error) { 
+    catch (error) {
       handlerError(res, error)
     }
   }
@@ -116,7 +119,7 @@ export class UserController {
     try {
       const email = req.body.email
       const response = await this.userBusiness.sendEmail(email)
-      res.status(HTTP_CODE.OK).send(response)       
+      res.status(HTTP_CODE.OK).send(response)
     } catch (error) {
       handlerError(res, error)
     }

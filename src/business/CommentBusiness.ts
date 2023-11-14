@@ -46,7 +46,6 @@ export class CommentBusiness {
 
     // aqui cria o objeto com os dados do novo comentário
     const newComment: CommentDB = {
-      id,
       creator_id: creatorId,
       post_id: postId,
       parental_post_id: "",
@@ -90,7 +89,7 @@ export class CommentBusiness {
     }
 
     //checar se o usuário pode editar o comentario 
-    if (resultComment.creator_id != creatorId) {
+    if (resultComment.creator_id.toString() != creatorId) {
       throw new UnAuthorizedError("recurso negado")
     }
     await this.commentDataBase.updateComment(updateComment, creatorId)
@@ -118,7 +117,7 @@ export class CommentBusiness {
     const [resultPost] = await this.commentDataBase.findPost(resultComment.post_id)
 
     //checar se o usuário pode deletar o comentario 
-    if (resultComment.creator_id != creatorId
+    if (resultComment.creator_id.toString() != creatorId
       && role != USER_ROLES.ADMIN
       && resultPost.creator_id != creatorId) {
       throw new UnAuthorizedError("recurso negado")
@@ -133,6 +132,7 @@ export class CommentBusiness {
   public getComment = async (input: GetCommentInputDTO): Promise<GetCommentOutputDTO[]> => {
 
     const { postId, token } = input
+    let resultDB:any[]
 
     // validar o token
     const payLoad = this.tokenManager.getPayload(token)
@@ -140,10 +140,10 @@ export class CommentBusiness {
       throw new BadRequestError("token inválido")
     }
 
-    const resultDB: CommentResultDB[] = await this.commentDataBase.getComment(postId)
-
+    resultDB = await this.commentDataBase.getComment(postId)
+    
     const response = await Promise.all(resultDB.map(async (comment) => {
-
+          
       const resultLikedDB = await this.commentDataBase.
         findLikeDislike(comment.id, payLoad.id)
 
@@ -163,8 +163,8 @@ export class CommentBusiness {
         dislikes: comment.dislikes,
         comments: comment.comments,
         creator: {
-          id: comment.creator_id,
-          name: comment.creator_name
+          id: comment.creator_id._id,
+          name: comment.creator_id.name
         },
         liked
       }

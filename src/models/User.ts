@@ -11,14 +11,14 @@ export interface TokenPayload {
 }
 
 export interface UserDB {
-  id: string,  
+  _id?: string,
   name: string,
   email: string,
   password: string,
   role: USER_ROLES,  
   created_at: string,
-  news_letter?: string, 
-  reset_password?: string 
+  news_letter: string, 
+  reset_password: string 
 }
  
 export interface AdminDB {

@@ -33,12 +33,8 @@ export class PostBusiness {
     // da validação do token
     const { id: creatorId } = payLoad
 
-    // gera um novo id para o post
-    const id = this.idGenerator.generate()
-
     // aqui cria o objeto com os dados do novo post
     const newPost: PostDB = {
-      id,
       creator_id: creatorId,
       content,
       likes: 0,
@@ -79,7 +75,7 @@ export class PostBusiness {
     }
 
     //checar se o usuário pode editar o post 
-    if (resultPost.creator_id != creatorId) {
+    if (resultPost.creator_id.toString() != creatorId) {
       throw new UnAuthorizedError("recurso negado")
     }
 
@@ -108,7 +104,7 @@ export class PostBusiness {
     }
 
     //checar se o usuário pode deletar o post 
-    if (resultPost.creator_id != creatorId && role != USER_ROLES.ADMIN) {
+    if (resultPost.creator_id.toString() != creatorId && role != USER_ROLES.ADMIN) {
       throw new UnAuthorizedError("recurso negado")
     }
 
@@ -122,7 +118,7 @@ export class PostBusiness {
 
     const { postId, token } = input
     const payLoad = this.tokenManager.getPayload(token)
-    let resultDB
+    let resultDB:any[]
 
     if (payLoad == null) {
       throw new BadRequestError("token inválido")
@@ -137,7 +133,7 @@ export class PostBusiness {
     const response = await Promise.all(resultDB.map(async (post) => {
       
       const resultLikedDB = await this.postDataBase.
-      findLikeDislike(post.id, payLoad.id)
+      findLikeDislike(post._id, payLoad.id)
       
       // valor default - DEVOLVE NO / LIKE / DISLIKE
       let liked: LIKED = LIKED.NOLIKED
@@ -146,15 +142,15 @@ export class PostBusiness {
       }
 
       const postNew = {
-        id: post.id,
+        id: post._id,
         content: post.content,
         likes: post.likes,
         dislikes: post.dislikes,
         comments: post.comments,
         updatedAt: post.updated_at,
         creator: {
-          id: post.creator_id,
-          name: post.creator_name
+          id: post.creator_id._id,
+          name: post.creator_id.name
         },
         liked
       }
