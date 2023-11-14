@@ -10,6 +10,9 @@ const commentSchema = new mongoose.Schema({
     comments: { type: Number, required: true },
     created_at: { type: String, required: true },
     updated_at: { type: String, required: true },
+    
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
+
 });
 
 const Comment = mongoose.model('Comments', commentSchema);

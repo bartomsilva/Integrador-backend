@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model } from 'mongoose';
 import { PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
 import { BaseDataBase } from "./BaseDataBase";
 import Post from './models/posts.db';
-
+// const User = require('./models/users.db'); // Importe o modelo User
 
 export class PostDataBase extends BaseDataBase {
 
@@ -12,12 +12,12 @@ export class PostDataBase extends BaseDataBase {
   public getPost = async (): Promise<PostResultDB[] | any> => {
     const PostModel = mongoose.model<PostDB>('Posts') 
     const response = await PostModel.find()
-      .select("id content likes dislikes comments created_at updated_at creator_id")
-      .populate('creator_id', 'name') // Adiciona a referência populada do criador
+      .select("_id content likes dislikes comments created_at updated_at creator_id")
+      .populate('creator', 'name') 
       .sort({ updated_at: -1 });
     return response ;
-  }
-
+  } 
+ 
   //=============== INSERT POST
   public insertPost = async (newPost: PostDB): Promise<void> => {
     const PostModel = mongoose.model<PostDB>('Posts') 

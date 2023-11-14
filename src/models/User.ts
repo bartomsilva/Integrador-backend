@@ -11,7 +11,8 @@ export interface TokenPayload {
 }
 
 export interface UserDB {
-  id: string,  
+  _id?: string,
+  id?: string,
   name: string,
   email: string,
   password: string,

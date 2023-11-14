@@ -15,13 +15,13 @@ export abstract class BaseDataBase {
 
   //============= FIND POST
   public async findPost(id: string): Promise<PostDB[]> {
-    const result: PostDB[] = await mongoose.model('Posts').find({ id });
+    const result: PostDB[] = await mongoose.model('Posts').find({ _id: id });
     return result;
   }
 
   //============= FIND COMMENT
   public async findComment(id: string): Promise<CommentDB[]> {
-    const result: CommentDB[] = await mongoose.model('Comments').find({ id });
+    const result: CommentDB[] = await mongoose.model('Comments').find({_id: id });
     return result;
   }
 

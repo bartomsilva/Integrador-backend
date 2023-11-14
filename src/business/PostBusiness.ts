@@ -34,12 +34,12 @@ export class PostBusiness {
     const { id: creatorId } = payLoad
 
     // gera um novo id para o post
-    const id = this.idGenerator.generate()
+    // const id = this.idGenerator.generate()
 
     // aqui cria o objeto com os dados do novo post
     const newPost: PostDB = {
-      id,
       creator_id: creatorId,
+      creator: creatorId,
       content,
       likes: 0,
       dislikes: 0,
@@ -137,7 +137,7 @@ export class PostBusiness {
     const response = await Promise.all(resultDB.map(async (post) => {
       
       const resultLikedDB = await this.postDataBase.
-      findLikeDislike(post.id, payLoad.id)
+      findLikeDislike(post._id, payLoad.id)
       
       // valor default - DEVOLVE NO / LIKE / DISLIKE
       let liked: LIKED = LIKED.NOLIKED
@@ -146,15 +146,15 @@ export class PostBusiness {
       }
 
       const postNew = {
-        id: post.id,
+        id: post._id,
         content: post.content,
         likes: post.likes,
         dislikes: post.dislikes,
         comments: post.comments,
         updatedAt: post.updated_at,
         creator: {
-          id: post.creator_id,
-          name: post.creator_name
+          id: post.creator._id,
+          name: post.creator.name
         },
         liked
       }

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { CommentDB, CommentResultDB, CommentUpdateDB } from "../models/Comments";
 import { BaseDataBase } from "./BaseDataBase";
 import Comment from './models/comments.db';
+// const User = require('./models/users.db'); // Importe o modelo User
 
 
 export class CommentDataBase extends BaseDataBase {
@@ -37,8 +38,8 @@ export class CommentDataBase extends BaseDataBase {
   public getComment = async (postId: string): Promise<CommentResultDB[]|any> => {
     const CommentModel = mongoose.model<CommentDB>(this.TABLE_NAME) 
     const output = await CommentModel.find({ post_id: postId })
-      .select("id post_id content likes dislikes comments creator_id created_at updated_at")
-      .populate('creator_id', 'name') // Adiciona a referência populada do criador
+      .select("_id post_id content likes dislikes comments creator_id created_at updated_at")
+      .populate('creator', 'name') // Adiciona a referência populada do criador
       .sort({ updated_at: -1 });
     return output;
   }

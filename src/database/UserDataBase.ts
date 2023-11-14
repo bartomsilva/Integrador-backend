@@ -9,11 +9,12 @@ export class UserDataBase extends BaseDataBase {
   TABLE_NAME = "users";
 
   //============= CADASTRO DE USUÁRIO
-  public insertUser = async (newUser: UserDB): Promise<void> => {
+  public insertUser = async (newUser: UserDB): Promise<any> => {
     const UserModel = mongoose.model<UserDB>('Users') 
     const newUserDB = new User(newUser)
     const userInstance = new UserModel(newUserDB)
-    await userInstance.save()
+    const response = await userInstance.save()
+    return response
   }
   
   // OBTÉM USUÁRIOS E TODOS OS USUÁRIOS
