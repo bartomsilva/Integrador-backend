@@ -9,13 +9,11 @@ import { NotFoundError } from "../error/NotFound"
 import { UnAuthorizedError } from "../error/UnAuthorized"
 import { LIKED, POST_ACTION, PostDB, PostResultDB, PostUpdateDB } from "../models/Post"
 import { USER_ROLES } from "../models/User"
-import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
 
 export class PostBusiness {
   constructor(
     private postDataBase: PostDataBase,
-    private idGenerator: IdGenerator,
     private tokenManager: TokenManager) { }
 
   //=============== CREATE POST 

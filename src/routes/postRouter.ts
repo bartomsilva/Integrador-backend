@@ -1,5 +1,4 @@
 import express from "express"
-import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
 import { PostController } from "../controller/PostController"
 import { PostBusiness } from "../business/PostBusiness"
@@ -11,7 +10,6 @@ const postController = new PostController
   (
     new PostBusiness(
       new PostDataBase(),
-      new IdGenerator(),
       new TokenManager())      
   )
 

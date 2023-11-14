@@ -9,13 +9,11 @@ import { UnAuthorizedError } from "../error/UnAuthorized"
 import { CommentDB, CommentResultDB, CommentUpdateDB } from "../models/Comments"
 import { LIKED } from "../models/Post"
 import { USER_ROLES } from "../models/User"
-import { IdGenerator } from "../services/IdGenarator"
 import { TokenManager } from "../services/TokenManager"
 
 export class CommentBusiness {
   constructor(
     private commentDataBase: CommentDataBase,
-    private idGenerator: IdGenerator,
     private tokenManager: TokenManager) { }
 
   //=============== CREATE COMMMENT 
@@ -41,8 +39,6 @@ export class CommentBusiness {
       throw new NotFoundError("post não encontrado")
     }
 
-    // gera um novo id para o comentário
-    const id = this.idGenerator.generate()
 
     // aqui cria o objeto com os dados do novo comentário
     const newComment: CommentDB = {
