@@ -29,37 +29,37 @@ export class LikeDislikeDatabase extends BaseDataBase {
   // soma um ao like  
   public postIncreaseLike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: 1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { likes: 1 } });
   }
 
   // subtrai um do like
   public postDecreaseLike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: -1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { likes: -1 } });
   }
 
   // soma um ao dislike
   public postIncreaseDislike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { dislikes: 1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { dislikes: 1 } });
   }
 
   // subtrai um do dislike
   public postDecreaseDislike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { dislikes: -1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { dislikes: -1 } });
   }
 
   // atualiza o status - de Like para Dislike
   public postReverseDislikeToLike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: 1, dislikes: -1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { likes: 1, dislikes: -1 } });
 
   }
 
   // atualiza o status - de Dislike para Like
   public postReverseLikeToDislike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
-    await LikeDislikeModel.updateOne({ id }, { $inc: { likes: -1, dislikes: 1 } });
+    await LikeDislikeModel.updateOne({ _id : id }, { $inc: { likes: -1, dislikes: 1 } });
   }
 }
