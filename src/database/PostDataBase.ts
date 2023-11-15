@@ -40,7 +40,6 @@ export class PostDataBase extends BaseDataBase {
   //=============== DELETE POST 
   public deletePost = async (postId: string): Promise<void> => {
     const PostModel = mongoose.model<PostDB>(this.TABLE_NAME, postSchema) 
-    
     const CommentModel = mongoose.model<CommentDB>('Comments') 
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes') 
 
@@ -54,44 +53,15 @@ export class PostDataBase extends BaseDataBase {
     await LikeDislikeModel.deleteMany({ action_id: { $in: commentIds } });
 
     // Remova os likes do post
-    await mongoose.model('LikesDislikes', likeDislikeSchema).deleteMany({ action_id: postId });
+    // await mongoose.model('LikesDislikes', likeDislikeSchema).deleteMany({ action_id: postId });
+    await LikeDislikeModel.deleteMany({ action_id: postId });
 
     // Remova os comentários ligados ao post
-    await mongoose.model('Comment',commentSchema).deleteMany({ post_id: postId });
+    // await mongoose.model('Comment',commentSchema).deleteMany({ post_id: postId });
+    await CommentModel.deleteMany({ post_id: postId });
 
     // Remova o post
     await PostModel.deleteOne({ _id: postId });
   }
 }
-
-
-  // //=============== DELETE POST 
-  //  public deletePost = async (postId: string): Promise<void> => {
-  // //   procurar comentários ligados ao post 
-  //    const commentIds = await BaseDataBase.connection('comments')
-  //      .pluck('id') // pluck pega apenas essa coluna
-  //      .where('post_id', postId)
-
-  //   // remover os likes dos comentários ligados ao post
-  //    await BaseDataBase.connection('likes_dislikes')
-  //      .del()
-  //      .whereIn('action_id', commentIds)
-
-  //   // remover os likes do post
-  //   await BaseDataBase.connection('likes_dislikes')
-  //     .del()
-  //     .where('action_id', postId)
-
-
-
-  //   // remover os comentários ligados ao post
-  //   await BaseDataBase.connection('comments')
-  //     .del()
-  //     .where('post_id', postId)
-
-  //   // remover o post
-  //   await BaseDataBase.connection('posts')
-  //     .del()
-  //     .where('id', postId)
-  // }
 
