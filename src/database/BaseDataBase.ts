@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { LikesDislikesDB, PostDB } from '../models/Post';
 import { CommentDB } from '../models/Comments';
+import { LikeDislike, likeDislikeSchema } from './models/likesdislikes.db';
+import { commentSchema } from './models/comments.db';
+import { postSchema } from './models/posts.db';
 
 dotenv.config();
 
@@ -16,19 +19,19 @@ export abstract class BaseDataBase {
   
   //============= FIND POST
   public async findPost(id: string): Promise<PostDB[]> {
-    const result: PostDB[] = await mongoose.model('Posts').find({ _id: id });
+    const result: PostDB[] = await mongoose.model('Posts',postSchema).find({ _id: id });
     return result;
   }
 
   //============= FIND COMMENT
   public async findComment(id: string): Promise<CommentDB[]> {
-    const result: CommentDB[] = await mongoose.model('Comments').find({_id: id });
+    const result: CommentDB[] = await mongoose.model('Comments',commentSchema).find({_id: id });
     return result;
   }
 
   // Busca os detalhes de like/dislike
   public findLikeDislike = async (actionId: string, userId: string): Promise<LikesDislikesDB> => {
-    const resultDB: LikesDislikesDB | null = await mongoose.model('LikesDislikes').findOne({
+    const resultDB: LikesDislikesDB | null = await mongoose.model('LikesDislikes',likeDislikeSchema).findOne({
       action_id: actionId,
       user_id: userId,
     });

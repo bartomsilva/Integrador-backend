@@ -53,11 +53,9 @@ export class PostDataBase extends BaseDataBase {
     await LikeDislikeModel.deleteMany({ action_id: { $in: commentIds } });
 
     // Remova os likes do post
-    // await mongoose.model('LikesDislikes', likeDislikeSchema).deleteMany({ action_id: postId });
     await LikeDislikeModel.deleteMany({ action_id: postId });
 
     // Remova os comentários ligados ao post
-    // await mongoose.model('Comment',commentSchema).deleteMany({ post_id: postId });
     await CommentModel.deleteMany({ post_id: postId });
 
     // Remova o post

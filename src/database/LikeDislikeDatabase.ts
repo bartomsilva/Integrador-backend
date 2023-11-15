@@ -54,7 +54,6 @@ export class LikeDislikeDatabase extends BaseDataBase {
   public postReverseDislikeToLike = async (action: string, id: string): Promise<void> => {
     const LikeDislikeModel = mongoose.model<LikesDislikesDB>(action=='posts'?'Posts':'Comments')
     await LikeDislikeModel.updateOne({ _id : id }, { $inc: { likes: 1, dislikes: -1 } });
-
   }
 
   // atualiza o status - de Dislike para Like
