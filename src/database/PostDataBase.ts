@@ -1,9 +1,10 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
-import { PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
+import { LikesDislikesDB, PostDB, PostResultDB, PostUpdateDB } from "../models/Post";
 import { BaseDataBase } from "./BaseDataBase";
 import { Post,postSchema } from './models/posts.db';
 import { commentSchema } from './models/comments.db';
 import { likeDislikeSchema } from './models/likesdislikes.db';
+import { CommentDB } from '../models/Comments';
 
 export class PostDataBase extends BaseDataBase {
 
@@ -40,6 +41,18 @@ export class PostDataBase extends BaseDataBase {
   public deletePost = async (postId: string): Promise<void> => {
     const PostModel = mongoose.model<PostDB>(this.TABLE_NAME, postSchema) 
     
+    const CommentModel = mongoose.model<CommentDB>('Comments') 
+    const LikeDislikeModel = mongoose.model<LikesDislikesDB>('LikesDislikes') 
+
+    // Procurar comentários ligados ao post
+    const comments = await CommentModel.find({ post_id : postId });
+
+    // Coletar os IDs dos comentários
+    const commentIds = comments.map(comment => comment._id);
+
+    // Remover os likes dos comentários ligados ao post
+    await LikeDislikeModel.deleteMany({ action_id: { $in: commentIds } });
+
     // Remova os likes do post
     await mongoose.model('LikesDislikes', likeDislikeSchema).deleteMany({ action_id: postId });
 
@@ -53,21 +66,23 @@ export class PostDataBase extends BaseDataBase {
 
 
   // //=============== DELETE POST 
-  // public deletePost = async (postId: string): Promise<void> => {
-  //   // procurar comentários ligados ao post 
-  //   const commentIds = await BaseDataBase.connection('comments')
-  //     .pluck('id') // pluck pega apenas essa coluna
-  //     .where('post_id', postId)
+  //  public deletePost = async (postId: string): Promise<void> => {
+  // //   procurar comentários ligados ao post 
+  //    const commentIds = await BaseDataBase.connection('comments')
+  //      .pluck('id') // pluck pega apenas essa coluna
+  //      .where('post_id', postId)
+
+  //   // remover os likes dos comentários ligados ao post
+  //    await BaseDataBase.connection('likes_dislikes')
+  //      .del()
+  //      .whereIn('action_id', commentIds)
 
   //   // remover os likes do post
   //   await BaseDataBase.connection('likes_dislikes')
   //     .del()
   //     .where('action_id', postId)
 
-  //   // remover os likes dos comentários ligados ao post
-  //   await BaseDataBase.connection('likes_dislikes')
-  //     .del()
-  //     .whereIn('action_id', commentIds)
+
 
   //   // remover os comentários ligados ao post
   //   await BaseDataBase.connection('comments')
