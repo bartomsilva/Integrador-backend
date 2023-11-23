@@ -10,7 +10,7 @@
     "strict": true,                                      /* Enable all strict type-checking options. */
     "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     "skipLibCheck": true,
-    "allowJs": true    
+    "allowJs": true,    
   },
   "exclude": ["./tests/*","./jest.config.js"] // faz o TS ignorar a pasta tests (pq é o Jest que cuida dela)
 }

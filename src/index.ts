@@ -20,8 +20,8 @@ server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`)
 })
 
-// ///////////
-// // MONGO DB
+///////////
+// MONGO DB
 
 // const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_CLUSTER}/?retryWrites=true&w=majority`
 
